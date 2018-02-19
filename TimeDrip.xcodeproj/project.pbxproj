@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060E56225D8F44696315A74C /* Pods_TimeDrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */; };
 		440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA0292033B4F300D2FBD8 /* AppDelegate.swift */; };
 		440EA02C2033B4F300D2FBD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA02B2033B4F300D2FBD8 /* ViewController.swift */; };
 		440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA02D2033B4F300D2FBD8 /* Main.storyboard */; };
 		440EA0312033B4F300D2FBD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0302033B4F300D2FBD8 /* Assets.xcassets */; };
 		440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */; };
+		4470E618203B4AD20061C75B /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470E617203B4AD20061C75B /* TimeLabel.swift */; };
+		4470E61B203B4EC20061C75B /* WordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470E61A203B4EC20061C75B /* WordLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,11 @@
 		440EA0302033B4F300D2FBD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		440EA0332033B4F300D2FBD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		440EA0352033B4F300D2FBD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4470E617203B4AD20061C75B /* TimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
+		4470E61A203B4EC20061C75B /* WordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordLabel.swift; sourceTree = "<group>"; };
+		797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeDrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.debug.xcconfig"; sourceTree = "<group>"; };
+		FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060E56225D8F44696315A74C /* Pods_TimeDrip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		120FCEB9C56E7B8BC8B9FF5F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */,
+				FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		440EA01D2033B4F300D2FBD8 = {
 			isa = PBXGroup;
 			children = (
 				440EA0282033B4F300D2FBD8 /* TimeDrip */,
 				440EA0272033B4F300D2FBD8 /* Products */,
+				120FCEB9C56E7B8BC8B9FF5F /* Pods */,
+				9A53D2A21A2536A2085575C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +76,30 @@
 			children = (
 				440EA0292033B4F300D2FBD8 /* AppDelegate.swift */,
 				440EA02B2033B4F300D2FBD8 /* ViewController.swift */,
+				4470E619203B4E0C0061C75B /* ViewStuff */,
 				440EA02D2033B4F300D2FBD8 /* Main.storyboard */,
 				440EA0302033B4F300D2FBD8 /* Assets.xcassets */,
 				440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */,
 				440EA0352033B4F300D2FBD8 /* Info.plist */,
 			);
 			path = TimeDrip;
+			sourceTree = "<group>";
+		};
+		4470E619203B4E0C0061C75B /* ViewStuff */ = {
+			isa = PBXGroup;
+			children = (
+				4470E617203B4AD20061C75B /* TimeLabel.swift */,
+				4470E61A203B4EC20061C75B /* WordLabel.swift */,
+			);
+			path = ViewStuff;
+			sourceTree = "<group>";
+		};
+		9A53D2A21A2536A2085575C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 440EA0382033B4F300D2FBD8 /* Build configuration list for PBXNativeTarget "TimeDrip" */;
 			buildPhases = (
+				E5EC73B1222B9744FD36E8BB /* [CP] Check Pods Manifest.lock */,
 				440EA0222033B4F300D2FBD8 /* Sources */,
 				440EA0232033B4F300D2FBD8 /* Frameworks */,
 				440EA0242033B4F300D2FBD8 /* Resources */,
+				60A6B5B6DA4AE3109DD3EC5A /* [CP] Embed Pods Frameworks */,
+				F220AFEA9756C2D7B3E4CC8F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +172,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		60A6B5B6DA4AE3109DD3EC5A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5EC73B1222B9744FD36E8BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TimeDrip-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F220AFEA9756C2D7B3E4CC8F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		440EA0222033B4F300D2FBD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -138,6 +233,8 @@
 			files = (
 				440EA02C2033B4F300D2FBD8 /* ViewController.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
+				4470E61B203B4EC20061C75B /* WordLabel.swift in Sources */,
+				4470E618203B4AD20061C75B /* TimeLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +369,7 @@
 		};
 		440EA0392033B4F300D2FBD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +385,7 @@
 		};
 		440EA03A2033B4F300D2FBD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
