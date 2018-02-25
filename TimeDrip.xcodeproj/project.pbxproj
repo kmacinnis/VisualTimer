@@ -9,24 +9,32 @@
 /* Begin PBXBuildFile section */
 		060E56225D8F44696315A74C /* Pods_TimeDrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */; };
 		440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA0292033B4F300D2FBD8 /* AppDelegate.swift */; };
-		440EA02C2033B4F300D2FBD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA02B2033B4F300D2FBD8 /* ViewController.swift */; };
+		440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */; };
 		440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA02D2033B4F300D2FBD8 /* Main.storyboard */; };
 		440EA0312033B4F300D2FBD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0302033B4F300D2FBD8 /* Assets.xcassets */; };
 		440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */; };
+		4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */; };
+		4450C2B12040DB9600A784A7 /* AddTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4450C2B02040DB9600A784A7 /* AddTimerView.xib */; };
+		4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */; };
 		4470E618203B4AD20061C75B /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470E617203B4AD20061C75B /* TimeLabel.swift */; };
 		4470E61B203B4EC20061C75B /* WordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470E61A203B4EC20061C75B /* WordLabel.swift */; };
+		44C3D257203F804E00F27433 /* SubclassingUILabelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C3D256203F804E00F27433 /* SubclassingUILabelExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		440EA0262033B4F300D2FBD8 /* TimeDrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeDrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		440EA0292033B4F300D2FBD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		440EA02B2033B4F300D2FBD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimerViewController.swift; sourceTree = "<group>"; };
 		440EA02E2033B4F300D2FBD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		440EA0302033B4F300D2FBD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		440EA0332033B4F300D2FBD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		440EA0352033B4F300D2FBD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimer.swift; sourceTree = "<group>"; };
+		4450C2B02040DB9600A784A7 /* AddTimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTimerView.xib; sourceTree = "<group>"; };
+		4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
 		4470E617203B4AD20061C75B /* TimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		4470E61A203B4EC20061C75B /* WordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordLabel.swift; sourceTree = "<group>"; };
+		44C3D256203F804E00F27433 /* SubclassingUILabelExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubclassingUILabelExample.swift; sourceTree = "<group>"; };
 		797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeDrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,9 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				440EA0292033B4F300D2FBD8 /* AppDelegate.swift */,
-				440EA02B2033B4F300D2FBD8 /* ViewController.swift */,
-				4470E619203B4E0C0061C75B /* ViewStuff */,
-				440EA02D2033B4F300D2FBD8 /* Main.storyboard */,
+				4450C2AD2040B7A900A784A7 /* Models */,
+				4470E619203B4E0C0061C75B /* Views */,
+				4450C2AC2040B78F00A784A7 /* Controllers */,
 				440EA0302033B4F300D2FBD8 /* Assets.xcassets */,
 				440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */,
 				440EA0352033B4F300D2FBD8 /* Info.plist */,
@@ -85,13 +93,33 @@
 			path = TimeDrip;
 			sourceTree = "<group>";
 		};
-		4470E619203B4E0C0061C75B /* ViewStuff */ = {
+		4450C2AC2040B78F00A784A7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */,
+				4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4450C2AD2040B7A900A784A7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4470E619203B4E0C0061C75B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				440EA02D2033B4F300D2FBD8 /* Main.storyboard */,
+				4450C2B02040DB9600A784A7 /* AddTimerView.xib */,
 				4470E617203B4AD20061C75B /* TimeLabel.swift */,
 				4470E61A203B4EC20061C75B /* WordLabel.swift */,
+				44C3D256203F804E00F27433 /* SubclassingUILabelExample.swift */,
 			);
-			path = ViewStuff;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		9A53D2A21A2536A2085575C4 /* Frameworks */ = {
@@ -164,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4450C2B12040DB9600A784A7 /* AddTimerView.xib in Resources */,
 				440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */,
 				440EA0312033B4F300D2FBD8 /* Assets.xcassets in Resources */,
 				440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */,
@@ -181,10 +210,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -231,8 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				440EA02C2033B4F300D2FBD8 /* ViewController.swift in Sources */,
+				440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
+				4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */,
+				44C3D257203F804E00F27433 /* SubclassingUILabelExample.swift in Sources */,
+				4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */,
 				4470E61B203B4EC20061C75B /* WordLabel.swift in Sources */,
 				4470E618203B4AD20061C75B /* TimeLabel.swift in Sources */,
 			);

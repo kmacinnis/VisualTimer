@@ -9,17 +9,19 @@
 import UIKit
 import CoreGraphics
 import ChameleonFramework
+import AVFoundation
 
-class ViewController: UIViewController {
+class SimpleTimerViewController: UIViewController {
 
     //MARK: - Initialize stuff
-//    let bucketLayer = CAShapeLayer()
     let bucketView = UIView()
     let bucketFillLayer = CAShapeLayer()
     let bucketLabelView = UIView()
     var labelList: [UILabel] = []
     let replicatorLayer = CAReplicatorLayer()
     let instanceLayer = CALayer()
+
+    let meaninglessExample = CustomLabel()
 
 
     let bucketLineColor = UIColor.flatBlackDark.cgColor
@@ -45,8 +47,8 @@ class ViewController: UIViewController {
         return label
     }()
 
-    var minutesSet: Int = 3
-    var minutes: Int = 1
+    var minutesSet: Int = 2
+    var minutes: Int = -99
     var seconds: Int = 0
     
     var timer = Timer()
@@ -61,10 +63,12 @@ class ViewController: UIViewController {
         if !timerInUse{
             minutes = minutesSet
             seconds = 0
+            minuteLabel.text = "\(minutes)"
+            secondLabel.text = "\(seconds)"
         }
         timerInUse = true
         timerPaused = false
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(SimpleTimerViewController.updateTimer)), userInfo: nil, repeats: true)
         drainBucket()
         timerButton.setTitle("Pause", for: .normal)
     }
@@ -72,21 +76,31 @@ class ViewController: UIViewController {
     func pauseTimer() {
         timer.invalidate()
         bucketFillLayer.removeAnimation(forKey: "drain")
+        bucketFillLayer.path = bucketFillPath().cgPath
         timerButton.setTitle("Resume", for: .normal)
         timerPaused = true
     }
 
 
     @objc func updateTimer() {
+        if minutes + seconds == 0 {
+            timer.invalidate()
+            AudioServicesPlayAlertSound(1030)
+            return
+        }
         if seconds == 0 {
             minutes -= 1
             seconds = 59
+            minuteLabel.text = "\(minutes)"
+            if minutes == 1 {
+                wordLabelMinutes.text = "Minute"
+            } else {
+                wordLabelMinutes.text = "Minutes"
+            }
         } else {
             seconds -= 1
         }
-        minuteLabel.text = "\(minutes)"
         secondLabel.text = "\(seconds)"
-        
     }
     
     
@@ -148,24 +162,27 @@ class ViewController: UIViewController {
 
     }
 
-    func fillBucket() {
+    func setUpBucketFill() {
         bucketView.layer.addSublayer(bucketFillLayer)
         bucketFillLayer.fillColor = bucketFillColor
         bucketFillLayer.frame = bucketView.bounds
         if timerInUse {
             bucketFillLayer.path = bucketFillPath().cgPath
         } else {
-            bucketFillLayer.path = bucketFillPath(1.0).cgPath
+            bucketFillLayer.path = bucketFillPath(0.0).cgPath
         }
     }
 
+    func percentFull() -> Float {
+        return Float(minutes * 60 + seconds)/Float(minutesSet * 60)
+    }
+
     func bucketFillPath(_ pd: Float? = nil) -> UIBezierPath {
-        let percentDrained = pd ?? Float(minutes * 60 + seconds)/Float(minutesSet * 60)
+        let percentDrained = pd ?? 1.0 - percentFull()
         let minX = bucketView.bounds.minX
         let maxX = bucketView.bounds.maxX
-        // Must swap min and max Y for proper draining
-        let minY = bucketView.bounds.maxY
-        let maxY = bucketView.bounds.minY * CGFloat(percentDrained)
+        let maxY = bucketView.bounds.maxY
+        let minY = CGFloat(percentDrained) * maxY
 
         let fillPath = UIBezierPath()
         fillPath.move(to: CGPoint(x: minX, y: minY))
@@ -177,18 +194,10 @@ class ViewController: UIViewController {
         return fillPath
     }
 
-
     func drainBucket() {
-        let startPath = bucketFillPath()
-        print("startPath: ",startPath)
-        let endPath = bucketFillPath(0.0)
-        print("endPath: ", endPath)
-
-
-
         let basicAnimation = CABasicAnimation(keyPath: "path")
         basicAnimation.fromValue = bucketFillPath().cgPath
-        basicAnimation.toValue = bucketFillPath(0.0).cgPath
+        basicAnimation.toValue = bucketFillPath(1.0).cgPath
         basicAnimation.duration = CFTimeInterval(minutes * 60 + seconds)
         basicAnimation.fillMode = kCAFillModeForwards
         basicAnimation.isRemovedOnCompletion = false
@@ -200,7 +209,7 @@ class ViewController: UIViewController {
     func drawBucketOutline() {
         view.addSubview(bucketView)
         bucketView.backgroundColor = UIColor.clear
-        let padding = CGFloat(10.0)
+        let horizPadding = CGFloat(10.0)
 
         bucketView.layer.borderWidth = 2
         bucketView.layer.borderColor = bucketLineColor
@@ -208,11 +217,11 @@ class ViewController: UIViewController {
         let bucketLeft = NSLayoutConstraint(item: bucketView, attribute: .left,
                                             relatedBy: .equal,
                                             toItem: self.view, attribute: .leftMargin,
-                                            multiplier: 1.0, constant: padding)
+                                            multiplier: 1.0, constant: horizPadding)
         let bucketRight = NSLayoutConstraint(item: bucketView, attribute: .right,
                                              relatedBy: .equal,
                                              toItem: self.view, attribute: .centerXWithinMargins,
-                                             multiplier: 1.0, constant: -padding)
+                                             multiplier: 1.0, constant: -horizPadding)
         let bucketTop = NSLayoutConstraint(item: bucketView, attribute: .top,
                                            relatedBy: .equal,
                                            toItem: self.view, attribute: .topMargin,
@@ -233,7 +242,7 @@ class ViewController: UIViewController {
         let labelRight = NSLayoutConstraint(item: bucketLabelView, attribute: .right,
                                             relatedBy: .equal,
                                             toItem: self.view, attribute: .centerX,
-                                            multiplier: 1.0, constant: padding)
+                                            multiplier: 1.0, constant: horizPadding)
         let labelTop = NSLayoutConstraint(item: bucketLabelView, attribute: .top,
                                           relatedBy: .equal,
                                           toItem: bucketView, attribute: .top,
@@ -244,6 +253,30 @@ class ViewController: UIViewController {
                                              multiplier: 1.0, constant: 0.0)
         NSLayoutConstraint.activate([labelTop,labelLeft,labelRight,labelBottom])
 
+    }
+
+    func bucketFillExample()  {
+        let minX = bucketView.bounds.minX
+        let maxX = bucketView.bounds.maxX
+        // Must swap min and max Y for proper draining
+        let minY = bucketView.bounds.maxY
+        let maxY = minY + 200
+
+        let fillPath = UIBezierPath()
+        fillPath.move(to: CGPoint(x: minX, y: minY))
+        fillPath.addLine(to: CGPoint(x: maxX, y: minY))
+        fillPath.addLine(to: CGPoint(x: maxX, y: maxY))
+        fillPath.addLine(to: CGPoint(x: minX, y: maxY))
+        fillPath.close()
+
+        bucketFillLayer.frame = bucketView.frame
+        bucketFillLayer.path = fillPath.cgPath
+    }
+
+    func setUpBucket() {
+        drawBucketOutline()
+        setUpMeasureLabels()
+        setUpBucketFill()
     }
 
     func setUpTimeView() {
@@ -315,7 +348,6 @@ class ViewController: UIViewController {
     @objc private func handleTap() {
         print("Screen tapped.")
 
-//        drainBucket()
 
     }
 
@@ -324,9 +356,7 @@ class ViewController: UIViewController {
     //MARK: - ViewController methods
 
     override func viewDidAppear(_ animated: Bool) {
-        drawBucketOutline()
-        setUpMeasureLabels()
-//        fillBucket()
+        setUpBucket()
         setUpTimeView()
 
     }
