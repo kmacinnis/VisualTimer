@@ -10,11 +10,28 @@
 import Foundation
 import RealmSwift
 
+// enum must have integer raw values to be stored by realm
+@objc enum TimerType: Int {
+    case simple = 0
+    case music = 1
+    case garden = 2
+    case sand = 3
+}
+
+
 class SavedTimer: Object {
     @objc dynamic var title: String = ""
+    @objc dynamic var hoursSet: Int = 0
     @objc dynamic var minutesSet: Int = 5
-    @objc dynamic var hexColor: String = ""
+    @objc dynamic var secondsSet: Int = 0
     @objc dynamic var dateCreated: Date = Date()
     @objc dynamic var sortOrder: Int = 99
+    @objc dynamic var timerType: TimerType = .simple
+    @objc dynamic var autoStart: Bool = false
+}
+
+class SimpleTimer: Object {
+    @objc dynamic var hexColor: String = ""
+    @objc dynamic var savedTimer: SavedTimer?
 }
 

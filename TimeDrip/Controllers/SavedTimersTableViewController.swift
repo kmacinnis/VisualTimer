@@ -11,7 +11,6 @@ import RealmSwift
 
 class SavedTimersTableViewController: UITableViewController {
 
-    let savedTimerArray = ["Three-minute timer", "Tomato timer", "Silly nonsense" ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,7 @@ class SavedTimersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedTimerCell", for: indexPath)
-        cell.textLabel?.text = savedTimerArray[indexPath.row]
+//        cell.textLabel?.text = savedTimerArray[indexPath.row]
 
         return cell
     }
@@ -36,9 +35,35 @@ class SavedTimersTableViewController: UITableViewController {
 
 
     @IBAction func addButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(nibName: <#T##String?#>, bundle: <#T##Bundle?#>)
 
     }
 
+
+
+
+
+    //MARK: - Fake data examples
+
+    //class SavedTimer: Object {
+    //    @objc dynamic var title: String = ""
+    //    @objc dynamic var minutesSet: Int = 5
+    //    @objc dynamic var hexColor: String = ""
+    //    @objc dynamic var dateCreated: Date = Date()
+    //    @objc dynamic var sortOrder: Int = 99
+    //}
+
+    let savedTimerArray = [
+        ["title": "Two Minute Timer",
+         "minutesSet": 2,
+         "hexColor": "",
+         "sortOrder": 1
+         ],
+        ["title": "Five Minute Timer",
+         "minutesSet": 5,
+         "hexColor": "",
+         "sortOrder":2
+        ]
+
+    ]
 
 }

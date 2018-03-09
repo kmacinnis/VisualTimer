@@ -9,6 +9,6 @@ target 'TimeDrip' do
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'RealmSwift'
   pod 'SwipeCellKit'
-
+  pod 'RappleColorPicker'
 
 end

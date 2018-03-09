@@ -21,11 +21,8 @@ class SimpleTimerViewController: UIViewController {
     let replicatorLayer = CAReplicatorLayer()
     let instanceLayer = CALayer()
 
-    let meaninglessExample = CustomLabel()
-
-
     let bucketLineColor = UIColor.flatBlackDark.cgColor
-    let bucketFillColor = UIColor.flatMint.cgColor
+    var bucketFillColor = UIColor.flatMint.cgColor
 
     let minuteLabel: UILabel = {
         let label = timeLabel("M")
@@ -54,6 +51,8 @@ class SimpleTimerViewController: UIViewController {
     var timer = Timer()
     var timerInUse: Bool = false
     var timerPaused: Bool = false
+
+    var autoStart: Bool = false
 
     @IBOutlet weak var timerButton: UIButton!
 
