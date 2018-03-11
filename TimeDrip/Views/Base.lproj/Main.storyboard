@@ -15,7 +15,7 @@
             <objects>
                 <tableViewController autoresizesArchivedViewToFullSize="NO" title="Edit Timer" automaticallyAdjustsScrollViewInsets="NO" id="po4-An-G2K" customClass="EditTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vY6-jm-ZeV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="S3t-2b-cqE">
@@ -111,6 +111,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="useBtn" destination="mXT-xD-KfN" id="IFF-yy-qKT"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="useNewTimer" id="kU5-oQ-8Uk"/>
                     </connections>
                 </tableViewController>
@@ -126,19 +127,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SavedTimerCell" id="zjm-nO-EMh">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zjm-nO-EMh" id="ruX-ZM-EqD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="WoL-xT-E7L"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="hlf-VI-8fP" id="32R-10-cUG"/>
                             <outlet property="delegate" destination="hlf-VI-8fP" id="x1G-tg-bNk"/>
@@ -148,19 +136,17 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="D3Q-QB-9ph">
                             <connections>
                                 <action selector="addButtonPressed:" destination="hlf-VI-8fP" id="ZKy-Uv-Qcb"/>
-                                <segue destination="po4-An-G2K" kind="popoverPresentation" popoverAnchorBarButtonItem="D3Q-QB-9ph" id="3ZG-TW-6wQ">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="po4-An-G2K" kind="show" id="3ZG-TW-6wQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="timerSegue" id="zxQ-wO-ous"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="startTimer" id="zxQ-wO-ous"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoP-Mc-8oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11" y="151"/>
+            <point key="canvasLocation" x="-12" y="150.67466266866569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hPb-g8-XPU">
@@ -184,11 +170,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SimpleTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeP-AU-NeJ" userLabel="timerButton">
-                                <rect key="frame" x="243" y="607" width="102" height="30"/>
+                                <rect key="frame" x="243" y="543" width="102" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.69947652284263961" blue="0.0067525933117605899" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="102" id="2jD-85-oDk"/>
@@ -218,6 +204,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kU5-oQ-8Uk"/>
+        <segue reference="zxQ-wO-ous"/>
     </inferredMetricsTieBreakers>
 </document>

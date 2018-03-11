@@ -20,18 +20,19 @@ import RealmSwift
 
 
 class SavedTimer: Object {
-    @objc dynamic var title: String = ""
+    @objc dynamic var name: String = ""
     @objc dynamic var hoursSet: Int = 0
-    @objc dynamic var minutesSet: Int = 5
+    @objc dynamic var minutesSet: Int = 0
     @objc dynamic var secondsSet: Int = 0
     @objc dynamic var dateCreated: Date = Date()
     @objc dynamic var sortOrder: Int = 99
     @objc dynamic var timerType: TimerType = .simple
     @objc dynamic var autoStart: Bool = false
+    @objc dynamic var pausable: Bool = false
+    @objc dynamic var hexColor: String = ""
 }
 
-class SimpleTimer: Object {
-    @objc dynamic var hexColor: String = ""
-    @objc dynamic var savedTimer: SavedTimer?
-}
+//class SimpleTimer: Object {
+//    @objc dynamic var savedTimer: SavedTimer?
+//}
 

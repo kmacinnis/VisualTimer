@@ -8,6 +8,7 @@
 
 import UIKit
 import RappleColorPicker
+import RealmSwift
 
 class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -25,7 +26,12 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     var hoursSet = 0
     var minutesSet = 0
     var secondsSet = 0
-    var autoStart = true
+
+    var nameField: UITextField?
+    var autoStartSwitch: UISwitch?
+    var pausableSwitch: UISwitch?
+
+    let realm = try! Realm()
 
 
     func togglePicker()  {
@@ -38,8 +44,13 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         tableView.reloadData()
     }
 
-    @objc func autoStartChanged() {
-        autoStart = !autoStart
+    @objc func nameChanged() {
+        timerName = (nameField?.text) ?? ""
+        if timerName == "" {
+            useBtn.title = "Use Timer"
+        } else {
+            useBtn.title = "Save & Use Timer"
+        }
     }
 
     @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
@@ -48,12 +59,10 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
-
         performSegue(withIdentifier: "useNewTimer", sender: self)
-
-
     }
 
+    @IBOutlet weak var useBtn: UIBarButtonItem!
 
 
     // MARK: - View Stuff
@@ -66,7 +75,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         tableView.register(UINib(nibName: "AutoStartCell", bundle: nil), forCellReuseIdentifier: "autoStartCell")
         tableView.register(UINib(nibName: "TimeSetCell", bundle: nil), forCellReuseIdentifier: "timeSetCell")
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
-
+        tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
     }
 
 
@@ -74,7 +83,6 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
@@ -97,13 +105,26 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 //TODO: Attach swipe recognizer to change pickerStyle
                 return cell
             case .autoStart:
-                let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! AutoStartCell
-                cell.autoStartSwitch.isOn = autoStart
-                cell.autoStartSwitch.addTarget(self, action: #selector(autoStartChanged), for: UIControlEvents.valueChanged)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleCell
+                cell.toggleLabel.text = "Auto-Start Timer:"
+                autoStartSwitch = cell.toggleSwitch
+                autoStartSwitch?.isOn = true
                 return cell
+            case .pausable:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleCell
+                cell.toggleLabel.text = "Make Timer Pausable:"
+                pausableSwitch = cell.toggleSwitch
+                pausableSwitch?.isOn = false
+                return cell
+
             case .timeSet:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TimeSetCell
                 cell.detail.text = timeText
+                return cell
+            case .name:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TitleCell
+                nameField = cell.nameField
+                nameField?.addTarget(self, action: #selector(nameChanged), for: UIControlEvents.allEditingEvents)
                 return cell
             default:
                 return tableView.dequeueReusableCell(withIdentifier: setting.rowIdent(), for: indexPath)
@@ -138,8 +159,12 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 self.color = color
                 RappleColorPicker.close()
                 self.closePicker()
-            }
 
+            }
+        case .shaded:
+            print("timerName: \(timerName)")
+            print("nameField: \(String(describing: nameField))")
+            print("nameField: \(String(describing: nameField?.text))")
         default:
             closePicker()
         }
@@ -274,23 +299,47 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     //MARK: - Segue to Timer Screen
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        let destinationVC = segue.destination as! ToDoListViewController
-        //
-        //        if let indexPath = tableView.indexPathForSelectedRow {
-        //            destinationVC.selectedCategory = categories?[indexPath.row]
-        //        }
-//        var timerName: String = ""
+        print("preparing for segue")
 //        var pickerStyle: PickerStyle = .minutesOnly
 //        var hoursSet = 0
-//        var minutesSet = 0
-//        var secondsSet = 0
-//        var autoStart = true
         let destinationVC = segue.destination as! SimpleTimerViewController
         destinationVC.minutesSet = minutesSet
+        destinationVC.secondsSet = secondsSet
         destinationVC.bucketFillColor = color.cgColor
+        destinationVC.pausable = pausableSwitch?.isOn ?? false
+        destinationVC.autoStart = autoStartSwitch?.isOn ?? false
+
+        if timerName != "" {
+            //TODO: This will need changing if we use this for editing existing timers
+            let newTimer = SavedTimer()
+            newTimer.name = timerName
+            newTimer.hoursSet = hoursSet
+            newTimer.minutesSet = minutesSet
+            newTimer.secondsSet = secondsSet
+            newTimer.timerType = .simple
+            newTimer.autoStart = autoStartSwitch?.isOn ?? false
+            newTimer.pausable = pausableSwitch?.isOn ?? false
+            newTimer.hexColor = color.hexValue()
+            save(newTimer)
+
+        }
 
         
 
 
     }
+
+    //MARK: - Database stuff
+
+        func save(_ timer: SavedTimer) {
+            print("Saving New Timer")
+            do {
+                try realm.write {
+                    realm.add(timer)
+                }
+            } catch {
+                print("Error saving context: \(error)")
+            }
+        }
+
 }

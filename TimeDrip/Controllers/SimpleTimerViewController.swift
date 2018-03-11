@@ -25,12 +25,12 @@ class SimpleTimerViewController: UIViewController {
     var bucketFillColor = UIColor.flatMint.cgColor
 
     let minuteLabel: UILabel = {
-        let label = timeLabel("M")
+        let label = timeLabel("")
         return label
     }()
 
     let secondLabel: UILabel = {
-        let label = timeLabel("S")
+        let label = timeLabel("")
         return label
     }()
 
@@ -45,6 +45,7 @@ class SimpleTimerViewController: UIViewController {
     }()
 
     var minutesSet: Int = 2
+    var secondsSet: Int = 0
     var minutes: Int = -99
     var seconds: Int = 0
     
@@ -53,13 +54,14 @@ class SimpleTimerViewController: UIViewController {
     var timerPaused: Bool = false
 
     var autoStart: Bool = false
+    var pausable: Bool = true
 
     @IBOutlet weak var timerButton: UIButton!
 
     //MARK: - Timer functionality
 
     func runTimer() {
-        if !timerInUse{
+        if !timerInUse {
             minutes = minutesSet
             seconds = 0
             minuteLabel.text = "\(minutes)"
@@ -115,7 +117,7 @@ class SimpleTimerViewController: UIViewController {
 
     //MARK: - Draw stuff
 
-    func setUpInstanceLayer() {
+    func setUpMeasureMarks() {
         let layerWidth = CGFloat(bucketView.frame.width)
         instanceLayer.frame = CGRect(x: bucketView.bounds.minX, y: 0.0, width: layerWidth, height: 2)
         instanceLayer.backgroundColor = bucketLineColor
@@ -194,6 +196,7 @@ class SimpleTimerViewController: UIViewController {
     }
 
     func drainBucket() {
+        bucketFillLayer.removeAllAnimations()
         let basicAnimation = CABasicAnimation(keyPath: "path")
         basicAnimation.fromValue = bucketFillPath().cgPath
         basicAnimation.toValue = bucketFillPath(1.0).cgPath
@@ -341,6 +344,8 @@ class SimpleTimerViewController: UIViewController {
                            relatedBy: .equal,
                            toItem: secondLabel, attribute: .bottom,
                            multiplier: 1.0, constant: 0.0).isActive = true
+        minuteLabel.text = "\(minutesSet)"
+        secondLabel.text = "\(secondsSet)"
     }
 
 
@@ -358,6 +363,7 @@ class SimpleTimerViewController: UIViewController {
         setUpBucket()
         setUpTimeView()
 
+
     }
 
 
@@ -366,15 +372,24 @@ class SimpleTimerViewController: UIViewController {
         if bucketView.frame.width > 0.0 {
             setUpReplicatorLayer()
             bucketView.layer.addSublayer(replicatorLayer)
-            setUpInstanceLayer()
+            setUpMeasureMarks()
             replicatorLayer.addSublayer(instanceLayer)
             positionMeasureLabels()
+            if timerInUse {
+                drainBucket()
+            }
+            if autoStart && !timerInUse {
+                runTimer()
+            }
         }
     }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !pausable {
+            timerButton.isHidden = true
+        }
 
         // view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
 

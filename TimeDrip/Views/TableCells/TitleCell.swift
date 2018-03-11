@@ -10,6 +10,9 @@ import UIKit
 
 class TitleCell: UITableViewCell {
 
-
+    @IBOutlet weak var nameField: UITextField!
+    
+    @IBAction func nameFieldChanged(_ sender: Any) {
+    }
     
 }

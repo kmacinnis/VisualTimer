@@ -12,11 +12,12 @@ enum SettingsRow: Int {
     case timeSet
     case timePicker
     case autoStart
+    case pausable
     case color
     case shaded
     case name
 
-    static let count = 6
+    static let count = 7
 
     func rowIdent () -> String {
         switch self {
@@ -32,6 +33,8 @@ enum SettingsRow: Int {
             return "colorCell"
         case .shaded:
             return "saveNoticeCell"
+        case .pausable:
+            return "pausableCell"
         }
     }
 
