@@ -375,7 +375,7 @@ class SimpleTimerViewController: UIViewController {
             setUpMeasureMarks()
             replicatorLayer.addSublayer(instanceLayer)
             positionMeasureLabels()
-            if timerInUse {
+            if timerInUse && !timerPaused {
                 drainBucket()
             }
             if autoStart && !timerInUse {
