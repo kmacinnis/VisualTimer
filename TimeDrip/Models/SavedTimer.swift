@@ -20,6 +20,7 @@ import RealmSwift
 
 
 class SavedTimer: Object {
+    @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var name: String = ""
     @objc dynamic var hoursSet: Int = 0
     @objc dynamic var minutesSet: Int = 0
@@ -30,6 +31,10 @@ class SavedTimer: Object {
     @objc dynamic var autoStart: Bool = false
     @objc dynamic var pausable: Bool = false
     @objc dynamic var hexColor: String = ""
+
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 //class SimpleTimer: Object {

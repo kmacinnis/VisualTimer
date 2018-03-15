@@ -16,8 +16,9 @@ enum SettingsRow: Int {
     case color
     case shaded
     case name
+    case alertSound
 
-    static let count = 7
+    static let count = 8
 
     func rowIdent () -> String {
         switch self {
@@ -35,6 +36,8 @@ enum SettingsRow: Int {
             return "saveNoticeCell"
         case .pausable:
             return "pausableCell"
+        case .alertSound:
+            return "errorCell" // "alertSound"
         }
     }
 

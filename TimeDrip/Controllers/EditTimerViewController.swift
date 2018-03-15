@@ -10,6 +10,12 @@ import UIKit
 import RappleColorPicker
 import RealmSwift
 
+//TODO:
+// * change pickerStyle by swiping picker left/right
+// * offer choice of alert sound
+// * disable "use timer" button until time is set
+
+
 class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIPickerViewDelegate {
 
     enum Mode {
@@ -24,12 +30,16 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     var pickerVisible = false
     var pickerStyle: PickerStyle = .minutesOnly
     var hoursSet = 0
-    var minutesSet = 0
+    var minutesSet = 5
     var secondsSet = 0
+    var origAutoStart = true
+    var origPausable = false
 
     var nameField: UITextField?
     var autoStartSwitch: UISwitch?
     var pausableSwitch: UISwitch?
+
+    var thisTimer: SavedTimer?
 
     let realm = try! Realm()
 
@@ -76,8 +86,13 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         tableView.register(UINib(nibName: "TimeSetCell", bundle: nil), forCellReuseIdentifier: "timeSetCell")
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
+
+
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
 
 
     // MARK: - Table view data source
@@ -102,19 +117,22 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TimePickerCell
                 cell.picker.dataSource = self
                 cell.picker.delegate = self
+                if mode == .edit {
+                    cell.picker.selectRow(minutesSet, inComponent: 0, animated: false)
+                }
                 //TODO: Attach swipe recognizer to change pickerStyle
                 return cell
             case .autoStart:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleCell
                 cell.toggleLabel.text = "Auto-Start Timer:"
                 autoStartSwitch = cell.toggleSwitch
-                autoStartSwitch?.isOn = true
+                autoStartSwitch?.isOn = origAutoStart
                 return cell
             case .pausable:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleCell
                 cell.toggleLabel.text = "Make Timer Pausable:"
                 pausableSwitch = cell.toggleSwitch
-                pausableSwitch?.isOn = false
+                pausableSwitch?.isOn = origPausable
                 return cell
 
             case .timeSet:
@@ -124,6 +142,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             case .name:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TitleCell
                 nameField = cell.nameField
+                nameField?.text = timerName
                 nameField?.addTarget(self, action: #selector(nameChanged), for: UIControlEvents.allEditingEvents)
                 return cell
             default:
@@ -309,18 +328,30 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         destinationVC.pausable = pausableSwitch?.isOn ?? false
         destinationVC.autoStart = autoStartSwitch?.isOn ?? false
 
-        if timerName != "" {
-            //TODO: This will need changing if we use this for editing existing timers
-            let newTimer = SavedTimer()
-            newTimer.name = timerName
-            newTimer.hoursSet = hoursSet
-            newTimer.minutesSet = minutesSet
-            newTimer.secondsSet = secondsSet
-            newTimer.timerType = .simple
-            newTimer.autoStart = autoStartSwitch?.isOn ?? false
-            newTimer.pausable = pausableSwitch?.isOn ?? false
-            newTimer.hexColor = color.hexValue()
-            save(newTimer)
+        if mode == .add && timerName == "" {
+            return // Nothing to do in the database in this case.
+        }
+        if mode == .add {
+            thisTimer = SavedTimer()
+            save(thisTimer!)
+        }
+        guard thisTimer != nil else { return }
+        if let thisTimer = thisTimer {
+            do {
+                try realm.write {
+                    thisTimer.name = timerName
+                    thisTimer.hoursSet = hoursSet
+                    thisTimer.minutesSet = minutesSet
+                    thisTimer.secondsSet = secondsSet
+                    thisTimer.timerType = .simple
+                    thisTimer.autoStart = autoStartSwitch?.isOn ?? false
+                    thisTimer.pausable = pausableSwitch?.isOn ?? false
+                    thisTimer.hexColor = color.hexValue()
+
+                }
+            } catch {
+                print("Error writing to database: \(error)")
+            }
 
         }
 
@@ -334,12 +365,14 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         func save(_ timer: SavedTimer) {
             print("Saving New Timer")
             do {
-                try realm.write {
-                    realm.add(timer)
-                }
+                try realm.write({
+                    realm.add(timer, update: true)
+                })
             } catch {
                 print("Error saving context: \(error)")
             }
         }
+
+    
 
 }

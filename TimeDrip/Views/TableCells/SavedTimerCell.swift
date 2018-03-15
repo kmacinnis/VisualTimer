@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class SavedTimerCell: UITableViewCell {
+class SavedTimerCell: SwipeTableViewCell {
 
     @IBOutlet weak var timerName: UILabel!
 

@@ -8,8 +8,18 @@
 
 import UIKit
 import CoreGraphics
-import ChameleonFramework
-import AVFoundation
+import ChameleonFramework // for easy color manipulation -- may not be necessary
+import AVFoundation // for alert sound
+
+//TODO:
+// * Refactor time view, making swipeable to change modes (minutes only, etc)
+// * Add slight gradient to bucketfill
+// * Add slight gradient to background
+// * change background and line color to contrast bucketfill color
+// * figure out out to retrieve timers left running after exiting
+// * incorporate willanimaterotation?
+
+
 
 class SimpleTimerViewController: UIViewController {
 
@@ -282,6 +292,9 @@ class SimpleTimerViewController: UIViewController {
     }
 
     func setUpTimeView() {
+        //TODO: Change things up, using a xib,
+        // and make it swipeable to change between display modes:
+        // minutes only, minutes+seconds, hours(when applicable)
         let timeView = UIView()
         view.addSubview(timeView)
         let spacer = CGFloat(30.0)
@@ -384,6 +397,9 @@ class SimpleTimerViewController: UIViewController {
         }
     }
 
+    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
