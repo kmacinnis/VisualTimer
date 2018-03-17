@@ -10,30 +10,23 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
-//TODO:
-// * make cells reorderable
 
 
 class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate {
-
 
     var timers: Results<SavedTimer>?
     let realm = try! Realm()
     var timerForEditing: SavedTimer?
 
-
-
     @objc func addTimer() {
         performSegue(withIdentifier: "newTimer", sender: self)
     }
-
 
     @objc func orderingModeOn() {
         tableView.isEditing = true
         let doneBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(orderingModeOff))
         navigationItem.setRightBarButtonItems([doneBarBtn], animated: true)
         tableView.reloadData()
-
     }
 
     @objc func orderingModeOff() {
@@ -44,7 +37,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
         self.navigationItem.setRightBarButtonItems([addBarBtn, editBarBtn], animated: true)
         tableView.reloadData()
-
     }
 
     override func viewDidLoad() {
@@ -94,10 +86,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
 
-
-
     //MARK: - TableView DataSource Methods
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timers?.count ?? 1
@@ -118,7 +107,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
             do {
                 let start = sourceIndexPath.row
                 let end = destinationIndexPath.row
-                print("Moving source: \(start); destination \(end).")
 
                 let movedTimer = (timers?[start])!
                 try realm.write {
@@ -134,7 +122,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
                     movedTimer.sortOrder = end
                 }
             } catch {
-                print("Error saving order to database: \(error)")
+                print("Error saving change in order to database: \(error)")
             }
         }
 
@@ -149,7 +137,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "startTimer", sender: self)
     }
-
 
 
     //MARK: - Database stuff
@@ -188,9 +175,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
     //MARK: - Swipe For Editing/Deleting
 
-
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-
 
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { (action, indexPath) in
             print("delete \(indexPath)")
@@ -216,21 +201,11 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         }
     }
 
-
         func tableView(_ tableView: UITableView,                            editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
             var options = SwipeTableOptions()
             options.transitionStyle = .border
             return options
         }
 
-
-
-
 }
 
-fileprivate extension Selector {
-    static let selectOrderingModeOn = #selector(SavedTimersTableViewController.orderingModeOn)
-    static let selectOrderingModeOff = #selector(SavedTimersTableViewController.orderingModeOff)
-    static let segueAddTimer = #selector(SavedTimersTableViewController.addTimer)
-//    static let deviceOrientationDidChange = #selector(ViewController.deviceOrientationDidChange)
-}
