@@ -21,15 +21,42 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     let realm = try! Realm()
     var timerForEditing: SavedTimer?
 
+//            let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "buttonMethod")
 
-    @IBAction func reorderPressed(_ sender: Any) {
+
+    @objc func addTimer() {
+        performSegue(withIdentifier: "newTimer", sender: self)
+    }
+
+
+    @objc func orderingModeOn() {
+        print("Editing mode on...")
         tableView.isEditing = true
+        let doneBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(orderingModeOff))
+        navigationItem.setRightBarButtonItems([doneBarBtn], animated: true)
         tableView.reloadData()
+
+    }
+
+    @objc func orderingModeOff() {
+        tableView.isEditing = false
+
+        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
+        let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
+
+        self.navigationItem.setRightBarButtonItems([addBarBtn, editBarBtn], animated: true)
+        tableView.reloadData()
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "SavedTimerCell", bundle: nil), forCellReuseIdentifier: "savedTimerCell")
+
+        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
+        let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
+
+        self.navigationItem.rightBarButtonItems = [addBarBtn, editBarBtn]
 
     }
 
@@ -81,24 +108,30 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if tableView.isEditing {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "orderableCell", for: indexPath)
-            cell.textLabel?.text = timers?[indexPath.row].name
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "savedTimerCell", for: indexPath) as! SavedTimerCell
-            cell.timerName?.text = timers?[indexPath.row].name ?? "No Timers Found. Tap + to create new timer."
-            if let iconColor = UIColor.init(hexString: (timers?[indexPath.row].hexColor)!) {
-                cell.timerIcon.tintColor = iconColor
-            }
-            cell.delegate = self
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "savedTimerCell", for: indexPath) as! SavedTimerCell
+        cell.timerName?.text = "\(timers?[indexPath.row].name) - \(timers?[indexPath.row].sortOrder)" //timers?[indexPath.row].name ?? "No Timers Found. Tap + to create new timer."
+        if let iconColor = UIColor.init(hexString: (timers?[indexPath.row].hexColor)!) {
+            cell.timerIcon.tintColor = iconColor
         }
+        cell.delegate = self
+        return cell
     }
 
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+        override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+            do {
+                let start = sourceIndexPath.row
+                let end = destinationIndexPath.row - 1
+                try realm.write {
+                    for i in start...end {
+                        timers?[i].sortOrder = i
+                    }
+                }
+            } catch {
+                print("Error saving order to database: \(error)")
+            }
+            tableView.reloadData()
+
+        }
 
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .none
@@ -113,14 +146,24 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
 
-    @IBAction func addButtonPressed(_ sender: Any) {
-
-    }
 
     //MARK: - Database stuff
 
     func loadSavedTimers() {
-        timers = realm.objects(SavedTimer.self)
+        let sortProperties = [SortDescriptor(keyPath: "sortOrder", ascending: true), SortDescriptor(keyPath: "dateCreated", ascending: true)]
+        timers = realm.objects(SavedTimer.self).sorted(by: sortProperties)
+
+        //TODO: Decide where this fits best
+        do {
+            try realm.write {
+                for i in 0...((timers?.count)! - 1) {
+                    timers?[i].sortOrder = i
+                }
+            }
+        } catch {
+            print("Error saving order to database: \(error)")
+        }
+
         tableView.reloadData()
     }
 
@@ -177,4 +220,11 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
 
 
+}
+
+fileprivate extension Selector {
+    static let selectOrderingModeOn = #selector(SavedTimersTableViewController.orderingModeOn)
+    static let selectOrderingModeOff = #selector(SavedTimersTableViewController.orderingModeOff)
+    static let segueAddTimer = #selector(SavedTimersTableViewController.addTimer)
+//    static let deviceOrientationDidChange = #selector(ViewController.deviceOrientationDidChange)
 }
