@@ -22,7 +22,6 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         case add, edit
     }
 
-    //TODO: Figure out how to pass in flag for add/edit mode
     var mode: Mode = .add
     var timeText: String = "Tap to set"
     var timerName: String = ""
@@ -228,7 +227,6 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         default:
             return 4
         }
-
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -263,10 +261,9 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        switch pickerStyle {
-        case .minutesOnly:
-            return CGFloat(50.0)
-        default:
+        if component % 2 == 0 {
+            return CGFloat(100.0)
+        } else {
             return CGFloat(50.0)
         }
     }
@@ -352,12 +349,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             } catch {
                 print("Error writing to database: \(error)")
             }
-
         }
-
-        
-
-
     }
 
     //MARK: - Database stuff

@@ -54,14 +54,17 @@ class SimpleTimerViewController: UIViewController {
         return label
     }()
 
+    var hoursSet: Int = 0
     var minutesSet: Int = 2
     var secondsSet: Int = 0
+    var hours: Int = 0
     var minutes: Int = -99
     var seconds: Int = 0
     
     var timer = Timer()
     var timerInUse: Bool = false
     var timerPaused: Bool = false
+    var shouldDisplaySeconds: Bool = true
 
     var autoStart: Bool = false
     var pausable: Bool = true
@@ -102,18 +105,35 @@ class SimpleTimerViewController: UIViewController {
         if seconds == 0 {
             minutes -= 1
             seconds = 59
-            minuteLabel.text = "\(minutes)"
-            if minutes == 1 {
-                wordLabelMinutes.text = "Minute"
-            } else {
-                wordLabelMinutes.text = "Minutes"
-            }
         } else {
             seconds -= 1
         }
-        secondLabel.text = "\(seconds)"
     }
-    
+
+    func updateTimeDisplay() {
+        minuteLabel.text = "\(minutes)"
+        if minutes == 1 {
+            wordLabelMinutes.text = "Minute"
+        } else {
+            wordLabelMinutes.text = "Minutes"
+        }
+        if shouldDisplaySeconds {
+            secondLabel.text = "\(seconds)"
+            if seconds == 1 {
+                wordLabelSeconds.text = "Second"
+            } else {
+                wordLabelSeconds.text = "Seconds"
+            }
+        }
+        if hoursSet > 0 {
+//            hourLabel.text = "\(hours)"
+//            if hours == 1 {
+//                wordLabelHours.text = "Hour"
+//            } else {
+//                wordLabelHours.text = "Hours"
+//            }
+        }
+    }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
         // timerPaused or not timerInUse
