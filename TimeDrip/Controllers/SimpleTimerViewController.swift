@@ -34,25 +34,25 @@ class SimpleTimerViewController: UIViewController {
     let bucketLineColor = UIColor.flatBlackDark.cgColor
     var bucketFillColor = UIColor.flatMint.cgColor
 
-    let minuteLabel: UILabel = {
-        let label = timeLabel("")
-        return label
-    }()
-
-    let secondLabel: UILabel = {
-        let label = timeLabel("")
-        return label
-    }()
-
-    let wordLabelMinutes: UILabel = {
-        let label = wordLabel("Minutes")
-        return label
-    }()
-
-    let wordLabelSeconds: UILabel = {
-        let label = wordLabel("Seconds")
-        return label
-    }()
+//    let minuteLabel: UILabel = {
+//        let label = timeLabel("")
+//        return label
+//    }()
+//
+//    let secondLabel: UILabel = {
+//        let label = timeLabel("")
+//        return label
+//    }()
+//
+//    let wordLabelMinutes: UILabel = {
+//        let label = wordLabel("Minutes")
+//        return label
+//    }()
+//
+//    let wordLabelSeconds: UILabel = {
+//        let label = wordLabel("Seconds")
+//        return label
+//    }()
 
     var hoursSet: Int = 0
     var minutesSet: Int = 2
@@ -77,8 +77,7 @@ class SimpleTimerViewController: UIViewController {
         if !timerInUse {
             minutes = minutesSet
             seconds = 0
-            minuteLabel.text = "\(minutes)"
-            secondLabel.text = "\(seconds)"
+            updateTimeDisplay()
         }
         timerInUse = true
         timerPaused = false
@@ -111,20 +110,20 @@ class SimpleTimerViewController: UIViewController {
     }
 
     func updateTimeDisplay() {
-        minuteLabel.text = "\(minutes)"
-        if minutes == 1 {
-            wordLabelMinutes.text = "Minute"
-        } else {
-            wordLabelMinutes.text = "Minutes"
-        }
-        if shouldDisplaySeconds {
-            secondLabel.text = "\(seconds)"
-            if seconds == 1 {
-                wordLabelSeconds.text = "Second"
-            } else {
-                wordLabelSeconds.text = "Seconds"
-            }
-        }
+//        minuteLabel.text = "\(minutes)"
+//        if minutes == 1 {
+//            wordLabelMinutes.text = "Minute"
+//        } else {
+//            wordLabelMinutes.text = "Minutes"
+//        }
+//        if shouldDisplaySeconds {
+//            secondLabel.text = "\(seconds)"
+//            if seconds == 1 {
+//                wordLabelSeconds.text = "Second"
+//            } else {
+//                wordLabelSeconds.text = "Seconds"
+//            }
+//        }
         if hoursSet > 0 {
 //            hourLabel.text = "\(hours)"
 //            if hours == 1 {
@@ -337,48 +336,55 @@ class SimpleTimerViewController: UIViewController {
                                              toItem: bucketView, attribute: .bottom,
                                              multiplier: 1.0, constant: 0.0)
         NSLayoutConstraint.activate([labelTop,labelLeft,labelRight,labelBottom])
-        timeView.addSubview(minuteLabel)
-        timeView.addSubview(secondLabel)
-        timeView.addSubview(wordLabelMinutes)
-        timeView.addSubview(wordLabelSeconds)
 
-        // Center labels horizontally
-        NSLayoutConstraint(item: minuteLabel, attribute: .centerX,
-                           relatedBy: .equal,
-                           toItem: timeView, attribute: .centerX,
-                           multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: secondLabel, attribute: .centerX,
-                           relatedBy: .equal,
-                           toItem: timeView, attribute: .centerX,
-                           multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: wordLabelMinutes, attribute: .centerX,
-                           relatedBy: .equal,
-                           toItem: timeView, attribute: .centerX,
-                           multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: wordLabelSeconds, attribute: .centerX,
-                           relatedBy: .equal,
-                           toItem: timeView, attribute: .centerX,
-                           multiplier: 1.0, constant: 0.0).isActive = true
 
-        // Position labels vertically
-        NSLayoutConstraint(item: wordLabelMinutes, attribute: .bottom,
-                           relatedBy: .equal,
-                           toItem: timeView, attribute: .centerY,
-                           multiplier: 1.0, constant: spacer).isActive = true
-        NSLayoutConstraint(item: minuteLabel, attribute: .bottom,
-                           relatedBy: .equal,
-                           toItem: wordLabelMinutes, attribute: .top,
-                           multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: secondLabel, attribute: .top,
-                           relatedBy: .equal,
-                           toItem: timeView, attribute: .centerY,
-                           multiplier: 1.0, constant: spacer).isActive = true
-        NSLayoutConstraint(item: wordLabelSeconds, attribute: .top,
-                           relatedBy: .equal,
-                           toItem: secondLabel, attribute: .bottom,
-                           multiplier: 1.0, constant: 0.0).isActive = true
-        minuteLabel.text = "\(minutesSet)"
-        secondLabel.text = "\(secondsSet)"
+
+
+
+
+
+//        timeView.addSubview(minuteLabel)
+//        timeView.addSubview(secondLabel)
+//        timeView.addSubview(wordLabelMinutes)
+//        timeView.addSubview(wordLabelSeconds)
+//
+//        // Center labels horizontally
+//        NSLayoutConstraint(item: minuteLabel, attribute: .centerX,
+//                           relatedBy: .equal,
+//                           toItem: timeView, attribute: .centerX,
+//                           multiplier: 1.0, constant: 0.0).isActive = true
+//        NSLayoutConstraint(item: secondLabel, attribute: .centerX,
+//                           relatedBy: .equal,
+//                           toItem: timeView, attribute: .centerX,
+//                           multiplier: 1.0, constant: 0.0).isActive = true
+//        NSLayoutConstraint(item: wordLabelMinutes, attribute: .centerX,
+//                           relatedBy: .equal,
+//                           toItem: timeView, attribute: .centerX,
+//                           multiplier: 1.0, constant: 0.0).isActive = true
+//        NSLayoutConstraint(item: wordLabelSeconds, attribute: .centerX,
+//                           relatedBy: .equal,
+//                           toItem: timeView, attribute: .centerX,
+//                           multiplier: 1.0, constant: 0.0).isActive = true
+//
+//        // Position labels vertically
+//        NSLayoutConstraint(item: wordLabelMinutes, attribute: .bottom,
+//                           relatedBy: .equal,
+//                           toItem: timeView, attribute: .centerY,
+//                           multiplier: 1.0, constant: spacer).isActive = true
+//        NSLayoutConstraint(item: minuteLabel, attribute: .bottom,
+//                           relatedBy: .equal,
+//                           toItem: wordLabelMinutes, attribute: .top,
+//                           multiplier: 1.0, constant: 0.0).isActive = true
+//        NSLayoutConstraint(item: secondLabel, attribute: .top,
+//                           relatedBy: .equal,
+//                           toItem: timeView, attribute: .centerY,
+//                           multiplier: 1.0, constant: spacer).isActive = true
+//        NSLayoutConstraint(item: wordLabelSeconds, attribute: .top,
+//                           relatedBy: .equal,
+//                           toItem: secondLabel, attribute: .bottom,
+//                           multiplier: 1.0, constant: 0.0).isActive = true
+//        minuteLabel.text = "\(minutesSet)"
+//        secondLabel.text = "\(secondsSet)"
     }
 
 

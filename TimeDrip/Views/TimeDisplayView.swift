@@ -8,6 +8,7 @@
 
 import UIKit
 
+//@IBDesignable
 class TimeDisplayView: NibView {
 
     @IBOutlet weak var timeValue: UILabel!

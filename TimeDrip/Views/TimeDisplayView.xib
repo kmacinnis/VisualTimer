@@ -10,40 +10,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeDisplayView" customModule="TimeDrip" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="xgl-XW-PBa" customClass="TimeDisplayView" customModule="TimeDrip" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="254" height="163"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-xr-PF2">
                     <rect key="frame" x="294" y="102" width="240" height="215"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPe-DY-eI7">
-                    <rect key="frame" x="16" y="20" width="218" height="86"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPe-DY-eI7">
+                    <rect key="frame" x="-2" y="5" width="134" height="120"/>
                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="100"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Units" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PQ-nC-BVa">
-                    <rect key="frame" x="16" y="114" width="222" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PQ-nC-BVa">
+                    <rect key="frame" x="37.666666666666671" y="103.33333333333333" width="54.666666666666671" height="28.999999999999986"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="8PQ-nC-BVa" firstAttribute="top" secondItem="oPe-DY-eI7" secondAttribute="bottom" constant="-21.666666666666664" id="S5J-1i-QN4"/>
+                <constraint firstItem="8PQ-nC-BVa" firstAttribute="centerX" secondItem="xgl-XW-PBa" secondAttribute="centerX" id="XRq-K9-T8u"/>
+                <constraint firstItem="oPe-DY-eI7" firstAttribute="centerY" secondItem="xgl-XW-PBa" secondAttribute="centerY" id="oge-ci-mnD"/>
+                <constraint firstItem="oPe-DY-eI7" firstAttribute="centerX" secondItem="xgl-XW-PBa" secondAttribute="centerX" id="vpB-1N-2b8"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="eoX-t0-0Cu"/>
             <connections>
                 <outlet property="timeUnit" destination="8PQ-nC-BVa" id="lDB-5p-o28"/>
                 <outlet property="timeValue" destination="oPe-DY-eI7" id="KMe-uw-5OU"/>
             </connections>
-            <point key="canvasLocation" x="231" y="261.5"/>
+            <point key="canvasLocation" x="180" y="252"/>
         </view>
     </objects>
 </document>

@@ -16,6 +16,7 @@
 		4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */; };
 		4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */; };
 		4450C31F204B802900A784A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C31E204B802900A784A7 /* Settings.swift */; };
+		4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462D8892066C2E00070D1C6 /* RoundedButton.swift */; };
 		4470E618203B4AD20061C75B /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470E617203B4AD20061C75B /* TimeLabel.swift */; };
 		4470E61B203B4EC20061C75B /* WordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470E61A203B4EC20061C75B /* WordLabel.swift */; };
 		44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */; };
@@ -50,6 +51,7 @@
 		4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimer.swift; sourceTree = "<group>"; };
 		4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
 		4450C31E204B802900A784A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		4462D8892066C2E00070D1C6 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		4470E617203B4AD20061C75B /* TimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		4470E61A203B4EC20061C75B /* WordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordLabel.swift; sourceTree = "<group>"; };
 		44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSampleTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				44CED514205D13FA002079F5 /* TimeDisplayView.swift */,
 				44CED51A205D178E002079F5 /* TimeDisplayView.xib */,
 				44CED516205D14B8002079F5 /* NibView.swift */,
+				4462D8892066C2E00070D1C6 /* RoundedButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
 				44CED515205D13FA002079F5 /* TimeDisplayView.swift in Sources */,
+				4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */,
 				4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */,
 				44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */,
 				44C3D257203F804E00F27433 /* SubclassingUILabelExample.swift in Sources */,
