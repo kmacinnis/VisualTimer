@@ -13,6 +13,7 @@ enum SettingsRow: Int {
     case timePicker
     case autoStart
     case pausable
+    case cancelable
     case color
     case shaded
     case name
@@ -36,7 +37,7 @@ enum SettingsRow: Int {
             return "saveNoticeCell"
         case .pausable:
             return "pausableCell"
-        case .alertSound:
+        default:
             return "errorCell" // "alertSound"
         }
     }

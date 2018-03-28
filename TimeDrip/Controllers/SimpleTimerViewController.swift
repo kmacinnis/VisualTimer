@@ -12,12 +12,12 @@ import ChameleonFramework // for easy color manipulation -- may not be necessary
 import AVFoundation // for alert sound
 
 //TODO:
-// * Refactor time view, making swipeable to change modes (minutes only, etc)
 // * Add slight gradient to bucketfill
 // * Add slight gradient to background
 // * change background and line color to contrast bucketfill color
 // * figure out out to retrieve timers left running after exiting
-// * incorporate willanimaterotation?
+// * incorporate viewWillTransition?
+// * pay attention to cancelable setting
 
 
 
@@ -26,7 +26,7 @@ class SimpleTimerViewController: UIViewController {
     //MARK: - Initialize stuff
     let bucketView = UIView()
     let bucketFillLayer = CAShapeLayer()
-    let bucketLabelView = UIView()
+    let bucketMeasureView = UIView()
     var labelList: [UILabel] = []
     let replicatorLayer = CAReplicatorLayer()
     let instanceLayer = CALayer()
@@ -34,42 +34,42 @@ class SimpleTimerViewController: UIViewController {
     let bucketLineColor = UIColor.flatBlackDark.cgColor
     var bucketFillColor = UIColor.flatMint.cgColor
 
-//    let minuteLabel: UILabel = {
-//        let label = timeLabel("")
-//        return label
-//    }()
-//
-//    let secondLabel: UILabel = {
-//        let label = timeLabel("")
-//        return label
-//    }()
-//
-//    let wordLabelMinutes: UILabel = {
-//        let label = wordLabel("Minutes")
-//        return label
-//    }()
-//
-//    let wordLabelSeconds: UILabel = {
-//        let label = wordLabel("Seconds")
-//        return label
-//    }()
-
     var hoursSet: Int = 0
     var minutesSet: Int = 2
     var secondsSet: Int = 0
     var hours: Int = 0
-    var minutes: Int = -99
+    var minutes: Int = 0
     var seconds: Int = 0
+    var minutesCeil: Int = 0
+
     
     var timer = Timer()
     var timerInUse: Bool = false
     var timerPaused: Bool = false
-    var shouldDisplaySeconds: Bool = true
+    var shouldDisplaySeconds: Bool = false
+    var shouldDisplayHours: Bool = false
 
     var autoStart: Bool = false
     var pausable: Bool = true
+    var cancelable: Bool = true
+    var setUpComplete: Bool = false
+    var bucketViewReady: Bool = false
 
     @IBOutlet weak var timerButton: UIButton!
+    @IBOutlet weak var cancelButton: RoundedButton!
+
+    @IBOutlet weak var bucketSpace: UIView!
+    @IBOutlet weak var timeDisplaySpace: UIView!
+    
+    @IBOutlet weak var hourSubview: UIView!
+    @IBOutlet weak var hourValueLabel: UILabel!
+    @IBOutlet weak var hourUnitLabel: UILabel!
+    @IBOutlet weak var minuteSubview: UIView!
+    @IBOutlet weak var minuteValueLabel: UILabel!
+    @IBOutlet weak var minuteUnitLabel: UILabel!
+    @IBOutlet weak var secondSubview: UIView!
+    @IBOutlet weak var secondValueLabel: UILabel!
+    @IBOutlet weak var secondUnitLabel: UILabel!
 
     //MARK: - Timer functionality
 
@@ -83,7 +83,11 @@ class SimpleTimerViewController: UIViewController {
         timerPaused = false
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(SimpleTimerViewController.updateTimer)), userInfo: nil, repeats: true)
         drainBucket()
-        timerButton.setTitle("Pause", for: .normal)
+        if pausable {
+            timerButton.setTitle("Pause", for: .normal)
+        } else {
+            timerButton.isHidden = true
+        }
     }
 
     func pauseTimer() {
@@ -94,44 +98,59 @@ class SimpleTimerViewController: UIViewController {
         timerPaused = true
     }
 
-
     @objc func updateTimer() {
         if minutes + seconds == 0 {
+            minutesCeil = 0
             timer.invalidate()
             AudioServicesPlayAlertSound(1030)
+            updateTimeDisplay()
             return
         }
         if seconds == 0 {
             minutes -= 1
+            minutesCeil = minutes + 1
             seconds = 59
         } else {
             seconds -= 1
         }
+        updateTimeDisplay()
     }
 
     func updateTimeDisplay() {
-//        minuteLabel.text = "\(minutes)"
-//        if minutes == 1 {
-//            wordLabelMinutes.text = "Minute"
-//        } else {
-//            wordLabelMinutes.text = "Minutes"
-//        }
-//        if shouldDisplaySeconds {
-//            secondLabel.text = "\(seconds)"
-//            if seconds == 1 {
-//                wordLabelSeconds.text = "Second"
-//            } else {
-//                wordLabelSeconds.text = "Seconds"
-//            }
-//        }
-        if hoursSet > 0 {
-//            hourLabel.text = "\(hours)"
-//            if hours == 1 {
-//                wordLabelHours.text = "Hour"
-//            } else {
-//                wordLabelHours.text = "Hours"
-//            }
+        if shouldDisplayHours {
+            hourValueLabel.text = "\(hours)"
+            if hours == 1 {
+                hourUnitLabel.text = "Hour"
+            } else {
+                hourUnitLabel.text = "Hours"
+            }
         }
+
+        if shouldDisplaySeconds {
+            minuteValueLabel.text = "\(minutes)"
+            if minutes == 1 {
+                minuteUnitLabel.text = "Minute"
+            } else  {
+                minuteUnitLabel.text = "Minutes"
+            }
+
+            secondValueLabel.text =  "\(seconds)"
+            if seconds == 1 {
+                secondUnitLabel.text = "Second"
+            } else {
+                secondUnitLabel.text = "Seconds"
+            }
+        } else {
+            minuteValueLabel.text = "\(minutesCeil)"
+            if minutesCeil == 1 {
+                minuteUnitLabel.text = "Minute"
+            } else  {
+                minuteUnitLabel.text = "Minutes"
+            }
+        }
+
+
+
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
@@ -141,7 +160,12 @@ class SimpleTimerViewController: UIViewController {
         } else {
             pauseTimer()
         }
+    }
 
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        timer.invalidate()
+
+        self.navigationController?.popViewController(animated: true)        //TODO: Fix cancel button
     }
 
     //MARK: - Draw stuff
@@ -171,16 +195,16 @@ class SimpleTimerViewController: UIViewController {
             label.text = "\(i)"
             label.textColor = UIColor(cgColor: bucketLineColor)
             label.font = UIFont.systemFont(ofSize: 14)
-            bucketLabelView.addSubview(label)
+            bucketMeasureView.addSubview(label)
                 }
         positionMeasureLabels()
         }
 
     func positionMeasureLabels() {
         let vertShift = bucketView.frame.height / CGFloat(minutesSet)
-        let minX = bucketLabelView.bounds.minX + 3
-        let width = bucketLabelView.bounds.width
-        let bottom = bucketLabelView.bounds.height
+        let minX = bucketMeasureView.bounds.minX + 3
+        let width = bucketMeasureView.bounds.width
+        let bottom = bucketMeasureView.bounds.height
         var currentY = CGFloat(0.0)
         var label : UILabel
 
@@ -238,51 +262,58 @@ class SimpleTimerViewController: UIViewController {
 
 
     func drawBucketOutline() {
-        view.addSubview(bucketView)
+        bucketSpace.backgroundColor = UIColor.clear
+        bucketSpace.addSubview(bucketView)
         bucketView.backgroundColor = UIColor.clear
-        let horizPadding = CGFloat(10.0)
+        let horizPadding = CGFloat(25)
+        let vertPadding = CGFloat(20)
+
+
+
 
         bucketView.layer.borderWidth = 2
         bucketView.layer.borderColor = bucketLineColor
         bucketView.translatesAutoresizingMaskIntoConstraints = false
         let bucketLeft = NSLayoutConstraint(item: bucketView, attribute: .left,
                                             relatedBy: .equal,
-                                            toItem: self.view, attribute: .leftMargin,
+                                            toItem: bucketSpace, attribute: .leftMargin,
                                             multiplier: 1.0, constant: horizPadding)
         let bucketRight = NSLayoutConstraint(item: bucketView, attribute: .right,
                                              relatedBy: .equal,
-                                             toItem: self.view, attribute: .centerXWithinMargins,
+                                             toItem: bucketSpace, attribute: .rightMargin,
                                              multiplier: 1.0, constant: -horizPadding)
         let bucketTop = NSLayoutConstraint(item: bucketView, attribute: .top,
                                            relatedBy: .equal,
-                                           toItem: self.view, attribute: .topMargin,
-                                           multiplier: 1.0, constant: 20.0)
+                                           toItem: bucketSpace, attribute: .top,
+                                           multiplier: 1.0, constant: vertPadding)
         let bucketBottom = NSLayoutConstraint(item: bucketView, attribute: .bottom,
                                               relatedBy: .equal,
-                                              toItem: self.view, attribute: .bottomMargin,
-                                              multiplier: 1.0, constant: -50)
+                                              toItem: bucketSpace, attribute: .bottom,
+                                              multiplier: 1.0, constant: -3*vertPadding)
         NSLayoutConstraint.activate([bucketTop, bucketBottom, bucketLeft, bucketRight])
 
-        view.addSubview(bucketLabelView)
-        bucketLabelView.translatesAutoresizingMaskIntoConstraints = false
-        bucketLabelView.backgroundColor = UIColor.clear
-        let labelLeft = NSLayoutConstraint(item: bucketLabelView, attribute: .left,
+        bucketSpace.addSubview(bucketMeasureView)
+        bucketMeasureView.translatesAutoresizingMaskIntoConstraints = false
+        bucketMeasureView.backgroundColor = UIColor.clear
+        let labelLeft = NSLayoutConstraint(item: bucketMeasureView, attribute: .left,
                                            relatedBy: .equal,
                                            toItem: bucketView, attribute: .right,
                                            multiplier: 1.0, constant: 0.0)
-        let labelRight = NSLayoutConstraint(item: bucketLabelView, attribute: .right,
+        let labelRight = NSLayoutConstraint(item: bucketMeasureView, attribute: .right,
                                             relatedBy: .equal,
-                                            toItem: self.view, attribute: .centerX,
-                                            multiplier: 1.0, constant: horizPadding)
-        let labelTop = NSLayoutConstraint(item: bucketLabelView, attribute: .top,
+                                            toItem: bucketSpace, attribute: .rightMargin,
+                                            multiplier: 1.0, constant: 0.0)
+        let labelTop = NSLayoutConstraint(item: bucketMeasureView, attribute: .top,
                                           relatedBy: .equal,
                                           toItem: bucketView, attribute: .top,
                                           multiplier: 1.0, constant: 0.0)
-        let labelBottom = NSLayoutConstraint(item: bucketLabelView, attribute: .bottom,
+        let labelBottom = NSLayoutConstraint(item: bucketMeasureView, attribute: .bottom,
                                              relatedBy: .equal,
                                              toItem: bucketView, attribute: .bottom,
                                              multiplier: 1.0, constant: 0.0)
         NSLayoutConstraint.activate([labelTop,labelLeft,labelRight,labelBottom])
+
+        bucketViewReady = true
 
     }
 
@@ -311,85 +342,17 @@ class SimpleTimerViewController: UIViewController {
     }
 
     func setUpTimeView() {
-        //TODO: Change things up, using a xib,
-        // and make it swipeable to change between display modes:
-        // minutes only, minutes+seconds, hours(when applicable)
-        let timeView = UIView()
-        view.addSubview(timeView)
-        let spacer = CGFloat(30.0)
-        timeView.translatesAutoresizingMaskIntoConstraints = false
-        timeView.backgroundColor = UIColor.clear
-        let labelLeft = NSLayoutConstraint(item: timeView, attribute: .left,
-                                           relatedBy: .equal,
-                                           toItem: bucketLabelView, attribute: .right,
-                                           multiplier: 1.0, constant: 0.0)
-        let labelRight = NSLayoutConstraint(item: timeView, attribute: .right,
-                                            relatedBy: .equal,
-                                            toItem: self.view, attribute: .rightMargin,
-                                            multiplier: 1.0, constant: 0.0)
-        let labelTop = NSLayoutConstraint(item: timeView, attribute: .top,
-                                          relatedBy: .equal,
-                                          toItem: bucketView, attribute: .top,
-                                          multiplier: 1.0, constant: 0.0)
-        let labelBottom = NSLayoutConstraint(item: timeView, attribute: .bottom,
-                                             relatedBy: .equal,
-                                             toItem: bucketView, attribute: .bottom,
-                                             multiplier: 1.0, constant: 0.0)
-        NSLayoutConstraint.activate([labelTop,labelLeft,labelRight,labelBottom])
 
-
-
-
-
-
-
-//        timeView.addSubview(minuteLabel)
-//        timeView.addSubview(secondLabel)
-//        timeView.addSubview(wordLabelMinutes)
-//        timeView.addSubview(wordLabelSeconds)
-//
-//        // Center labels horizontally
-//        NSLayoutConstraint(item: minuteLabel, attribute: .centerX,
-//                           relatedBy: .equal,
-//                           toItem: timeView, attribute: .centerX,
-//                           multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: secondLabel, attribute: .centerX,
-//                           relatedBy: .equal,
-//                           toItem: timeView, attribute: .centerX,
-//                           multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: wordLabelMinutes, attribute: .centerX,
-//                           relatedBy: .equal,
-//                           toItem: timeView, attribute: .centerX,
-//                           multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: wordLabelSeconds, attribute: .centerX,
-//                           relatedBy: .equal,
-//                           toItem: timeView, attribute: .centerX,
-//                           multiplier: 1.0, constant: 0.0).isActive = true
-//
-//        // Position labels vertically
-//        NSLayoutConstraint(item: wordLabelMinutes, attribute: .bottom,
-//                           relatedBy: .equal,
-//                           toItem: timeView, attribute: .centerY,
-//                           multiplier: 1.0, constant: spacer).isActive = true
-//        NSLayoutConstraint(item: minuteLabel, attribute: .bottom,
-//                           relatedBy: .equal,
-//                           toItem: wordLabelMinutes, attribute: .top,
-//                           multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: secondLabel, attribute: .top,
-//                           relatedBy: .equal,
-//                           toItem: timeView, attribute: .centerY,
-//                           multiplier: 1.0, constant: spacer).isActive = true
-//        NSLayoutConstraint(item: wordLabelSeconds, attribute: .top,
-//                           relatedBy: .equal,
-//                           toItem: secondLabel, attribute: .bottom,
-//                           multiplier: 1.0, constant: 0.0).isActive = true
-//        minuteLabel.text = "\(minutesSet)"
-//        secondLabel.text = "\(secondsSet)"
     }
 
 
     @objc private func handleTap() {
-        print("Screen tapped.")
+        shouldDisplaySeconds = !shouldDisplaySeconds
+//        secondSubview.isHidden = !shouldDisplaySeconds
+        self.updateTimeDisplay()
+        UIView.animate(withDuration: 0.5) {
+            self.secondSubview.isHidden = !(self.shouldDisplaySeconds)
+        }
 
 
     }
@@ -408,32 +371,46 @@ class SimpleTimerViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if bucketView.frame.width > 0.0 {
+        if bucketViewReady {
             setUpReplicatorLayer()
             bucketView.layer.addSublayer(replicatorLayer)
             setUpMeasureMarks()
             replicatorLayer.addSublayer(instanceLayer)
             positionMeasureLabels()
-            if timerInUse && !timerPaused {
-                drainBucket()
-            }
             if autoStart && !timerInUse {
                 runTimer()
+            }
+            if timerInUse && !timerPaused {
+                drainBucket()
             }
         }
     }
 
-    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+//    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+//
+//    }
+
+    override func viewWillAppear(_ animated: Bool) {
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !pausable {
+        if !pausable && autoStart {
             timerButton.isHidden = true
         }
+        hourValueLabel.text = "\(hoursSet)"
+        minuteValueLabel.text = "\(minutesSet)"
+        secondValueLabel.text = "\(secondsSet)"
+        if hoursSet == 0 {
+            hourSubview.isHidden = true
+            shouldDisplayHours = false
+        }
 
-        // view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        secondSubview.isHidden = !shouldDisplaySeconds
+
+
+        timeDisplaySpace.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
 
     }
 

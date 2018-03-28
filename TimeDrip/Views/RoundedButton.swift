@@ -9,12 +9,10 @@
 import UIKit
 
 @IBDesignable
-open class RoundedButton: UIButton {
+class RoundedButton: UIButton {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setTitle("Cancel", for: .normal)
-        setTitleColor(UIColor.flatRed, for: .normal)
     }
 
     public required init?(coder aDecoder: NSCoder) {

@@ -11,7 +11,7 @@ import RappleColorPicker
 import RealmSwift
 
 //TODO:
-// * change pickerStyle by swiping picker left/right
+// * change timePickerStyle by swiping picker left/right
 // * offer choice of alert sound
 // * disable "use timer" button until time is set
 
@@ -26,30 +26,36 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     var timeText: String = "Tap to set"
     var timerName: String = ""
     var color: UIColor = UIColor.blue
-    var pickerVisible = false
-    var pickerStyle: PickerStyle = .minutesOnly
+    var timePickerVisible = false
+    var timePickerStyle: PickerStyle = .minutesOnly
     var hoursSet = 0
     var minutesSet = 5
     var secondsSet = 0
     var origAutoStart = true
     var origPausable = false
+    var origCancelable = true
 
     var nameField: UITextField?
     var autoStartSwitch: UISwitch?
     var pausableSwitch: UISwitch?
+    var cancelSwitch: UISwitch?
 
     var thisTimer: SavedTimer?
 
     let realm = try! Realm()
 
+    enum PickerTag: Int {
+        case timePicker
+        case soundPicker
+    }
 
-    func togglePicker()  {
-        pickerVisible = !pickerVisible
+    func togglePicker(picker: )  {
+        timePickerVisible = !timePickerVisible
         tableView.reloadData()
     }
 
     func closePicker() {
-        pickerVisible = false
+        timePickerVisible = false
         tableView.reloadData()
     }
 
@@ -116,6 +122,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TimePickerCell
                 cell.picker.dataSource = self
                 cell.picker.delegate = self
+                cell.picker.tag = PickerTag.timePicker.rawValue
                 if mode == .edit {
                     cell.picker.selectRow(minutesSet, inComponent: 0, animated: false)
                 }
@@ -133,7 +140,12 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 pausableSwitch = cell.toggleSwitch
                 pausableSwitch?.isOn = origPausable
                 return cell
-
+            case .cancelable:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleCell
+                cell.toggleLabel.text = "Make Timer Cancelable:"
+                cancelSwitch = cell.toggleSwitch
+                cancelSwitch?.isOn = origCancelable
+                return cell
             case .timeSet:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TimeSetCell
                 cell.detail.text = timeText
@@ -156,7 +168,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
         switch SettingsRow(rawValue: indexPath.row)! {
         case .timePicker:
-            if pickerVisible {
+            if timePickerVisible {
                 return CGFloat(162)
             } else {
                 return CGFloat(0)
@@ -221,7 +233,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        switch pickerStyle {
+        switch timePickerStyle {
         case .minutesOnly:
             return 2
         default:
@@ -230,7 +242,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch pickerStyle {
+        switch timePickerStyle {
         case .hoursMinutes:
             switch component {
             case 0: // number of hours
@@ -269,7 +281,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch pickerStyle {
+        switch timePickerStyle {
         case .hoursMinutes:
             switch component {
             case 1:
@@ -299,7 +311,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerStyle {
+        switch timePickerStyle {
         case .minutesOnly:
             timeText = "\(row) min"
             hoursSet = 0
@@ -316,7 +328,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("preparing for segue")
-//        var pickerStyle: PickerStyle = .minutesOnly
+//        var timePickerStyle: PickerStyle = .minutesOnly
 //        var hoursSet = 0
         let destinationVC = segue.destination as! SimpleTimerViewController
         destinationVC.minutesSet = minutesSet
@@ -324,6 +336,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         destinationVC.bucketFillColor = color.cgColor
         destinationVC.pausable = pausableSwitch?.isOn ?? false
         destinationVC.autoStart = autoStartSwitch?.isOn ?? false
+        destinationVC.cancelable = cancelSwitch?.isOn ?? true
 
         if mode == .add && timerName == "" {
             return // Nothing to do in the database in this case.
