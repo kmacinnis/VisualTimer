@@ -69,10 +69,15 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
     @objc func nameChanged() {
         timerName = (nameField?.text) ?? ""
-        if timerName == "" {
-            useBtn.title = "Use Timer"
-        } else {
-            useBtn.title = "Save & Use Timer"
+        switch mode {
+        case .edit:
+            useBtn.isEnabled = (timerName != "")
+        case .add:
+            if timerName == "" {
+                useBtn.title = "Use Timer"
+            } else {
+                useBtn.title = "Save & Use Timer"
+            }
         }
     }
 
@@ -82,7 +87,12 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     }
 
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "useNewTimer", sender: self)
+        switch mode {
+        case .add:
+            performSegue(withIdentifier: "useNewTimer", sender: self)
+        case .edit:
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
 
     @IBOutlet weak var useBtn: UIBarButtonItem!
@@ -101,6 +111,9 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
 
         useBtn.isEnabled = (minutesSet > 0)
+        if mode == .edit {
+            useBtn.title = "Save Changes"
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -199,10 +212,6 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 self.closePickers()
 
             }
-        case .shaded:
-            print("timerName: \(timerName)")
-            print("nameField: \(String(describing: nameField))")
-            print("nameField: \(String(describing: nameField?.text))")
         default:
             closePickers()
         }
@@ -336,7 +345,6 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     //MARK: - Segue to Timer Screen
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("preparing for segue")
 //        var timePickerStyle: PickerStyle = .minutesOnly
 //        var hoursSet = 0
         let destinationVC = segue.destination as! SimpleTimerViewController
