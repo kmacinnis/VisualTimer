@@ -63,6 +63,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
                     destinationVC.bucketFillColor = UIColor.init(hexString: timer.hexColor)?.cgColor ?? UIColor.gray.cgColor
                     destinationVC.pausable = timer.pausable
                     destinationVC.autoStart = timer.autoStart
+                    destinationVC.timerName = timer.name
                 }
             }
         } else if segue.identifier == "editTimer" {

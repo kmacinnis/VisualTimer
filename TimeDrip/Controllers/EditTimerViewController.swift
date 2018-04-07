@@ -13,6 +13,7 @@ import RealmSwift
 //TODO:
 // * change timePickerStyle by swiping picker left/right
 // * offer choice of alert sound
+// * when editing, should it save & return to list?
 
 enum PickerTag: Int {
     case timePicker
@@ -33,7 +34,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     var timePickerStyle: PickerStyle = .minutesOnly
     var soundPickerVisible: Bool = false
     var hoursSet = 0
-    var minutesSet = 5
+    var minutesSet = 0
     var secondsSet = 0
     var origAutoStart = true
     var origPausable = false
@@ -99,7 +100,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
 
-        useBtn.isEnabled = false
+        useBtn.isEnabled = (minutesSet > 0)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -339,6 +340,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 //        var timePickerStyle: PickerStyle = .minutesOnly
 //        var hoursSet = 0
         let destinationVC = segue.destination as! SimpleTimerViewController
+        destinationVC.timerName = timerName
         destinationVC.minutesSet = minutesSet
         destinationVC.secondsSet = secondsSet
         destinationVC.bucketFillColor = color.cgColor

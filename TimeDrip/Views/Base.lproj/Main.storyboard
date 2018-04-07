@@ -12,10 +12,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Info Screen View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="uzm-WK-yK4">
             <objects>
-                <viewController id="nvY-hO-fQ0" customClass="InfoScreenViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nvY-hO-fQ0" customClass="UIPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o9N-vE-gI2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

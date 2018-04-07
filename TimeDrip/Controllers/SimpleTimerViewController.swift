@@ -33,6 +33,7 @@ class SimpleTimerViewController: UIViewController {
     let bucketLineColor = UIColor.flatBlackDark.cgColor
     var bucketFillColor = UIColor.flatMint.cgColor
 
+    var timerName: String = ""
     var hoursSet: Int = 0
     var minutesSet: Int = 2
     var secondsSet: Int = 0
@@ -104,6 +105,8 @@ class SimpleTimerViewController: UIViewController {
             timer.invalidate()
             AudioServicesPlayAlertSound(1030)
             updateTimeDisplay()
+            navigationItem.hidesBackButton = false
+
             return
         }
         if seconds == 0 {
@@ -356,11 +359,9 @@ class SimpleTimerViewController: UIViewController {
 
     //MARK: - ViewController methods
 
-    override func viewDidAppear(_ animated: Bool) {
-        setUpBucket()
-
-
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        setUpBucket()
+//    }
 
 
     override func viewDidLayoutSubviews() {
@@ -388,6 +389,7 @@ class SimpleTimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        navigationItem.title = timerName
         if !pausable && autoStart {
             timerButton.isHidden = true
         }
@@ -403,6 +405,7 @@ class SimpleTimerViewController: UIViewController {
 
 
         timeDisplaySpace.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        setUpBucket()
 
     }
 
