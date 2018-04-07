@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZhT-JY-ISp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZhT-JY-ISp">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Info Screen View Controller-->
+        <scene sceneID="uzm-WK-yK4">
+            <objects>
+                <viewController id="nvY-hO-fQ0" customClass="InfoScreenViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="o9N-vE-gI2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="fQF-4s-tQf" userLabel="infoLabel">
+                                <rect key="frame" x="20" y="0.0" width="374" height="632"/>
+                                <string key="text">Thanks for testing out my app!
+
+Please let me know about any problems you have. You can grab me in person, or if it's easier, email me at macinnis.k@gmail.com
+
+One known issue is that the timer does not work in the background right now.  I'm currently working on that.
+Also, in the future I will add the ability to choose an alert sound.  Let me know if you have any other feature requests.
+
+Thanks again!
+Kate</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fQF-4s-tQf" firstAttribute="leading" secondItem="VUp-lI-zRZ" secondAttribute="leading" constant="20" id="DIa-zI-hn3"/>
+                            <constraint firstItem="fQF-4s-tQf" firstAttribute="top" secondItem="VUp-lI-zRZ" secondAttribute="top" id="LdK-wc-4ip"/>
+                            <constraint firstItem="fQF-4s-tQf" firstAttribute="bottom" secondItem="VUp-lI-zRZ" secondAttribute="bottom" priority="749" constant="-40" id="S85-JZ-gbI"/>
+                            <constraint firstItem="fQF-4s-tQf" firstAttribute="trailing" secondItem="VUp-lI-zRZ" secondAttribute="trailing" priority="749" constant="-20" id="x5I-k5-12x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VUp-lI-zRZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yez-WC-qxL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223.18840579710147" y="-631.79347826086962"/>
+        </scene>
         <!--Edit Timer-->
         <scene sceneID="QDi-pl-qEe">
             <objects>
@@ -145,7 +183,13 @@
                             <outlet property="delegate" destination="hlf-VI-8fP" id="x1G-tg-bNk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Saved Timers" id="oim-0T-CgQ"/>
+                    <navigationItem key="navigationItem" title="Saved Timers" id="oim-0T-CgQ">
+                        <barButtonItem key="leftBarButtonItem" title="Info" id="f2c-yA-UOU" userLabel="infoButton">
+                            <connections>
+                                <segue destination="nvY-hO-fQ0" kind="show" id="A4E-LO-DQ0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="startTimer" id="zxQ-wO-ous"/>
                         <segue destination="po4-An-G2K" kind="show" identifier="editTimer" id="UFt-e5-oWQ"/>
@@ -409,7 +453,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kU5-oQ-8Uk"/>
+        <segue reference="zxQ-wO-ous"/>
         <segue reference="Xb3-8O-YCV"/>
     </inferredMetricsTieBreakers>
 </document>

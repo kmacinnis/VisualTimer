@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		060E56225D8F44696315A74C /* Pods_TimeDrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */; };
+		4405959820792F80000781B6 /* InfoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405959720792F80000781B6 /* InfoScreenViewController.swift */; };
 		440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA0292033B4F300D2FBD8 /* AppDelegate.swift */; };
 		440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */; };
 		440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA02D2033B4F300D2FBD8 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4405959720792F80000781B6 /* InfoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoScreenViewController.swift; sourceTree = "<group>"; };
 		440EA0262033B4F300D2FBD8 /* TimeDrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeDrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		440EA0292033B4F300D2FBD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimerViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */,
 				4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */,
+				4405959720792F80000781B6 /* InfoScreenViewController.swift */,
 				44A6559D2051D0720088FE49 /* EditTimerViewController.swift */,
 			);
 			path = Controllers;
@@ -213,7 +216,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Kate MacInnis";
 				TargetAttributes = {
 					440EA0252033B4F300D2FBD8 = {
@@ -332,6 +335,7 @@
 				4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */,
 				4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */,
 				44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */,
+				4405959820792F80000781B6 /* InfoScreenViewController.swift in Sources */,
 				44CED50E20533C13002079F5 /* ToggleCell.swift in Sources */,
 				4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */,
 				44A655932051BC280088FE49 /* TimeSetCell.swift in Sources */,
@@ -382,6 +386,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -389,6 +394,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -439,6 +445,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -446,6 +453,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

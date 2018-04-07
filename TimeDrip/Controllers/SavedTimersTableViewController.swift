@@ -45,7 +45,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
         let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
         let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
-
+//        let infoBarBtn = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(SavedTimersTableViewController.showInfo))
         self.navigationItem.rightBarButtonItems = [addBarBtn, editBarBtn]
     }
 
@@ -54,7 +54,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare for segue: \(String(describing: segue.identifier))")
         if segue.identifier == "startTimer" {
             let destinationVC = segue.destination as! SimpleTimerViewController
             if let indexPath = tableView.indexPathForSelectedRow {

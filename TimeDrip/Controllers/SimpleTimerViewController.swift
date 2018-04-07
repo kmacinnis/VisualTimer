@@ -17,7 +17,6 @@ import AVFoundation // for alert sound
 // * change background and line color to contrast bucketfill color
 // * figure out out to retrieve timers left running after exiting
 // * incorporate viewWillTransition?
-// * pay attention to cancelable setting
 
 
 
@@ -40,7 +39,7 @@ class SimpleTimerViewController: UIViewController {
     var hours: Int = 0
     var minutes: Int = 0
     var seconds: Int = 0
-    var minutesCeil: Int = 0
+    var minutesCeil: Int = 15
 
     
     var timer = Timer()
@@ -76,6 +75,7 @@ class SimpleTimerViewController: UIViewController {
     func runTimer() {
         if !timerInUse {
             minutes = minutesSet
+            minutesCeil = minutesSet
             seconds = 0
             updateTimeDisplay()
         }
@@ -86,7 +86,7 @@ class SimpleTimerViewController: UIViewController {
         if pausable {
             timerButton.setTitle("Pause", for: .normal)
         } else {
-            timerButton.isHidden = true
+            timerButton.isHidden = true //TODO: This should be somewhere else?
         }
     }
 
@@ -164,8 +164,7 @@ class SimpleTimerViewController: UIViewController {
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         timer.invalidate()
-
-        self.navigationController?.popViewController(animated: true)        //TODO: Fix cancel button
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     //MARK: - Draw stuff
@@ -341,10 +340,6 @@ class SimpleTimerViewController: UIViewController {
         setUpBucketFill()
     }
 
-    func setUpTimeView() {
-
-    }
-
 
     @objc private func handleTap() {
         shouldDisplaySeconds = !shouldDisplaySeconds
@@ -363,7 +358,6 @@ class SimpleTimerViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         setUpBucket()
-        setUpTimeView()
 
 
     }
@@ -390,12 +384,10 @@ class SimpleTimerViewController: UIViewController {
 //
 //    }
 
-    override func viewWillAppear(_ animated: Bool) {
-
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
         if !pausable && autoStart {
             timerButton.isHidden = true
         }

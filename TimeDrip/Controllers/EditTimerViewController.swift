@@ -13,8 +13,11 @@ import RealmSwift
 //TODO:
 // * change timePickerStyle by swiping picker left/right
 // * offer choice of alert sound
-// * disable "use timer" button until time is set
 
+enum PickerTag: Int {
+    case timePicker
+    case soundPicker
+}
 
 class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -28,6 +31,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     var color: UIColor = UIColor.blue
     var timePickerVisible = false
     var timePickerStyle: PickerStyle = .minutesOnly
+    var soundPickerVisible: Bool = false
     var hoursSet = 0
     var minutesSet = 5
     var secondsSet = 0
@@ -44,18 +48,21 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
     let realm = try! Realm()
 
-    enum PickerTag: Int {
-        case timePicker
-        case soundPicker
-    }
 
-    func togglePicker(picker: )  {
-        timePickerVisible = !timePickerVisible
+
+    func togglePicker(tag: Int)  {
+        switch (PickerTag.init(rawValue: tag))! {
+        case .timePicker:
+            timePickerVisible = !timePickerVisible
+        case .soundPicker:
+            soundPickerVisible = !soundPickerVisible
+        }
         tableView.reloadData()
     }
 
-    func closePicker() {
+    func closePickers() {
         timePickerVisible = false
+        soundPickerVisible = false
         tableView.reloadData()
     }
 
@@ -92,7 +99,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
 
-
+        useBtn.isEnabled = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -181,14 +188,14 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch SettingsRow(rawValue: indexPath.row)! {
         case .timeSet:
-            togglePicker()
+            togglePicker(tag: PickerTag.timePicker.rawValue)
         case .timePicker:
             print("Touched timePicker")
         case .color:
             RappleColorPicker.openColorPallet { (color, num) in
                 self.color = color
                 RappleColorPicker.close()
-                self.closePicker()
+                self.closePickers()
 
             }
         case .shaded:
@@ -196,7 +203,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             print("nameField: \(String(describing: nameField))")
             print("nameField: \(String(describing: nameField?.text))")
         default:
-            closePicker()
+            closePickers()
         }
     }
 
@@ -317,6 +324,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             hoursSet = 0
             minutesSet = row
             secondsSet = 0
+            useBtn.isEnabled = (minutesSet > 0)
         default:
             timeText = "TBA"
             // Probably going to need refactoring to deal with multiple components
