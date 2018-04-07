@@ -91,6 +91,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         case .add:
             performSegue(withIdentifier: "useNewTimer", sender: self)
         case .edit:
+            saveChanges()
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
@@ -356,14 +357,25 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         destinationVC.autoStart = autoStartSwitch?.isOn ?? false
         destinationVC.cancelable = cancelSwitch?.isOn ?? true
 
-        if mode == .add && timerName == "" {
-            return // Nothing to do in the database in this case.
+        // The only time we don't save is if we hit add & didn't give the timer a name
+        if !(mode == .add && timerName == "") {
+            saveChanges()
         }
+    }
+
+    //MARK: - Database stuff
+
+    func saveChanges() {
         if mode == .add {
             thisTimer = SavedTimer()
-            save(thisTimer!)
+            do {
+                try realm.write({
+                    realm.add(thisTimer!, update: true)
+                })
+            } catch {
+                print("Error saving new timer: \(error)")
+            }
         }
-        guard thisTimer != nil else { return }
         if let thisTimer = thisTimer {
             do {
                 try realm.write {
@@ -380,21 +392,12 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             } catch {
                 print("Error writing to database: \(error)")
             }
+        } else {
+            print("Error: unexpected nil timer in \(mode) mode.")
         }
     }
 
-    //MARK: - Database stuff
 
-        func save(_ timer: SavedTimer) {
-            print("Saving New Timer")
-            do {
-                try realm.write({
-                    realm.add(timer, update: true)
-                })
-            } catch {
-                print("Error saving context: \(error)")
-            }
-        }
 
     
 
