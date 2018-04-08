@@ -30,8 +30,8 @@ class SimpleTimerViewController: UIViewController {
     let replicatorLayer = CAReplicatorLayer()
     let instanceLayer = CALayer()
 
-    let bucketLineColor = UIColor.flatBlackDark.cgColor
-    var bucketFillColor = UIColor.flatMint.cgColor
+    let bucketLineColor: CGColor = UIColor.flatBlackDark.cgColor
+    var bucketFillColor: CGColor = UIColor.flatMint.cgColor
 
     var timerName: String = ""
     var hoursSet: Int = 0

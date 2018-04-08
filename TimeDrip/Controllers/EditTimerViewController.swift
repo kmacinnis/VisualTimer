@@ -13,7 +13,6 @@ import RealmSwift
 //TODO:
 // * change timePickerStyle by swiping picker left/right
 // * offer choice of alert sound
-// * when editing, should it save & return to list?
 
 enum PickerTag: Int {
     case timePicker
@@ -207,7 +206,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         case .timePicker:
             print("Touched timePicker")
         case .color:
-            RappleColorPicker.openColorPallet { (color, num) in
+            RappleColorPicker.openColorPallet { (color, _) in
                 self.color = color
                 RappleColorPicker.close()
                 self.closePickers()

@@ -69,7 +69,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         } else if segue.identifier == "editTimer" {
             let destinationVC = segue.destination as! EditTimerViewController
             if let timer = timerForEditing {
-                print("timer: \(timer)")
                 destinationVC.mode = .edit
                 destinationVC.thisTimer = timer
                 destinationVC.minutesSet = timer.minutesSet
@@ -178,12 +177,10 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
 
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            print("delete \(indexPath)")
             self.deleteTimer(at: indexPath)
         }
 
         let editAction = SwipeAction(style: .default, title: "Edit") { (action, indexPath) in
-            print("edit \(indexPath)")
             self.timerForEditing = self.timers?[indexPath.row]
             self.performSegue(withIdentifier: "editTimer", sender: self)
         }
