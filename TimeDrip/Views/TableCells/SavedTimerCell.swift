@@ -18,6 +18,13 @@ class SavedTimerCell: SwipeTableViewCell {
 
     override func awakeFromNib() {
         timerIcon.image = timerIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        let iconLayer = timerIcon.layer
+        iconLayer.shadowColor = UIColor.black.cgColor
+        iconLayer.shadowOpacity = 0.4
+        iconLayer.shadowOffset = CGSize(width: 1, height: 1)
+        iconLayer.shadowRadius = 1
+        iconLayer.shouldRasterize = true
+        iconLayer.rasterizationScale = UIScreen.main.scale
     }
     
 }

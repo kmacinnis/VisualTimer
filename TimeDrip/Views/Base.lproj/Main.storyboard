@@ -12,16 +12,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Page View Controller-->
+        <!--View Controller-->
         <scene sceneID="uzm-WK-yK4">
             <objects>
-                <viewController id="nvY-hO-fQ0" customClass="UIPageViewController" sceneMemberID="viewController">
+                <viewController id="nvY-hO-fQ0" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o9N-vE-gI2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="fQF-4s-tQf" userLabel="infoLabel">
-                                <rect key="frame" x="20" y="0.0" width="374" height="632"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="190-ZS-JXj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
                                 <string key="text">Thanks for testing out my app!
 
 Please let me know about any problems you have. You can grab me in person, or if it's easier, email me at macinnis.k@gmail.com
@@ -31,17 +35,17 @@ Also, in the future I will add the ability to choose an alert sound.  Let me kno
 
 Thanks again!
 Kate</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fQF-4s-tQf" firstAttribute="leading" secondItem="VUp-lI-zRZ" secondAttribute="leading" constant="20" id="DIa-zI-hn3"/>
-                            <constraint firstItem="fQF-4s-tQf" firstAttribute="top" secondItem="VUp-lI-zRZ" secondAttribute="top" id="LdK-wc-4ip"/>
-                            <constraint firstItem="fQF-4s-tQf" firstAttribute="bottom" secondItem="VUp-lI-zRZ" secondAttribute="bottom" priority="749" constant="-40" id="S85-JZ-gbI"/>
-                            <constraint firstItem="fQF-4s-tQf" firstAttribute="trailing" secondItem="VUp-lI-zRZ" secondAttribute="trailing" priority="749" constant="-20" id="x5I-k5-12x"/>
+                            <constraint firstItem="VUp-lI-zRZ" firstAttribute="bottom" secondItem="190-ZS-JXj" secondAttribute="bottom" id="HZW-L1-R6J"/>
+                            <constraint firstItem="190-ZS-JXj" firstAttribute="top" secondItem="VUp-lI-zRZ" secondAttribute="top" id="Wsl-o6-nnp"/>
+                            <constraint firstItem="190-ZS-JXj" firstAttribute="leading" secondItem="VUp-lI-zRZ" secondAttribute="leading" id="gSh-Uc-df5"/>
+                            <constraint firstItem="190-ZS-JXj" firstAttribute="trailing" secondItem="VUp-lI-zRZ" secondAttribute="trailing" id="ugo-gm-d0D"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUp-lI-zRZ"/>
                     </view>
@@ -308,7 +312,6 @@ Kate</string>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qX-3d-0x3" userLabel="fillerA">
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="36.666666666666664"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAf-08-iPQ" userLabel="hourView">
                                                 <rect key="frame" x="0.0" y="46.666666666666657" width="130" height="128.33333333333334"/>
@@ -398,7 +401,6 @@ Kate</string>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsm-5x-eO8" userLabel="fillerB">
                                                 <rect key="frame" x="0.0" y="463.33333333333337" width="130" height="36.666666666666686"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                         <constraints>

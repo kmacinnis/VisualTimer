@@ -30,7 +30,7 @@ class SimpleTimerViewController: UIViewController {
     let replicatorLayer = CAReplicatorLayer()
     let instanceLayer = CALayer()
 
-    let bucketLineColor: CGColor = UIColor.flatBlackDark.cgColor
+    var bucketLineColor: UIColor = UIColor.flatBlackDark
     var bucketFillColor: CGColor = UIColor.flatMint.cgColor
 
     var timerName: String = ""
@@ -40,7 +40,7 @@ class SimpleTimerViewController: UIViewController {
     var hours: Int = 0
     var minutes: Int = 0
     var seconds: Int = 0
-    var minutesCeil: Int = 15
+    var minutesCeil: Int = 0
 
     
     var timer = Timer()
@@ -175,7 +175,7 @@ class SimpleTimerViewController: UIViewController {
     func setUpMeasureMarks() {
         let layerWidth = CGFloat(bucketView.frame.width)
         instanceLayer.frame = CGRect(x: bucketView.bounds.minX, y: 0.0, width: layerWidth, height: 2)
-        instanceLayer.backgroundColor = bucketLineColor
+        instanceLayer.backgroundColor = bucketLineColor.cgColor
     }
 
     func setUpReplicatorLayer() {
@@ -195,7 +195,7 @@ class SimpleTimerViewController: UIViewController {
         for i in 1...minutesSet {
             label = labelList[i-1]
             label.text = "\(i)"
-            label.textColor = UIColor(cgColor: bucketLineColor)
+            label.tintColor = bucketLineColor
             label.font = UIFont.systemFont(ofSize: 14)
             bucketMeasureView.addSubview(label)
                 }
@@ -274,7 +274,8 @@ class SimpleTimerViewController: UIViewController {
 
 
         bucketView.layer.borderWidth = 2
-        bucketView.layer.borderColor = bucketLineColor
+        bucketView.layer.borderColor = bucketLineColor.cgColor
+//        bucketView.tintColor
         bucketView.translatesAutoresizingMaskIntoConstraints = false
         let bucketLeft = NSLayoutConstraint(item: bucketView, attribute: .left,
                                             relatedBy: .equal,
@@ -407,6 +408,10 @@ class SimpleTimerViewController: UIViewController {
         timeDisplaySpace.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         setUpBucket()
 
+
+        if bucketFillColor == UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor {
+            view.backgroundColor = UIColor.gray
+        }
     }
 
 }
