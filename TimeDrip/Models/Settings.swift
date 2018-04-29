@@ -46,10 +46,30 @@ enum SettingsRow: Int {
         return self.rawValue
     }
 
+    func hasDefault() -> Bool {
+        switch self {
+        case .autoStart, .color, .pausable, .cancelable:
+            return true
+        default:
+            return false
+        }
+    }
+
     static func all() -> [SettingsRow] {
         var settingsArray : [SettingsRow] = []
         for i in 0...SettingsRow.count-1 {
             settingsArray.append(SettingsRow(rawValue: i)!)
+        }
+        return settingsArray
+    }
+
+    static func defaultPrefs() -> [SettingsRow] {
+        var settingsArray : [SettingsRow] = []
+        for i in 0...SettingsRow.count-1 {
+            let settingRow = SettingsRow(rawValue: i)!
+            if settingRow.hasDefault() {
+                settingsArray.append(settingRow)
+            }
         }
         return settingsArray
     }

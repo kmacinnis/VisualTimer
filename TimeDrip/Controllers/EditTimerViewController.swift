@@ -22,8 +22,10 @@ enum PickerTag: Int {
 class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIPickerViewDelegate {
 
     enum Mode {
-        case add, edit
+        case add, edit, singleUse, prefs
     }
+
+    let defaults = UserDefaults.standard
 
     var mode: Mode = .add
     var timeText: String = "Tap to set"
@@ -77,6 +79,8 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             } else {
                 useBtn.title = "Save & Use Timer"
             }
+        default: // name field doesn't show for single-use or preferences mode
+            ()
         }
     }
 
@@ -87,9 +91,9 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
         switch mode {
-        case .add:
+        case .add, .singleUse:
             performSegue(withIdentifier: "useNewTimer", sender: self)
-        case .edit:
+        case .edit, .prefs:
             saveChanges()
             self.navigationController?.popToRootViewController(animated: true)
         }
@@ -357,7 +361,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         destinationVC.cancelable = cancelSwitch?.isOn ?? true
 
         // The only time we don't save is if we hit add & didn't give the timer a name
-        if !(mode == .add && timerName == "") {
+        if !(mode == .add && timerName == "") || (mode == .singleUse) {
             saveChanges()
         }
     }
@@ -365,6 +369,14 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     //MARK: - Database stuff
 
     func saveChanges() {
+        if mode == .prefs {
+            defaults.set(pausableSwitch?.isOn ?? false, forKey: "pausable")
+            defaults.set(autoStartSwitch?.isOn ?? false, forKey: "autoStart")
+            defaults.set(cancelSwitch?.isOn ?? true, forKey: "cancelable")
+            defaults.set(color.hexValue(), forKey: "color")
+            // defaults.set("simple", forKey: "style")
+            return
+        }
         if mode == .add {
             thisTimer = SavedTimer()
             do {
@@ -386,7 +398,7 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                     thisTimer.autoStart = autoStartSwitch?.isOn ?? false
                     thisTimer.pausable = pausableSwitch?.isOn ?? false
                     thisTimer.hexColor = color.hexValue()
-
+                    thisTimer.cancelable = cancelSwitch?.isOn ?? true
                 }
             } catch {
                 print("Error writing to database: \(error)")

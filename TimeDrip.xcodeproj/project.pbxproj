@@ -17,6 +17,8 @@
 		4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */; };
 		4450C31F204B802900A784A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C31E204B802900A784A7 /* Settings.swift */; };
 		4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462D8892066C2E00070D1C6 /* RoundedButton.swift */; };
+		44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8620891A0200A0AE15 /* RoundedView.swift */; };
+		44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8820893C5E00A0AE15 /* InitialViewController.swift */; };
 		44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */; };
 		44A65587204CAA730088FE49 /* ColorSampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */; };
 		44A6558A204CE3250088FE49 /* TimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65588204CE3250088FE49 /* TimePickerCell.swift */; };
@@ -46,6 +48,8 @@
 		4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
 		4450C31E204B802900A784A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		4462D8892066C2E00070D1C6 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		44877F8620891A0200A0AE15 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		44877F8820893C5E00A0AE15 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSampleTableViewCell.swift; sourceTree = "<group>"; };
 		44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSampleTableViewCell.xib; sourceTree = "<group>"; };
 		44A65588204CE3250088FE49 /* TimePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCell.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */,
+				44877F8820893C5E00A0AE15 /* InitialViewController.swift */,
 				4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */,
 				44A6559D2051D0720088FE49 /* EditTimerViewController.swift */,
 			);
@@ -144,6 +149,7 @@
 				440EA02D2033B4F300D2FBD8 /* Main.storyboard */,
 				44A6558C205086E50088FE49 /* TableCells */,
 				4462D8892066C2E00070D1C6 /* RoundedButton.swift */,
+				44877F8620891A0200A0AE15 /* RoundedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,12 +335,14 @@
 				44CED50E20533C13002079F5 /* ToggleCell.swift in Sources */,
 				4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */,
 				44A655932051BC280088FE49 /* TimeSetCell.swift in Sources */,
+				44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */,
 				44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */,
 				44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */,
 				44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */,
 				4450C31F204B802900A784A7 /* Settings.swift in Sources */,
 				44A6558A204CE3250088FE49 /* TimePickerCell.swift in Sources */,
 				44A655972051BFAF0088FE49 /* AutoStartCell.swift in Sources */,
+				44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

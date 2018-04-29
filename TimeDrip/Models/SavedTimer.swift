@@ -31,6 +31,7 @@ class SavedTimer: Object {
     @objc dynamic var autoStart: Bool = false
     @objc dynamic var pausable: Bool = false
     @objc dynamic var hexColor: String = ""
+    @objc dynamic var cancelable: Bool = true
 
     override static func primaryKey() -> String? {
         return "id"
