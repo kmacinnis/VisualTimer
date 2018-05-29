@@ -14,11 +14,15 @@ class InitialViewController: UIViewController {
     let defaults = UserDefaults.standard
 
     @IBOutlet weak var oneTimeView: RoundedView!
-
+    @IBOutlet weak var singleHourglass: UIImageView!
+    @IBOutlet weak var singleTimerText: UITextView!
+    
     @IBOutlet weak var savedListView: RoundedView!
-
+    @IBOutlet weak var savedTimersText: UITextView!
+    
     @IBOutlet weak var preferenceView: RoundedView!
-
+    @IBOutlet weak var prefText: UITextView!
+    
     @objc func toSingleUseTimer(sender : UITapGestureRecognizer) {
         performSegue(withIdentifier: "toSingleUseTimer", sender: self)
     }
@@ -28,10 +32,11 @@ class InitialViewController: UIViewController {
     }
 
     @objc func toPreferences(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toPreferenceScreen", sender: self)
+        performSegue(withIdentifier: "toSettingsScreen", sender: self)
     }
 
-    func firstLaunch()->Bool{
+    func firstLaunch() -> Bool{
+        return false
         if let _ = defaults.string(forKey: "hasLaunchedBefore"){
             print("App has launched before")
             return true
@@ -42,17 +47,29 @@ class InitialViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tapTop = UITapGestureRecognizer(target: self, action:  #selector(self.toSingleUseTimer))
-        self.oneTimeView.addGestureRecognizer(tapTop)
 
-        let tapMiddle = UITapGestureRecognizer(target: self, action: #selector(self.toSavedTimerList(sender:)))
-        self.savedListView.addGestureRecognizer(tapMiddle)
+        // Set up gesture recognizers
+        let tapSingle = UITapGestureRecognizer(target: self, action:  #selector(self.toSingleUseTimer))
+        self.oneTimeView.addGestureRecognizer(tapSingle)
 
-        let tapBottom = UITapGestureRecognizer(target: self, action: #selector(self.toPreferences(sender:)))
-        self.preferenceView.addGestureRecognizer(tapBottom)
+        let tapList = UITapGestureRecognizer(target: self, action: #selector(self.toSavedTimerList(sender:)))
+        self.savedListView.addGestureRecognizer(tapList)
+
+        let tapSettings = UITapGestureRecognizer(target: self, action: #selector(self.toPreferences(sender:)))
+        self.preferenceView.addGestureRecognizer(tapSettings)
 
         if firstLaunch() {
             defaults.set(false, forKey: "pausable")
@@ -78,24 +95,6 @@ class InitialViewController: UIViewController {
             } catch {
                 print("Error writing to database: \(error)")
             }
-//            @objc dynamic var name: String = ""
-//            @objc dynamic var hoursSet: Int = 0
-//            @objc dynamic var minutesSet: Int = 0
-//            @objc dynamic var secondsSet: Int = 0
-//            @objc dynamic var dateCreated: Date = Date()
-//            @objc dynamic var sortOrder: Int = 99
-//            @objc dynamic var timerType: TimerType = .simple
-//            @objc dynamic var autoStart: Bool = false
-//            @objc dynamic var pausable: Bool = false
-//            @objc dynamic var hexColor: String = ""
-
-
-
-
-
-
-
-
 
         }
 
@@ -107,10 +106,10 @@ class InitialViewController: UIViewController {
             let destinationVC = segue.destination as! EditTimerViewController
             destinationVC.mode = .singleUse
             destinationVC.title = "Single Use Timer"
-        case "toPreferenceScreen":
+        case "toSettingsScreen":
             let destinationVC = segue.destination as! EditTimerViewController
             destinationVC.mode = .prefs
-            destinationVC.title = "Preferences"
+            destinationVC.title = "Settings"
         default:
             ()
         }

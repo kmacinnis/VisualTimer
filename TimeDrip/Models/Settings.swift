@@ -4,41 +4,87 @@
 //
 //  Created by Kate MacInnis on 3/3/18.
 //  Copyright © 2018 Kate MacInnis. All rights reserved.
-//
 
 import Foundation
 
 enum SettingsRow: Int {
+    case name
+    case styleSet
+    case stylePicker
     case timeSet
     case timePicker
     case autoStart
     case pausable
     case cancelable
     case color
-    case shaded
-    case name
-    case alertSound
+    case soundSet
+    case soundPicker
+    case loopAudio
+    case overflow
 
-    static let count = 8
+    static let count = 12
 
-    func rowIdent () -> String {
+    func reuseIdent () -> String {
         switch self {
         case .timeSet:
-            return "timeSetCell"
+            return "detailCell"
         case .timePicker:
-            return "timePickerCell"
+            return "pickerCell"
+        case .soundSet:
+            return "detailCell"
+        case .soundPicker:
+            return "pickerCell"
+        case .styleSet:
+            return "detailCell"
+        case .stylePicker:
+            return "pickerCell"
         case .name:
             return "titleCell"
         case .autoStart:
-            return "autoStartCell"
+            return "toggleCell"
         case .color:
             return "colorCell"
-        case .shaded:
-            return "saveNoticeCell"
+//        case .shaded:
+//            return "saveNoticeCell"
         case .pausable:
-            return "pausableCell"
+            return "toggleCell"
+        case .cancelable:
+            return "toggleCell"
+        case .loopAudio:
+            return "toggleCell"
         default:
-            return "errorCell" // "alertSound"
+            return "errorCell"
+        }
+    }
+
+    func nibName () -> String {
+        switch self {
+        case .timeSet:
+            return "DetailCell"
+        case .timePicker:
+            return "PickerCell"
+        case .soundSet:
+            return "DetailCell"
+        case .soundPicker:
+            return "PickerCell"
+        case .styleSet:
+            return "DetailCell"
+        case .stylePicker:
+            return "PickerCell"
+        case .name:
+            return "TitleCell"
+        case .autoStart:
+            return "ToggleCell"
+        case .color:
+            return "ColorSampleTableViewCell"
+//        case .shaded:
+//            return "saveNoticeCell"
+        case .pausable:
+            return "ToggleCell"
+        case .cancelable:
+            return "ToggleCell"
+        default:
+            return "errorCell"
         }
     }
 

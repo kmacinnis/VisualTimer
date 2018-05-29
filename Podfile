@@ -10,5 +10,6 @@ target 'TimeDrip' do
   pod 'RealmSwift'
   pod 'SwipeCellKit'
   pod 'RappleColorPicker'
+  pod 'SwiftySound'
 
 end

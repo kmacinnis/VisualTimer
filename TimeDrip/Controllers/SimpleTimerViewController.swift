@@ -9,14 +9,12 @@
 import UIKit
 import CoreGraphics
 import ChameleonFramework // for easy color manipulation -- may not be necessary
-import AVFoundation // for alert sound
+import SwiftySound // for alert sound
 
 //TODO:
-// * Add slight gradient to bucketfill
-// * Add slight gradient to background
-// * change background and line color to contrast bucketfill color
-// * figure out out to retrieve timers left running after exiting
-// * incorporate viewWillTransition?
+// * Fix rotation problem (incorporate viewWillTransition?)
+// * applicationWillEnterBackground/applicationWillEnterForeground
+//      - https://stackoverflow.com/a/46877212/731985
 
 
 
@@ -49,9 +47,12 @@ class SimpleTimerViewController: UIViewController {
     var shouldDisplaySeconds: Bool = false
     var shouldDisplayHours: Bool = false
 
+    var alertSound: String = ""
     var autoStart: Bool = false
     var pausable: Bool = true
     var cancelable: Bool = true
+    var loopAudio: Bool = true
+    var runTimerWhenReady: Bool = false
     var setUpComplete: Bool = false
     var bucketViewReady: Bool = false
 
@@ -74,6 +75,7 @@ class SimpleTimerViewController: UIViewController {
     //MARK: - Timer functionality
 
     func runTimer() {
+        print("run timer")
         if !timerInUse {
             minutes = minutesSet
             minutesCeil = minutesSet
@@ -87,8 +89,9 @@ class SimpleTimerViewController: UIViewController {
         if pausable {
             timerButton.setTitle("Pause", for: .normal)
         } else {
-            timerButton.isHidden = true //TODO: This should be somewhere else?
+            timerButton.isHidden = true
         }
+        cancelButton.isHidden = !cancelable
     }
 
     func pauseTimer() {
@@ -100,13 +103,15 @@ class SimpleTimerViewController: UIViewController {
     }
 
     @objc func updateTimer() {
+
         if minutes + seconds == 0 {
             minutesCeil = 0
             timer.invalidate()
-            AudioServicesPlayAlertSound(1030)
+            let numLoops = loopAudio ? -1 : 0
+            print("sounds/\(alertSound)")
+            Sound.play(file: "sounds/\(alertSound)", fileExtension: "wav", numberOfLoops: numLoops)
             updateTimeDisplay()
             navigationItem.hidesBackButton = false
-
             return
         }
         if seconds == 0 {
@@ -120,6 +125,7 @@ class SimpleTimerViewController: UIViewController {
     }
 
     func updateTimeDisplay() {
+
         if shouldDisplayHours {
             hourValueLabel.text = "\(hours)"
             if hours == 1 {
@@ -157,6 +163,7 @@ class SimpleTimerViewController: UIViewController {
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
+        print("Timer button pressed")
         // timerPaused or not timerInUse
         if timerPaused || !timerInUse {
             runTimer()
@@ -166,8 +173,20 @@ class SimpleTimerViewController: UIViewController {
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        print("Cancel button pressed")
+        self.navigationController?.isNavigationBarHidden = false
+        navigationItem.hidesBackButton = false
+        Sound.stopAll()
         timer.invalidate()
-        self.navigationController?.popToRootViewController(animated: true)
+
+        bucketFillLayer.removeAllAnimations()
+        bucketFillLayer.path = bucketFillPath().cgPath
+        timerInUse = false
+        timerPaused = false
+        timerButton.isHidden = false
+        timerButton.setTitle("Restart", for: .normal)
+        cancelButton.isHidden = true
+
     }
 
     //MARK: - Draw stuff
@@ -178,11 +197,11 @@ class SimpleTimerViewController: UIViewController {
         instanceLayer.backgroundColor = bucketLineColor.cgColor
     }
 
-    func setUpReplicatorLayer() {
+    func setUpReplicatorLayer(size: CGSize) {
         replicatorLayer.frame = bucketView.bounds
         replicatorLayer.instanceCount = Int(minutesSet)
         replicatorLayer.preservesDepth = false
-        let vertShift = bucketView.frame.height / CGFloat(minutesSet)
+        let vertShift = size.height / CGFloat(minutesSet)
         replicatorLayer.instanceTransform = CATransform3DMakeTranslation(0.0, vertShift, 0.0)
     }
     
@@ -346,35 +365,38 @@ class SimpleTimerViewController: UIViewController {
 
 
     @objc private func handleTap() {
+        print("HandleTap")
         shouldDisplaySeconds = !shouldDisplaySeconds
-//        secondSubview.isHidden = !shouldDisplaySeconds
         self.updateTimeDisplay()
         UIView.animate(withDuration: 0.5) {
             self.secondSubview.isHidden = !(self.shouldDisplaySeconds)
         }
-
-
     }
-
-
 
     //MARK: - ViewController methods
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        setUpBucket()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+        runTimerWhenReady = autoStart
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+        Sound.stopAll()
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if bucketViewReady {
-            setUpReplicatorLayer()
+            setUpReplicatorLayer(size: bucketView.frame.size)
             bucketView.layer.addSublayer(replicatorLayer)
             setUpMeasureMarks()
             replicatorLayer.addSublayer(instanceLayer)
             positionMeasureLabels()
-            if autoStart && !timerInUse {
+            if runTimerWhenReady {
                 runTimer()
+                runTimerWhenReady = false
             }
             if timerInUse && !timerPaused {
                 drainBucket()
@@ -382,18 +404,14 @@ class SimpleTimerViewController: UIViewController {
         }
     }
 
-//    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-//
-//    }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
         navigationItem.title = timerName
         if !pausable && autoStart {
             timerButton.isHidden = true
         }
+        cancelButton.isHidden = !cancelable
         hourValueLabel.text = "\(hoursSet)"
         minuteValueLabel.text = "\(minutesSet)"
         secondValueLabel.text = "\(secondsSet)"
@@ -401,18 +419,36 @@ class SimpleTimerViewController: UIViewController {
             hourSubview.isHidden = true
             shouldDisplayHours = false
         }
-
         secondSubview.isHidden = !shouldDisplaySeconds
-
-
         timeDisplaySpace.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-        setUpBucket()
 
+        setUpBucket()
 
         if bucketFillColor == UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor {
             view.backgroundColor = UIColor.gray
         }
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print("viewWillTransition")
+        setUpReplicatorLayer(size: size)
+//        bucketView.layer.addSublayer(replicatorLayer)
+//        setUpMeasureMarks()
+//        replicatorLayer.addSublayer(instanceLayer)
+//        positionMeasureLabels()
+//        if timerInUse && !timerPaused {
+//            drainBucket()
+//        }
+        bucketFillLayer.path = bucketFillPath().cgPath
+
+//        if timerInUse && !timerPaused {
+//            runTimer()
+//        }
+
+
+    }
+
 }
+
 

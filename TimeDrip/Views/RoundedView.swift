@@ -23,6 +23,7 @@ class RoundedView: UIView {
     public var cornerRadius: CGFloat = 2.0 {
         didSet {
             self.layer.cornerRadius = self.cornerRadius
+            setNeedsLayout()
         }
     }
 
@@ -34,8 +35,7 @@ class RoundedView: UIView {
             self.layer.shadowOpacity = self.shadowOpacity
             self.layer.shadowOffset = self.shadowOffset
             self.layer.shadowRadius = self.shadowRadius
-
-
+            setNeedsLayout()
         }
     }
 
@@ -43,6 +43,7 @@ class RoundedView: UIView {
     public var shadowColor: CGColor = UIColor.black.cgColor {
         didSet {
             self.layer.shadowColor = self.shadowColor
+            setNeedsLayout()
         }
     }
 
@@ -50,6 +51,7 @@ class RoundedView: UIView {
     public var shadowOpacity: Float = 0.5 {
         didSet {
             self.layer.shadowOpacity = self.shadowOpacity
+            setNeedsLayout()
         }
     }
 
@@ -57,6 +59,7 @@ class RoundedView: UIView {
     public var shadowOffset: CGSize = CGSize(width:2.0, height:2.0) {
         didSet {
             self.layer.shadowOffset = self.shadowOffset
+            setNeedsLayout()
         }
     }
 
@@ -64,6 +67,7 @@ class RoundedView: UIView {
     public var shadowRadius: CGFloat = 3.0 {
         didSet {
             self.layer.shadowRadius = self.shadowRadius
+            setNeedsLayout()
         }
     }
 

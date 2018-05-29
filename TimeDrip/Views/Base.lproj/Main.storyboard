@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sIQ-wy-9wg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l9N-xJ-TtB">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -17,7 +17,7 @@
             <objects>
                 <tableViewController autoresizesArchivedViewToFullSize="NO" title="Edit Timer" automaticallyAdjustsScrollViewInsets="NO" id="po4-An-G2K" customClass="EditTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vY6-jm-ZeV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="S3t-2b-cqE">
@@ -111,7 +111,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kA4-Eq-eT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="-614"/>
+            <point key="canvasLocation" x="-1101" y="-488"/>
         </scene>
         <!--Saved Timers-->
         <scene sceneID="rxu-4b-vRA">
@@ -154,24 +154,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoP-Mc-8oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-265" y="150"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hPb-g8-XPU">
-            <objects>
-                <navigationController id="ZhT-JY-ISp" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2ZN-9B-q35">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="hlf-VI-8fP" kind="relationship" relationship="rootViewController" id="fjO-py-3KI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n40-Pc-AYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1159" y="-336"/>
+            <point key="canvasLocation" x="-1058" y="-1654"/>
         </scene>
         <!--Simple Timer View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -182,13 +165,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDo-Lk-XhM" userLabel="bucketSide">
-                                <rect key="frame" x="-8" y="20" width="207" height="724"/>
+                                <rect key="frame" x="-8" y="64" width="207" height="680"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yr0-TO-zbe" userLabel="buttonSpace">
-                                <rect key="frame" x="199" y="591.66666666666663" width="215" height="144.33333333333337"/>
+                                <rect key="frame" x="199" y="600.33333333333337" width="215" height="135.66666666666663"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CSM-pT-eRe">
-                                        <rect key="frame" x="47.666666666666657" y="36" width="120" height="73"/>
+                                        <rect key="frame" x="47.666666666666657" y="31.666666666666629" width="120" height="73"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeP-AU-NeJ" userLabel="timerButton" customClass="RoundedButton" customModule="TimeDrip" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="33"/>
@@ -257,10 +240,10 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-wy-mcY" userLabel="timeDisplaySpace">
-                                <rect key="frame" x="199" y="20" width="215" height="571.66666666666663"/>
+                                <rect key="frame" x="199" y="64" width="215" height="536.33333333333337"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="o1P-f0-08Z">
-                                        <rect key="frame" x="42.666666666666657" y="35.666666666666686" width="130" height="500.00000000000006"/>
+                                        <rect key="frame" x="42.666666666666657" y="18" width="130" height="500"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qX-3d-0x3" userLabel="fillerA">
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="37"/>
@@ -278,7 +261,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWT-xP-MET" userLabel="hourUnitLabel">
-                                                                <rect key="frame" x="0.0" y="99.333333333333329" width="130" height="28.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="99.333333333333343" width="130" height="28.666666666666657"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -306,7 +289,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nz7-AP-eHu" userLabel="minuteUnitLabel">
-                                                                <rect key="frame" x="0.0" y="99.333333333333343" width="130" height="28.666666666666657"/>
+                                                                <rect key="frame" x="0.0" y="99.333333333333314" width="130" height="28.666666666666671"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -334,7 +317,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" text="Seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKU-VP-oZj" userLabel="secondUnitLabel">
-                                                                <rect key="frame" x="0.0" y="99.666666666666629" width="130" height="30.333333333333343"/>
+                                                                <rect key="frame" x="0.0" y="99.666666666666686" width="130" height="30.333333333333343"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -352,7 +335,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsm-5x-eO8" userLabel="fillerB">
-                                                <rect key="frame" x="0.0" y="462.99999999999994" width="130" height="37"/>
+                                                <rect key="frame" x="0.0" y="463" width="130" height="37"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -403,7 +386,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1282.5" y="150"/>
+            <point key="canvasLocation" x="2873.913043478261" y="-1224.4565217391305"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="qby-i5-6qX">
@@ -413,63 +396,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8vd-oa-ywa">
-                                <rect key="frame" x="10" y="25" width="394" height="701"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0TQ-51-a63" userLabel="Background" customClass="GradientView" customModule="TimeDrip" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.9340175986289978" green="0.89254754781723022" blue="0.97099322080612183" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8vd-oa-ywa">
+                                <rect key="frame" x="30" y="69" width="354" height="637"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-YY-5bs" customClass="RoundedView" customModule="TimeDrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="227"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-YY-5bs" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="192.33333333333334"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="initial-hourglass" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-w3-7zj">
-                                                <rect key="frame" x="8" y="0.0" width="106" height="213"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Create a timer for one-time use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-n5-omN">
+                                                <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-hourglass" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-w3-7zj" userLabel="single-hourglass">
+                                                <rect key="frame" x="60" y="-3.6666666666666714" width="234" height="200"/>
                                                 <color key="tintColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Create a timer for one-time use" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-n5-omN">
-                                                <rect key="frame" x="87" y="22" width="307" height="183"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="bzC-n5-omN" firstAttribute="centerY" secondItem="GrN-YY-5bs" secondAttribute="centerY" id="2a4-yx-Y8A"/>
-                                            <constraint firstItem="bzC-n5-omN" firstAttribute="leading" secondItem="GrN-YY-5bs" secondAttribute="leading" constant="87" id="Auy-nz-RE6"/>
-                                            <constraint firstAttribute="trailing" secondItem="bzC-n5-omN" secondAttribute="trailing" id="GFr-MJ-lKe"/>
-                                            <constraint firstItem="bzC-n5-omN" firstAttribute="top" secondItem="GrN-YY-5bs" secondAttribute="top" constant="22" id="Jb4-sD-Mcp"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                <size key="value" width="5" height="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gG-bI-vcK" customClass="RoundedView" customModule="TimeDrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="237" width="394" height="227"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Go to list of saved timers for repeat use" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-9v-rhP">
-                                                <rect key="frame" x="10" y="9" width="240" height="159"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="159" id="ANB-2W-EDH"/>
-                                                    <constraint firstAttribute="width" constant="240" id="rVJ-ny-VJ8"/>
+                                                    <constraint firstAttribute="height" constant="200" id="N46-Sf-q9l"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Esg-9v-rhP" firstAttribute="top" secondItem="2gG-bI-vcK" secondAttribute="top" constant="9" id="IyL-oL-576"/>
-                                            <constraint firstItem="Esg-9v-rhP" firstAttribute="leading" secondItem="2gG-bI-vcK" secondAttribute="leading" constant="10" id="yXV-Ch-JOW"/>
+                                            <constraint firstItem="bzC-n5-omN" firstAttribute="trailing" secondItem="GrN-YY-5bs" secondAttribute="trailing" constant="-30" id="15o-dT-rYk"/>
+                                            <constraint firstItem="0MX-w3-7zj" firstAttribute="centerX" secondItem="GrN-YY-5bs" secondAttribute="centerX" id="6dP-Ja-wFc"/>
+                                            <constraint firstItem="bzC-n5-omN" firstAttribute="top" secondItem="GrN-YY-5bs" secondAttribute="top" constant="30" id="PCg-HY-8ya"/>
+                                            <constraint firstItem="bzC-n5-omN" firstAttribute="leading" secondItem="GrN-YY-5bs" secondAttribute="leading" constant="30" id="dNf-P1-3f0"/>
+                                            <constraint firstItem="0MX-w3-7zj" firstAttribute="centerY" secondItem="GrN-YY-5bs" secondAttribute="centerY" id="kYi-an-VAw"/>
+                                            <constraint firstItem="bzC-n5-omN" firstAttribute="bottom" secondItem="GrN-YY-5bs" secondAttribute="bottom" constant="-30" id="yfr-PL-18k"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -484,23 +451,36 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                <color key="value" red="0.40000000000000002" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                <color key="value" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2r-75-LuV" customClass="RoundedView" customModule="TimeDrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="474" width="394" height="227"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gG-bI-vcK" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="222.33333333333331" width="354" height="192.33333333333331"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Save preferences for new timers" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
-                                                <rect key="frame" x="51" y="20" width="347" height="165"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Go to list of saved timers for repeat use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-9v-rhP">
+                                                <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="List Icon" translatesAutoresizingMaskIntoConstraints="NO" id="10K-Si-4pJ">
+                                                <rect key="frame" x="57" y="77" width="240" height="199"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="leading" secondItem="S2r-75-LuV" secondAttribute="leading" constant="51" id="9u1-3s-Ak2"/>
-                                            <constraint firstAttribute="bottom" secondItem="5bT-4l-A3x" secondAttribute="bottom" constant="42" id="NWp-Rh-lKW"/>
-                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="top" secondItem="S2r-75-LuV" secondAttribute="top" constant="20" id="RZE-d8-Vka"/>
-                                            <constraint firstAttribute="trailing" secondItem="5bT-4l-A3x" secondAttribute="trailing" constant="-4" id="rqd-F9-O0a"/>
+                                            <constraint firstItem="Esg-9v-rhP" firstAttribute="trailing" secondItem="2gG-bI-vcK" secondAttribute="trailing" constant="-30" id="J3C-rJ-n3u"/>
+                                            <constraint firstItem="Esg-9v-rhP" firstAttribute="top" secondItem="2gG-bI-vcK" secondAttribute="top" constant="30" id="ckq-Jl-O8t"/>
+                                            <constraint firstItem="Esg-9v-rhP" firstAttribute="leading" secondItem="2gG-bI-vcK" secondAttribute="leading" constant="30" id="osg-7H-Vp3"/>
+                                            <constraint firstItem="Esg-9v-rhP" firstAttribute="bottom" secondItem="2gG-bI-vcK" secondAttribute="bottom" constant="-30" id="xfg-TV-LSi"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -514,13 +494,62 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                <color key="value" red="0.40000000000000002" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                <color key="value" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2r-75-LuV" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="444.66666666666657" width="354" height="192.33333333333331"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Save preferences for new timers" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
+                                                <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Gears" translatesAutoresizingMaskIntoConstraints="NO" id="Rg1-zV-wwg">
+                                                <rect key="frame" x="30" y="30" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="top" secondItem="S2r-75-LuV" secondAttribute="top" constant="30" id="KEs-Wk-cTQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="5bT-4l-A3x" secondAttribute="trailing" constant="30" id="Mht-Ve-vwe"/>
+                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="leading" secondItem="S2r-75-LuV" secondAttribute="leading" constant="30" id="NTt-KL-HB0"/>
+                                            <constraint firstAttribute="bottom" secondItem="5bT-4l-A3x" secondAttribute="bottom" constant="30" id="zpy-Hx-ZE8"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="5" height="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                <color key="value" red="0.40000000000000002" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                <color key="value" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="2gG-bI-vcK" secondAttribute="trailing" id="HEr-iq-JAC"/>
-                                    <constraint firstAttribute="trailing" secondItem="GrN-YY-5bs" secondAttribute="trailing" id="lKJ-ad-lVa"/>
+                                    <constraint firstItem="2gG-bI-vcK" firstAttribute="trailing" secondItem="8vd-oa-ywa" secondAttribute="trailing" id="HEr-iq-JAC"/>
+                                    <constraint firstItem="GrN-YY-5bs" firstAttribute="trailing" secondItem="8vd-oa-ywa" secondAttribute="trailing" id="lKJ-ad-lVa"/>
                                     <constraint firstItem="S2r-75-LuV" firstAttribute="trailing" secondItem="8vd-oa-ywa" secondAttribute="trailing" id="oBm-bt-Eof"/>
                                     <constraint firstItem="S2r-75-LuV" firstAttribute="height" secondItem="GrN-YY-5bs" secondAttribute="height" id="obV-84-AgF"/>
                                     <constraint firstItem="2gG-bI-vcK" firstAttribute="height" secondItem="GrN-YY-5bs" secondAttribute="height" id="pfm-Vb-yHj"/>
@@ -529,33 +558,57 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.91213201269999999" blue="0.76292315330000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8vd-oa-ywa" firstAttribute="leading" secondItem="jIp-dh-aVj" secondAttribute="leading" constant="10" id="3b7-fx-hBN"/>
-                            <constraint firstAttribute="bottom" secondItem="8vd-oa-ywa" secondAttribute="bottom" constant="10" id="HgH-GW-RG7"/>
-                            <constraint firstAttribute="trailing" secondItem="8vd-oa-ywa" secondAttribute="trailing" constant="10" id="Ty4-Ac-Krs"/>
+                            <constraint firstItem="8vd-oa-ywa" firstAttribute="leading" secondItem="jIp-dh-aVj" secondAttribute="leading" constant="30" id="3b7-fx-hBN"/>
+                            <constraint firstItem="8vd-oa-ywa" firstAttribute="bottom" secondItem="Ho3-S7-Qtv" secondAttribute="bottom" constant="-30" id="HgH-GW-RG7"/>
+                            <constraint firstItem="8vd-oa-ywa" firstAttribute="trailing" secondItem="Ho3-S7-Qtv" secondAttribute="trailing" constant="-30" id="Ty4-Ac-Krs"/>
                             <constraint firstItem="8vd-oa-ywa" firstAttribute="top" secondItem="jIp-dh-aVj" secondAttribute="top" constant="5" id="xYf-bf-O3w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jIp-dh-aVj"/>
                     </view>
+                    <navigationItem key="navigationItem" id="MUm-Nc-Vad"/>
                     <connections>
                         <outlet property="oneTimeView" destination="GrN-YY-5bs" id="Aoa-UW-THU"/>
+                        <outlet property="prefText" destination="5bT-4l-A3x" id="r34-oZ-lcM"/>
                         <outlet property="preferenceView" destination="S2r-75-LuV" id="zVB-zB-Odi"/>
                         <outlet property="savedListView" destination="2gG-bI-vcK" id="uOK-g9-bPS"/>
-                        <segue destination="hlf-VI-8fP" kind="show" identifier="toSavedTimerList" id="WYi-fC-Wc4"/>
+                        <outlet property="savedTimersText" destination="Esg-9v-rhP" id="B0k-DU-s1c"/>
+                        <outlet property="singleHourglass" destination="0MX-w3-7zj" id="Jez-PF-E7v"/>
+                        <outlet property="singleTimerText" destination="bzC-n5-omN" id="e9I-Vj-Bio"/>
                         <segue destination="po4-An-G2K" kind="show" identifier="toSingleUseTimer" id="YDd-W5-U9e"/>
                         <segue destination="po4-An-G2K" kind="show" identifier="toPreferenceScreen" id="LLh-3B-Btu"/>
+                        <segue destination="hlf-VI-8fP" kind="show" identifier="toSavedTimerList" id="p7P-3I-kK9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgq-Ve-uMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-265" y="-666"/>
+            <point key="canvasLocation" x="-2286.9565217391305" y="-1644.2934782608697"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pBa-x7-35U">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l9N-xJ-TtB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9CM-s4-NVB">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sIQ-wy-9wg" kind="relationship" relationship="rootViewController" id="WJw-b4-VCj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ls8-vx-vL0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3194.202898550725" y="-1644.2934782608697"/>
         </scene>
     </scenes>
     <resources>
-        <image name="initial-hourglass" width="233" height="341"/>
+        <image name="Gears" width="100" height="96"/>
+        <image name="List Icon" width="206" height="294"/>
+        <image name="white-hourglass" width="234" height="331"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zxQ-wO-ous"/>
-        <segue reference="WYi-fC-Wc4"/>
-        <segue reference="LLh-3B-Btu"/>
+        <segue reference="Xb3-8O-YCV"/>
     </inferredMetricsTieBreakers>
 </document>

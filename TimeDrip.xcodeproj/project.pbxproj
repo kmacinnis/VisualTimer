@@ -13,18 +13,24 @@
 		440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA02D2033B4F300D2FBD8 /* Main.storyboard */; };
 		440EA0312033B4F300D2FBD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0302033B4F300D2FBD8 /* Assets.xcassets */; };
 		440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */; };
+		4448127D20BB0D15004D97F5 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4448127C20BB0D15004D97F5 /* Sounds.swift */; };
+		4448127F20BB0FF6004D97F5 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 4448127E20BB0FF6004D97F5 /* sounds */; };
 		4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */; };
 		4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */; };
 		4450C31F204B802900A784A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C31E204B802900A784A7 /* Settings.swift */; };
+		445F847D20A8CA90004E1E3A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F847C20A8CA90004E1E3A /* GradientView.swift */; };
+		445F847F20A91E8D004E1E3A /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F847E20A91E8D004E1E3A /* ColorPalette.swift */; };
+		445F848120A925F6004E1E3A /* RoundedGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F848020A925F6004E1E3A /* RoundedGradientView.swift */; };
+		445F848320AB6D5F004E1E3A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F848220AB6D5F004E1E3A /* SettingsViewController.swift */; };
 		4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462D8892066C2E00070D1C6 /* RoundedButton.swift */; };
 		44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8620891A0200A0AE15 /* RoundedView.swift */; };
 		44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8820893C5E00A0AE15 /* InitialViewController.swift */; };
 		44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */; };
 		44A65587204CAA730088FE49 /* ColorSampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */; };
-		44A6558A204CE3250088FE49 /* TimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65588204CE3250088FE49 /* TimePickerCell.swift */; };
-		44A6558B204CE3250088FE49 /* TimePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65589204CE3250088FE49 /* TimePickerCell.xib */; };
-		44A655932051BC280088FE49 /* TimeSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655912051BC280088FE49 /* TimeSetCell.swift */; };
-		44A655942051BC280088FE49 /* TimeSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A655922051BC280088FE49 /* TimeSetCell.xib */; };
+		44A6558A204CE3250088FE49 /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65588204CE3250088FE49 /* PickerCell.swift */; };
+		44A6558B204CE3250088FE49 /* PickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65589204CE3250088FE49 /* PickerCell.xib */; };
+		44A655932051BC280088FE49 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655912051BC280088FE49 /* DetailCell.swift */; };
+		44A655942051BC280088FE49 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A655922051BC280088FE49 /* DetailCell.xib */; };
 		44A655972051BFAF0088FE49 /* AutoStartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655952051BFAF0088FE49 /* AutoStartCell.swift */; };
 		44A655982051BFAF0088FE49 /* AutoStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A655962051BFAF0088FE49 /* AutoStartCell.xib */; };
 		44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655992051C5FD0088FE49 /* TitleCell.swift */; };
@@ -44,18 +50,24 @@
 		440EA0302033B4F300D2FBD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		440EA0332033B4F300D2FBD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		440EA0352033B4F300D2FBD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4448127C20BB0D15004D97F5 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
+		4448127E20BB0FF6004D97F5 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimer.swift; sourceTree = "<group>"; };
 		4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
 		4450C31E204B802900A784A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		445F847C20A8CA90004E1E3A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		445F847E20A91E8D004E1E3A /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		445F848020A925F6004E1E3A /* RoundedGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGradientView.swift; sourceTree = "<group>"; };
+		445F848220AB6D5F004E1E3A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4462D8892066C2E00070D1C6 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		44877F8620891A0200A0AE15 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		44877F8820893C5E00A0AE15 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSampleTableViewCell.swift; sourceTree = "<group>"; };
 		44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSampleTableViewCell.xib; sourceTree = "<group>"; };
-		44A65588204CE3250088FE49 /* TimePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCell.swift; sourceTree = "<group>"; };
-		44A65589204CE3250088FE49 /* TimePickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimePickerCell.xib; sourceTree = "<group>"; };
-		44A655912051BC280088FE49 /* TimeSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSetCell.swift; sourceTree = "<group>"; };
-		44A655922051BC280088FE49 /* TimeSetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSetCell.xib; sourceTree = "<group>"; };
+		44A65588204CE3250088FE49 /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
+		44A65589204CE3250088FE49 /* PickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerCell.xib; sourceTree = "<group>"; };
+		44A655912051BC280088FE49 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		44A655922051BC280088FE49 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		44A655952051BFAF0088FE49 /* AutoStartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoStartCell.swift; sourceTree = "<group>"; };
 		44A655962051BFAF0088FE49 /* AutoStartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoStartCell.xib; sourceTree = "<group>"; };
 		44A655992051C5FD0088FE49 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
@@ -117,6 +129,7 @@
 				4470E619203B4E0C0061C75B /* Views */,
 				4450C2AC2040B78F00A784A7 /* Controllers */,
 				440EA0302033B4F300D2FBD8 /* Assets.xcassets */,
+				4448127E20BB0FF6004D97F5 /* sounds */,
 				440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */,
 				440EA0352033B4F300D2FBD8 /* Info.plist */,
 			);
@@ -129,6 +142,7 @@
 				440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */,
 				44877F8820893C5E00A0AE15 /* InitialViewController.swift */,
 				4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */,
+				445F848220AB6D5F004E1E3A /* SettingsViewController.swift */,
 				44A6559D2051D0720088FE49 /* EditTimerViewController.swift */,
 			);
 			path = Controllers;
@@ -139,6 +153,7 @@
 			children = (
 				4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */,
 				4450C31E204B802900A784A7 /* Settings.swift */,
+				4448127C20BB0D15004D97F5 /* Sounds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,6 +164,9 @@
 				440EA02D2033B4F300D2FBD8 /* Main.storyboard */,
 				44A6558C205086E50088FE49 /* TableCells */,
 				4462D8892066C2E00070D1C6 /* RoundedButton.swift */,
+				445F847C20A8CA90004E1E3A /* GradientView.swift */,
+				445F848020A925F6004E1E3A /* RoundedGradientView.swift */,
+				445F847E20A91E8D004E1E3A /* ColorPalette.swift */,
 				44877F8620891A0200A0AE15 /* RoundedView.swift */,
 			);
 			path = Views;
@@ -159,10 +177,10 @@
 			children = (
 				44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */,
 				44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */,
-				44A65588204CE3250088FE49 /* TimePickerCell.swift */,
-				44A65589204CE3250088FE49 /* TimePickerCell.xib */,
-				44A655912051BC280088FE49 /* TimeSetCell.swift */,
-				44A655922051BC280088FE49 /* TimeSetCell.xib */,
+				44A65588204CE3250088FE49 /* PickerCell.swift */,
+				44A65589204CE3250088FE49 /* PickerCell.xib */,
+				44A655912051BC280088FE49 /* DetailCell.swift */,
+				44A655922051BC280088FE49 /* DetailCell.xib */,
 				44A655952051BFAF0088FE49 /* AutoStartCell.swift */,
 				44A655962051BFAF0088FE49 /* AutoStartCell.xib */,
 				44A655992051C5FD0088FE49 /* TitleCell.swift */,
@@ -195,7 +213,6 @@
 				440EA0232033B4F300D2FBD8 /* Frameworks */,
 				440EA0242033B4F300D2FBD8 /* Resources */,
 				60A6B5B6DA4AE3109DD3EC5A /* [CP] Embed Pods Frameworks */,
-				F220AFEA9756C2D7B3E4CC8F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,14 +263,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A6559C2051C5FD0088FE49 /* TitleCell.xib in Resources */,
-				44A655942051BC280088FE49 /* TimeSetCell.xib in Resources */,
+				44A655942051BC280088FE49 /* DetailCell.xib in Resources */,
 				440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */,
 				44A655982051BFAF0088FE49 /* AutoStartCell.xib in Resources */,
 				44A65587204CAA730088FE49 /* ColorSampleTableViewCell.xib in Resources */,
+				4448127F20BB0FF6004D97F5 /* sounds in Resources */,
 				44CED5132053B71A002079F5 /* SavedTimerCell.xib in Resources */,
 				440EA0312033B4F300D2FBD8 /* Assets.xcassets in Resources */,
 				44CED50F20533C13002079F5 /* ToggleCell.xib in Resources */,
-				44A6558B204CE3250088FE49 /* TimePickerCell.xib in Resources */,
+				44A6558B204CE3250088FE49 /* PickerCell.xib in Resources */,
 				440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +290,7 @@
 				"${BUILT_PRODUCTS_DIR}/RappleColorPicker/RappleColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftySound/SwiftySound.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -280,6 +299,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RappleColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftySound.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,21 +325,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F220AFEA9756C2D7B3E4CC8F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -327,20 +332,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445F848120A925F6004E1E3A /* RoundedGradientView.swift in Sources */,
 				440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
+				445F848320AB6D5F004E1E3A /* SettingsViewController.swift in Sources */,
 				4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */,
 				4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */,
 				44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */,
+				445F847D20A8CA90004E1E3A /* GradientView.swift in Sources */,
 				44CED50E20533C13002079F5 /* ToggleCell.swift in Sources */,
 				4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */,
-				44A655932051BC280088FE49 /* TimeSetCell.swift in Sources */,
+				44A655932051BC280088FE49 /* DetailCell.swift in Sources */,
 				44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */,
 				44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */,
+				445F847F20A91E8D004E1E3A /* ColorPalette.swift in Sources */,
 				44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */,
 				44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */,
 				4450C31F204B802900A784A7 /* Settings.swift in Sources */,
-				44A6558A204CE3250088FE49 /* TimePickerCell.swift in Sources */,
+				44A6558A204CE3250088FE49 /* PickerCell.swift in Sources */,
+				4448127D20BB0D15004D97F5 /* Sounds.swift in Sources */,
 				44A655972051BFAF0088FE49 /* AutoStartCell.swift in Sources */,
 				44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */,
 			);
@@ -424,6 +434,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -475,6 +486,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

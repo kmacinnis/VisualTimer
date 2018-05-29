@@ -9,17 +9,18 @@
 import UIKit
 import RappleColorPicker
 import RealmSwift
+import SwiftySound
 
 //TODO:
 // * change timePickerStyle by swiping picker left/right
-// * offer choice of alert sound
 
 enum PickerTag: Int {
+    case stylePicker
     case timePicker
     case soundPicker
 }
 
-class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIPickerViewDelegate {
+class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     enum Mode {
         case add, edit, singleUse, prefs
@@ -29,44 +30,42 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
     var mode: Mode = .add
     var timeText: String = "Tap to set"
+    var soundText: String = "Tap to set"
+    var styleText: String = ""
     var timerName: String = ""
     var color: UIColor = UIColor.blue
-    var timePickerVisible = false
-    var timePickerStyle: PickerStyle = .minutesOnly
-    var soundPickerVisible: Bool = false
+    var timePickerStyle: TimePickerStyle = .minutesOnly
     var hoursSet = 0
     var minutesSet = 0
     var secondsSet = 0
     var origAutoStart = true
     var origPausable = false
     var origCancelable = true
+    var origLoopSound = true
+    var stylePickerHidden: Bool = true
+    var timePickerHidden: Bool = true
+    var soundPickerHidden: Bool = true
+    var timerStyle: TimerType = .simple
 
     var nameField: UITextField?
     var autoStartSwitch: UISwitch?
     var pausableSwitch: UISwitch?
     var cancelSwitch: UISwitch?
+    var loopSwitch: UISwitch?
+    var soundLabel: UILabel?
+    var soundPicker: UIPickerView?
+    var timeLabel: UILabel?
+    var timePicker: UIPickerView?
+    var styleLabel: UILabel?
+    var stylePicker: UIPickerView?
+
+
+
+
 
     var thisTimer: SavedTimer?
 
     let realm = try! Realm()
-
-
-
-    func togglePicker(tag: Int)  {
-        switch (PickerTag.init(rawValue: tag))! {
-        case .timePicker:
-            timePickerVisible = !timePickerVisible
-        case .soundPicker:
-            soundPickerVisible = !soundPickerVisible
-        }
-        tableView.reloadData()
-    }
-
-    func closePickers() {
-        timePickerVisible = false
-        soundPickerVisible = false
-        tableView.reloadData()
-    }
 
     @objc func nameChanged() {
         timerName = (nameField?.text) ?? ""
@@ -108,9 +107,8 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: "ColorSampleTableViewCell", bundle: nil), forCellReuseIdentifier: "colorCell")
-        tableView.register(UINib(nibName: "TimePickerCell", bundle: nil), forCellReuseIdentifier: "timePickerCell")
-        tableView.register(UINib(nibName: "AutoStartCell", bundle: nil), forCellReuseIdentifier: "autoStartCell")
-        tableView.register(UINib(nibName: "TimeSetCell", bundle: nil), forCellReuseIdentifier: "timeSetCell")
+        tableView.register(UINib(nibName: "PickerCell", bundle: nil), forCellReuseIdentifier: "pickerCell")
+        tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "detailCell")
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
 
@@ -135,23 +133,68 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         return SettingsRow.count
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let setting = SettingsRow(rawValue: indexPath.row) {
             switch setting {
             case .color:
-                let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! ColorSampleTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ColorSampleTableViewCell
                 cell.sampleBlock.backgroundColor = color
                 return cell
+            case .timeSet:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! DetailCell
+                cell.title.text = "Time:"
+                cell.detail.text = timeText
+                timeLabel = cell.detail
+                return cell
             case .timePicker:
-                let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TimePickerCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
                 cell.picker.dataSource = self
                 cell.picker.delegate = self
                 cell.picker.tag = PickerTag.timePicker.rawValue
+                timePicker = cell.picker
                 if mode == .edit {
                     cell.picker.selectRow(minutesSet, inComponent: 0, animated: false)
                 }
                 //TODO: Attach swipe recognizer to change pickerStyle
+                return cell
+            case .soundSet:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! DetailCell
+                cell.title.text = "Alert Sound:"
+                soundLabel = cell.detail
+                soundLabel?.text = soundText
+                return cell
+            case .soundPicker:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
+                cell.picker.dataSource = self
+                cell.picker.delegate = self
+                cell.picker.tag = PickerTag.soundPicker.rawValue
+                soundPicker = cell.picker
+                if mode == .edit {
+                    cell.picker.selectRow(Sounds.getIndex(filename: soundText) ?? 0, inComponent: 0, animated: false)
+                }
+                return cell
+            case .loopAudio:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
+                cell.toggleLabel.text = "Loop Alert Sound"
+                loopSwitch = cell.toggleSwitch
+                loopSwitch?.isOn = origLoopSound
+                return cell
+            case .styleSet:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! DetailCell
+                cell.title.text = "Timer Style:"
+                cell.detail.text = styleText
+                styleLabel = cell.detail
+                return cell
+            case .stylePicker:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
+                cell.picker.dataSource = self
+                cell.picker.delegate = self
+                cell.picker.tag = PickerTag.stylePicker.rawValue
+                stylePicker = cell.picker
+                if mode == .edit {
+                    //TODO: Set picker to current value
+                    // cell.picker.selectRow(minutesSet, inComponent: 0, animated: false)
+                }
                 return cell
             case .autoStart:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleCell
@@ -171,18 +214,17 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 cancelSwitch = cell.toggleSwitch
                 cancelSwitch?.isOn = origCancelable
                 return cell
-            case .timeSet:
-                let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TimeSetCell
-                cell.detail.text = timeText
-                return cell
             case .name:
-                let cell = tableView.dequeueReusableCell(withIdentifier: setting.rowIdent()) as! TitleCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! TitleCell
                 nameField = cell.nameField
                 nameField?.text = timerName
                 nameField?.addTarget(self, action: #selector(nameChanged), for: UIControlEvents.allEditingEvents)
+                if mode == .prefs || mode == .singleUse {
+                    cell.isHidden = true
+                }
                 return cell
             default:
-                return tableView.dequeueReusableCell(withIdentifier: setting.rowIdent(), for: indexPath)
+                return tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent(), for: indexPath)
             }
         } else {
             return tableView.dequeueReusableCell(withIdentifier: "errorCell")!
@@ -193,10 +235,16 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
 
         switch SettingsRow(rawValue: indexPath.row)! {
         case .timePicker:
-            if timePickerVisible {
-                return CGFloat(162)
+            return timePickerHidden ? 0 : 216
+        case .soundPicker:
+            return soundPickerHidden ? 0 : 216
+        case .stylePicker:
+            return stylePickerHidden ? 0 : 80
+        case .name:
+            if mode == .add || mode == .edit {
+                return UITableViewAutomaticDimension
             } else {
-                return CGFloat(0)
+                return 0.0
             }
         default:
             return UITableViewAutomaticDimension
@@ -206,24 +254,42 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch SettingsRow(rawValue: indexPath.row)! {
         case .timeSet:
-            togglePicker(tag: PickerTag.timePicker.rawValue)
-        case .timePicker:
-            print("Touched timePicker")
+            if timePickerHidden {
+                showPickerCell(timePicker!)
+            } else {
+                hidePickerCell(timePicker!)
+            }
+        case .styleSet:
+            if stylePickerHidden {
+                showPickerCell(stylePicker!)
+            } else {
+                hidePickerCell(stylePicker!)
+            }
+        case .soundSet:
+            if soundPickerHidden {
+                showPickerCell(soundPicker!)
+            } else {
+                hidePickerCell(soundPicker!)
+            }
         case .color:
             RappleColorPicker.openColorPallet { (color, _) in
                 self.color = color
                 RappleColorPicker.close()
-                self.closePickers()
-
+                self.hideAllPickerCells()
             }
+        case .timePicker, .soundPicker:
+            print("Touched picker")
         default:
-            closePickers()
+            hideAllPickerCells()
         }
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     //MARK: - Picker Management
 
-    enum PickerStyle {
+    enum TimePickerStyle {
         case minutesOnly
         case hoursMinutes
         case minutesSeconds
@@ -249,20 +315,25 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                 ()
             }
         }
-
-
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        switch timePickerStyle {
-        case .minutesOnly:
-            return 2
+        guard let tag = PickerTag(rawValue: pickerView.tag) else {
+            print("Error! Picker has no tag specified!" )
+            return 0
+        }
+        switch tag {
+        case .timePicker:
+            return timePickerStyle == .minutesOnly ? 2 : 4
         default:
-            return 4
+            return 1
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    fileprivate func numRowsInTimePickerForComponent(_ component: Int) -> Int {
+        //TODO: * pull this into sep function.
+        //      * make this handle timePicker, soundPicker and stylePicker
+
         switch timePickerStyle {
         case .hoursMinutes:
             switch component {
@@ -293,15 +364,32 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        if component % 2 == 0 {
-            return CGFloat(100.0)
-        } else {
-            return CGFloat(50.0)
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        guard let tag = PickerTag(rawValue: pickerView.tag) else {return 0}
+        switch tag {
+        case .timePicker:
+            return numRowsInTimePickerForComponent(component)
+        case .soundPicker:
+            return Sounds.soundArray.count
+        case .stylePicker:
+            return TimerType.count
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ picker: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        guard let tag = PickerTag(rawValue: picker.tag) else {
+            print("Error! Picker has no tag specified!" )
+            return 0
+        }
+        switch tag {
+        case .timePicker:
+            return component % 2 == 0 ? 100.0 : 50.0
+        default:
+            return picker.frame.width
+        }
+    }
+
+    fileprivate func titleForRowInComponent(_ component: Int, _ row: Int) -> String? {
         switch timePickerStyle {
         case .hoursMinutes:
             switch component {
@@ -331,7 +419,20 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let tag = PickerTag(rawValue: pickerView.tag) else {return ""}
+
+        switch tag {
+        case .timePicker:
+            return titleForRowInComponent(component, row)
+        case .stylePicker:
+            return TimerType.all[row]
+        case .soundPicker:
+            return Sounds.soundArray[row]["name"] ?? "???"
+        }
+    }
+
+    fileprivate func didSelectRowInTimePicker(_ row: Int) {
         switch timePickerStyle {
         case .minutesOnly:
             timeText = "\(row) min"
@@ -343,14 +444,110 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             timeText = "TBA"
             // Probably going to need refactoring to deal with multiple components
         }
-        tableView.reloadData()
     }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let tag = PickerTag(rawValue: pickerView.tag) else {return}
+
+        switch tag {
+        case .timePicker:
+            didSelectRowInTimePicker(row)
+        case .soundPicker:
+            soundText = Sounds.soundArray[row]["file"] ?? ""
+            soundLabel?.text = Sounds.soundArray[row]["name"] ?? "???"
+            let soundFile = "sounds/\(soundText)"
+            Sound.stopAll()
+            Sound.play(file: soundFile, fileExtension: "wav")
+        case .stylePicker:
+            styleText = TimerType.all[row]
+            timerStyle = TimerType(rawValue: row)!
+        }
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+
+    //MARK:- PickerView Animations
+
+    func showPickerCell(_ picker:UIPickerView) {
+        guard let tag = PickerTag(rawValue: picker.tag) else {
+            print("Error! Picker has no tag specified!" )
+            return
+        }
+        var detailLabel: UILabel!
+
+        switch tag {
+        case .soundPicker:
+            soundPickerHidden = false
+            detailLabel = soundLabel
+        case .timePicker:
+            timePickerHidden = false
+            detailLabel = timeLabel
+        case .stylePicker:
+            stylePickerHidden = false
+            detailLabel = styleLabel
+        }
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        picker.isHidden = false
+        picker.alpha = 1.0
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            picker.alpha = 1.0
+            picker.tintColor = UIColor.red
+            detailLabel.textColor = UIColor.orange
+        }, completion: {(finished) -> Void in
+            picker.isHidden = false
+
+        }
+        )
+    }
+
+    func hidePickerCell(_ picker:UIPickerView) {
+        guard let tag = PickerTag(rawValue: picker.tag) else {
+            print("Error! Picker has no tag specified!" )
+            return
+        }
+        var detailLabel: UILabel!
+
+        switch tag {
+        case .soundPicker:
+            soundPickerHidden = true
+            detailLabel = soundLabel
+            Sound.stopAll()
+        case .timePicker:
+            timePickerHidden = true
+            detailLabel = timeLabel
+        case .stylePicker:
+            stylePickerHidden = true
+            detailLabel = styleLabel
+        }
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        picker.alpha = 1.0
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            picker.alpha = 0.0
+            detailLabel.textColor = UIColor.darkText
+        }, completion: {(finished) -> Void in
+            picker.isHidden = true
+
+        }
+        )
+
+    }
+
+    func hideAllPickerCells() {
+        for picker in [soundPicker,].compactMap({ $0 }) {
+            hidePickerCell(picker)
+        }
+    }
+
+
+
+
 
     //MARK: - Segue to Timer Screen
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        var timePickerStyle: PickerStyle = .minutesOnly
-//        var hoursSet = 0
+
         let destinationVC = segue.destination as! SimpleTimerViewController
         destinationVC.timerName = timerName
         destinationVC.minutesSet = minutesSet
@@ -359,9 +556,11 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
         destinationVC.pausable = pausableSwitch?.isOn ?? false
         destinationVC.autoStart = autoStartSwitch?.isOn ?? false
         destinationVC.cancelable = cancelSwitch?.isOn ?? true
+        destinationVC.alertSound = soundText
+        destinationVC.loopAudio = loopSwitch?.isOn ?? true
+        //TODO:- Change above ??s to read from defaults
 
-        // The only time we don't save is if we hit add & didn't give the timer a name
-        if !(mode == .add && timerName == "") || (mode == .singleUse) {
+        if mode != .singleUse {
             saveChanges()
         }
     }
@@ -374,7 +573,9 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
             defaults.set(autoStartSwitch?.isOn ?? false, forKey: "autoStart")
             defaults.set(cancelSwitch?.isOn ?? true, forKey: "cancelable")
             defaults.set(color.hexValue(), forKey: "color")
-            // defaults.set("simple", forKey: "style")
+            defaults.set(timerStyle.rawValue, forKey: "style")
+            defaults.set(soundText, forKey: "alertSound")
+            defaults.set(loopSwitch?.isOn ?? true, forKey: "loopAudio")
             return
         }
         if mode == .add {
@@ -394,11 +595,13 @@ class EditTimerViewController: UITableViewController,UIPickerViewDataSource, UIP
                     thisTimer.hoursSet = hoursSet
                     thisTimer.minutesSet = minutesSet
                     thisTimer.secondsSet = secondsSet
-                    thisTimer.timerType = .simple
+                    thisTimer.timerType = timerStyle
                     thisTimer.autoStart = autoStartSwitch?.isOn ?? false
                     thisTimer.pausable = pausableSwitch?.isOn ?? false
                     thisTimer.hexColor = color.hexValue()
                     thisTimer.cancelable = cancelSwitch?.isOn ?? true
+                    thisTimer.loopAudio = loopSwitch?.isOn ?? true
+                    thisTimer.sound = soundText
                 }
             } catch {
                 print("Error writing to database: \(error)")

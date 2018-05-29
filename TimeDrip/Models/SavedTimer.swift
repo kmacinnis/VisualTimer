@@ -13,9 +13,21 @@ import RealmSwift
 // enum must have integer raw values to be stored by realm
 @objc enum TimerType: Int {
     case simple = 0
-    case music = 1
-    case garden = 2
-    case sand = 3
+    case hourglass = 1
+//    case garden = 2
+//    case beach = 3
+
+    static let all = ["Simple Timer", "Hourglass"]
+    static let count = all.count
+
+    func display() -> String {
+        switch self {
+        case .simple:
+            return "Simple"
+        case .hourglass:
+            return "Hourglass"
+        }
+    }
 }
 
 
@@ -32,6 +44,8 @@ class SavedTimer: Object {
     @objc dynamic var pausable: Bool = false
     @objc dynamic var hexColor: String = ""
     @objc dynamic var cancelable: Bool = true
+    @objc dynamic var sound: String = "alertsound-buzzer"
+    @objc dynamic var loopAudio: Bool = true
 
     override static func primaryKey() -> String? {
         return "id"
