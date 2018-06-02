@@ -36,6 +36,7 @@
 		44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655992051C5FD0088FE49 /* TitleCell.swift */; };
 		44A6559C2051C5FD0088FE49 /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A6559A2051C5FD0088FE49 /* TitleCell.xib */; };
 		44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6559D2051D0720088FE49 /* EditTimerViewController.swift */; };
+		44B6758020C246BF00F71B9F /* BucketSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B6757F20C246BF00F71B9F /* BucketSpace.swift */; };
 		44CED50E20533C13002079F5 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CED50C20533C13002079F5 /* ToggleCell.swift */; };
 		44CED50F20533C13002079F5 /* ToggleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CED50D20533C13002079F5 /* ToggleCell.xib */; };
 		44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CED5102053B71A002079F5 /* SavedTimerCell.swift */; };
@@ -73,6 +74,7 @@
 		44A655992051C5FD0088FE49 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		44A6559A2051C5FD0088FE49 /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
 		44A6559D2051D0720088FE49 /* EditTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerViewController.swift; sourceTree = "<group>"; };
+		44B6757F20C246BF00F71B9F /* BucketSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketSpace.swift; sourceTree = "<group>"; };
 		44CED50C20533C13002079F5 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		44CED50D20533C13002079F5 /* ToggleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCell.xib; sourceTree = "<group>"; };
 		44CED5102053B71A002079F5 /* SavedTimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimerCell.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				445F848020A925F6004E1E3A /* RoundedGradientView.swift */,
 				445F847E20A91E8D004E1E3A /* ColorPalette.swift */,
 				44877F8620891A0200A0AE15 /* RoundedView.swift */,
+				44B6757F20C246BF00F71B9F /* BucketSpace.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			files = (
 				445F848120A925F6004E1E3A /* RoundedGradientView.swift in Sources */,
 				440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */,
+				44B6758020C246BF00F71B9F /* BucketSpace.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
 				445F848320AB6D5F004E1E3A /* SettingsViewController.swift in Sources */,
 				4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */,
@@ -434,7 +438,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -486,7 +490,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

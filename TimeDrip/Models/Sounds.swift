@@ -40,7 +40,7 @@ class Sounds {
     ]
 
     static func getIndex(filename: String) -> Int? {
-        for i in 0...soundArray.count {
+        for i in 0...soundArray.count - 1 {
             if soundArray[i]["file"] == filename {
                 return i
             }

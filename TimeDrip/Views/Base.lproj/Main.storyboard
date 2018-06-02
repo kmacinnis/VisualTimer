@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l9N-xJ-TtB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l9N-xJ-TtB">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -164,7 +164,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDo-Lk-XhM" userLabel="bucketSide">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDo-Lk-XhM" userLabel="bucketSide" customClass="BucketSpace" customModule="TimeDrip" customModuleProvider="target">
                                 <rect key="frame" x="-8" y="64" width="207" height="680"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yr0-TO-zbe" userLabel="buttonSpace">
@@ -396,9 +396,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0TQ-51-a63" userLabel="Background" customClass="GradientView" customModule="TimeDrip" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0TQ-51-a63" userLabel="Background" customClass="GradientView" customModule="TimeDrip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="startColor">
@@ -418,10 +417,10 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Create a timer for one-time use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-n5-omN">
                                                 <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-hourglass" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-w3-7zj" userLabel="single-hourglass">
+                                            <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-hourglass" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-w3-7zj" userLabel="single-hourglass">
                                                 <rect key="frame" x="60" y="-3.6666666666666714" width="234" height="200"/>
                                                 <color key="tintColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -467,10 +466,10 @@
                                                 <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="List Icon" translatesAutoresizingMaskIntoConstraints="NO" id="10K-Si-4pJ">
+                                            <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="List Icon" translatesAutoresizingMaskIntoConstraints="NO" id="10K-Si-4pJ">
                                                 <rect key="frame" x="57" y="77" width="240" height="199"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -507,13 +506,13 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2r-75-LuV" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="444.66666666666657" width="354" height="192.33333333333331"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Save preferences for new timers" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Settings" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
                                                 <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Gears" translatesAutoresizingMaskIntoConstraints="NO" id="Rg1-zV-wwg">
+                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Gears" translatesAutoresizingMaskIntoConstraints="NO" id="Rg1-zV-wwg">
                                                 <rect key="frame" x="30" y="30" width="240" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -558,9 +557,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.91213201269999999" blue="0.76292315330000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="0TQ-51-a63" firstAttribute="trailing" secondItem="jIp-dh-aVj" secondAttribute="trailing" id="35n-EV-A7a"/>
                             <constraint firstItem="8vd-oa-ywa" firstAttribute="leading" secondItem="jIp-dh-aVj" secondAttribute="leading" constant="30" id="3b7-fx-hBN"/>
+                            <constraint firstItem="0TQ-51-a63" firstAttribute="leading" secondItem="jIp-dh-aVj" secondAttribute="leading" id="81B-hU-hS6"/>
                             <constraint firstItem="8vd-oa-ywa" firstAttribute="bottom" secondItem="Ho3-S7-Qtv" secondAttribute="bottom" constant="-30" id="HgH-GW-RG7"/>
                             <constraint firstItem="8vd-oa-ywa" firstAttribute="trailing" secondItem="Ho3-S7-Qtv" secondAttribute="trailing" constant="-30" id="Ty4-Ac-Krs"/>
+                            <constraint firstItem="0TQ-51-a63" firstAttribute="bottom" secondItem="jIp-dh-aVj" secondAttribute="bottom" id="du2-6y-Kg2"/>
+                            <constraint firstItem="0TQ-51-a63" firstAttribute="top" secondItem="Ho3-S7-Qtv" secondAttribute="top" id="uil-rp-rcD"/>
                             <constraint firstItem="8vd-oa-ywa" firstAttribute="top" secondItem="jIp-dh-aVj" secondAttribute="top" constant="5" id="xYf-bf-O3w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jIp-dh-aVj"/>
@@ -609,6 +612,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zxQ-wO-ous"/>
-        <segue reference="Xb3-8O-YCV"/>
+        <segue reference="YDd-W5-U9e"/>
     </inferredMetricsTieBreakers>
 </document>
