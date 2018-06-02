@@ -27,14 +27,11 @@ class BucketSpace: UIView {
         return parentVC.bucketFillColor
     }
 
-//    var hoursSet: Int = 0
-    var totalMinutes: Int = 2
-//    var secondsSet: Int = 0
-//    var hours: Int = 0
-//    var minutes: Int = 0
-//    var seconds: Int = 0
+    var totalMinutes: Int {
+        return parentVC.minutesSet
+    }
 
-//    var bucketViewReady: Bool = false
+    var ready: Bool = false
 
 
 
@@ -97,10 +94,8 @@ class BucketSpace: UIView {
         }
     }
 
-
-
     func bucketFillPath(_ pd: Float? = nil) -> UIBezierPath {
-        let percentDrained = pd ?? 1.0 - parentVC.percentFull()
+        let percentDrained = pd ?? 1.0 - parentVC.percentRun()
         let minX = bucketView.bounds.minX
         let maxX = bucketView.bounds.maxX
         let maxY = bucketView.bounds.maxY
@@ -166,8 +161,16 @@ class BucketSpace: UIView {
                                              multiplier: 1.0, constant: 0.0)
         NSLayoutConstraint.activate([labelTop,labelLeft,labelRight,labelBottom])
 
-//        bucketViewReady = true
+        ready = true
 
+    }
+
+    func updateFillPath() {
+        bucketFillLayer.path = bucketFillPath().cgPath
+    }
+
+    func stopAnimations() {
+        bucketFillLayer.removeAllAnimations()
     }
 
     func bucketFillExample()  {
@@ -188,8 +191,9 @@ class BucketSpace: UIView {
         bucketFillLayer.path = fillPath.cgPath
     }
 
-    func setUpBucketInsides() {
+    func adjustBucketInsides() {
         print("Setting up insides")
+        print(bucketView.frame.size)
         setUpReplicatorLayer(size: bucketView.frame.size)
         bucketView.layer.addSublayer(replicatorLayer)
         setUpMeasureMarks()
@@ -202,7 +206,9 @@ class BucketSpace: UIView {
         drawBucketOutline()
         setUpMeasureLabels()
         setUpBucketFill()
-        setUpBucketInsides()
+        setNeedsLayout()
+        layoutIfNeeded()
+        adjustBucketInsides()
     }
 
     func drainBucket() {
