@@ -21,11 +21,6 @@ import SwiftySound // for alert sound
 class SimpleTimerViewController: UIViewController {
 
     //MARK: - Initialize stuff
-//    let bucketFillLayer = CAShapeLayer()
-//    let bucketMeasureView = UIView()
-//    var labelList: [UILabel] = []
-//    let replicatorLayer = CAReplicatorLayer()
-//    let instanceLayer = CALayer()
 
     var bucketLineColor: UIColor = UIColor.black
     var bucketFillColor: CGColor = UIColor.gray.cgColor
@@ -254,6 +249,8 @@ class SimpleTimerViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
+        // Handles rotation
+        super.viewDidLayoutSubviews()
         bucketSpace.setNeedsLayout()
         bucketSpace.layoutIfNeeded()
         bucketSpace.adjustBucketInsides()

@@ -106,9 +106,12 @@ class InitialViewController: UIViewController {
             let destinationVC = segue.destination as! EditTimerViewController
             destinationVC.mode = .singleUse
             destinationVC.title = "Single Use Timer"
+//        case "toSettingsScreen":
+//            let destinationVC = segue.destination as! EditTimerViewController
+//            destinationVC.mode = .prefs
+//            destinationVC.title = "Settings"
         case "toSettingsScreen":
-            let destinationVC = segue.destination as! EditTimerViewController
-            destinationVC.mode = .prefs
+            let destinationVC = segue.destination as! SettingsViewController
             destinationVC.title = "Settings"
         default:
             ()
