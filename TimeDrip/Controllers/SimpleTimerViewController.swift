@@ -11,10 +11,11 @@ import CoreGraphics
 import ChameleonFramework // for easy color manipulation -- may not be necessary
 import SwiftySound // for alert sound
 
-//TODO:
+//TODO: Checklist
 // * Fix rotation problem (incorporate viewWillTransition?)
 // * applicationWillEnterBackground/applicationWillEnterForeground
 //      - https://stackoverflow.com/a/46877212/731985
+// * BUG: Cancelling timer leaves graphic moving
 
 
 
@@ -93,6 +94,10 @@ class SimpleTimerViewController: UIViewController {
         bucketSpace.bucketFillLayer.path = bucketSpace.bucketFillPath().cgPath
         timerButton.setTitle("Resume", for: .normal)
         timerPaused = true
+    }
+
+    func refreshTimer() {
+
     }
 
     @objc func updateTimer() {
@@ -213,8 +218,6 @@ class SimpleTimerViewController: UIViewController {
         Sound.stopAll()
     }
 
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         bucketSpace.parentVC = self
@@ -256,6 +259,7 @@ class SimpleTimerViewController: UIViewController {
         bucketSpace.adjustBucketInsides()
         pauseTimer()
         runTimer()
+        //TODO: what's up with pause/run above? was that a clunky way to force update the bucket?
     }
 
 

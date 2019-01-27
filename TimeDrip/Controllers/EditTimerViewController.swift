@@ -15,6 +15,7 @@ import SwiftySound
 // * change timePickerStyle by swiping picker left/right
 // * "Save Changes" in .edit mode shouldn't go back to root
 // * need to reload tableview after changes in color/sound/time
+// * tapping outside an expanded selector (style/time/sound) should close it
 
 
 enum PickerTag: Int {
