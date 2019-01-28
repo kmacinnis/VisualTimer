@@ -25,7 +25,6 @@ class InitialViewController: UIViewController, Storyboarded {
     @IBOutlet weak var prefText: UITextView!
     
     @objc func toSingleUseTimer(sender : UITapGestureRecognizer) {
-//        performSegue(withIdentifier: "toSingleUseTimer", sender: self)
         coordinator?.pushEditTimer(timer: SavedTimer())
     }
 
@@ -34,7 +33,6 @@ class InitialViewController: UIViewController, Storyboarded {
     }
 
     @objc func toPreferences(sender : UITapGestureRecognizer) {
-//        performSegue(withIdentifier: "toSettingsScreen", sender: self)
         coordinator?.pushSettings()
     }
 
@@ -103,20 +101,6 @@ class InitialViewController: UIViewController, Storyboarded {
 
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "toSingleUseTimer":
-            let destinationVC = segue.destination as! EditTimerViewController
-            destinationVC.mode = .singleUse
-            destinationVC.title = "Single Use Timer"
-        case "toSettingsScreen":
-            let destinationVC = segue.destination as! EditTimerViewController
-            destinationVC.mode = .prefs
-            destinationVC.title = "Settings"
-        default:
-            ()
-        }
-    }
 
 
 }

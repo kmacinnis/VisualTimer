@@ -97,7 +97,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             saveChanges()
             coordinator?.pushSimpleTimer(timer: thisTimer!)
         case .singleUse:
-//            performSegue(withIdentifier: "useNewTimer", sender: self)
             coordinator?.pushSimpleTimer(timer: thisTimer!)
         case .edit, .prefs:
             saveChanges()
@@ -547,28 +546,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         }
     }
 
-
-
-
-
-    //MARK: - Segue to Timer Screen
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        let destinationVC = segue.destination as! SimpleTimerViewController
-        destinationVC.timerName = timerName
-        destinationVC.minutesSet = minutesSet
-        destinationVC.secondsSet = secondsSet
-        destinationVC.bucketFillColor = color.cgColor
-        destinationVC.pausable = pausableSwitch?.isOn ?? false
-        destinationVC.autoStart = autoStartSwitch?.isOn ?? false
-        destinationVC.cancelable = cancelSwitch?.isOn ?? true
-        destinationVC.alertSound = soundText
-        destinationVC.loopAudio = loopSwitch?.isOn ?? true
-        //TODO:- Change above ??s to read from defaults
-
-
-    }
 
     //MARK: - Database stuff
 

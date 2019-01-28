@@ -8,6 +8,7 @@
 
 import UIKit
 
+//TODO: Make this actually work
 class SettingsViewController: UITableViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?
