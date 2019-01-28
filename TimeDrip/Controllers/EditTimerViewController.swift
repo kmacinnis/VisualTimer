@@ -97,7 +97,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
         switch mode {
         case .add, .singleUse:
-            performSegue(withIdentifier: "useNewTimer", sender: self)
+//            performSegue(withIdentifier: "useNewTimer", sender: self)
+            coordinator?.pushSimpleTimer()
         case .edit, .prefs:
             saveChanges()
             self.navigationController?.popToRootViewController(animated: true)

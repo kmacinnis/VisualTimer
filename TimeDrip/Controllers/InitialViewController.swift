@@ -25,7 +25,8 @@ class InitialViewController: UIViewController, Storyboarded {
     @IBOutlet weak var prefText: UITextView!
     
     @objc func toSingleUseTimer(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toSingleUseTimer", sender: self)
+//        performSegue(withIdentifier: "toSingleUseTimer", sender: self)
+        coordinator?.pushEditTimer(timer: SavedTimer())
     }
 
     @objc func toSavedTimerList(sender : UITapGestureRecognizer) {
@@ -33,7 +34,8 @@ class InitialViewController: UIViewController, Storyboarded {
     }
 
     @objc func toPreferences(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toSettingsScreen", sender: self)
+//        performSegue(withIdentifier: "toSettingsScreen", sender: self)
+        coordinator?.pushSettings()
     }
 
     func firstLaunch() -> Bool{

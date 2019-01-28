@@ -136,7 +136,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "startTimer", sender: self)
+        coordinator?.pushSimpleTimer()
     }
 
 
@@ -184,7 +184,8 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
         let editAction = SwipeAction(style: .default, title: "Edit") { (action, indexPath) in
             self.timerForEditing = self.timers?[indexPath.row]
-            self.performSegue(withIdentifier: "editTimer", sender: self)
+//            self.performSegue(withIdentifier: "editTimer", sender: self)
+            self.coordinator?.pushEditTimer(timer:self.timerForEditing!)
         }
         editAction.backgroundColor = UIColor.init(hexString: "#FFAE00")
 

@@ -41,9 +41,10 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
 
-    func pushEditTimer() {
+    func pushEditTimer(timer: SavedTimer) {
         let vc = EditTimerViewController.instantiate()
         vc.coordinator = self
+        vc.thisTimer = timer
         navigationController.pushViewController(vc, animated: true)
     }
 
