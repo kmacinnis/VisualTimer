@@ -24,7 +24,9 @@ enum PickerTag: Int {
     case soundPicker
 }
 
-class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, Storyboarded {
+
+    weak var coordinator: MainCoordinator?
 
     enum Mode {
         case add, edit, singleUse, prefs

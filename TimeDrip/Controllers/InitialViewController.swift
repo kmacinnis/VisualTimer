@@ -9,8 +9,9 @@
 import UIKit
 import RealmSwift
 
-class InitialViewController: UIViewController {
+class InitialViewController: UIViewController, Storyboarded {
 
+    weak var coordinator: MainCoordinator?
     let defaults = UserDefaults.standard
 
     @IBOutlet weak var oneTimeView: RoundedView!
@@ -28,7 +29,7 @@ class InitialViewController: UIViewController {
     }
 
     @objc func toSavedTimerList(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toSavedTimerList", sender: self)
+        coordinator?.pushSavedTimers()
     }
 
     @objc func toPreferences(sender : UITapGestureRecognizer) {

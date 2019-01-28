@@ -12,14 +12,16 @@ import SwipeCellKit
 
 
 
-class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate {
+class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate, Storyboarded {
+
+    weak var coordinator: MainCoordinator?
 
     var timers: Results<SavedTimer>?
     let realm = try! Realm()
     var timerForEditing: SavedTimer?
 
     @objc func addTimer() {
-        performSegue(withIdentifier: "newTimer", sender: self)
+        coordinator?.createNewTimer()
     }
 
     @objc func orderingModeOn() {

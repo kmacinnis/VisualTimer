@@ -19,10 +19,11 @@ import SwiftySound // for alert sound
 
 
 
-class SimpleTimerViewController: UIViewController {
+class SimpleTimerViewController: UIViewController, Storyboarded {
 
     //MARK: - Initialize stuff
-
+    weak var coordinator: MainCoordinator?
+    
     var bucketLineColor: UIColor = UIColor.black
     var bucketFillColor: CGColor = UIColor.gray.cgColor
 

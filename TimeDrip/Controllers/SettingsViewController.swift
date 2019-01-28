@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: UITableViewController, Storyboarded {
+
+    weak var coordinator: MainCoordinator?
 
     let appLevelSettings = "App-Level"
     let defaultSettings = "Defaults"
