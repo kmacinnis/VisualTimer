@@ -55,6 +55,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         loadSavedTimers()
     }
 
+    //TODO: Remove this after coordinator has replaced segue functionality
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "startTimer" {
             let destinationVC = segue.destination as! SimpleTimerViewController
@@ -136,7 +137,10 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.pushSimpleTimer()
+        if let timer = timers?[indexPath.row] {
+            coordinator?.pushSimpleTimer(timer: timer)
+        }
+
     }
 
 

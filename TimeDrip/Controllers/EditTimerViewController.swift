@@ -16,6 +16,7 @@ import SwiftySound
 // * "Save Changes" in .edit mode shouldn't go back to root
 // * need to reload tableview after changes in color/sound/time
 // * tapping outside an expanded selector (style/time/sound) should close it
+// * make work for .prefs mode
 
 
 enum PickerTag: Int {
@@ -65,10 +66,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var styleLabel: UILabel?
     var stylePicker: UIPickerView?
 
-
-
-
-
     var thisTimer: SavedTimer?
 
     let realm = try! Realm()
@@ -96,9 +93,12 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
         switch mode {
-        case .add, .singleUse:
+        case .add:
+            saveChanges()
+            coordinator?.pushSimpleTimer(timer: thisTimer!)
+        case .singleUse:
 //            performSegue(withIdentifier: "useNewTimer", sender: self)
-            coordinator?.pushSimpleTimer()
+            coordinator?.pushSimpleTimer(timer: thisTimer!)
         case .edit, .prefs:
             saveChanges()
             self.navigationController?.popToRootViewController(animated: true)
@@ -567,9 +567,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         destinationVC.loopAudio = loopSwitch?.isOn ?? true
         //TODO:- Change above ??s to read from defaults
 
-        if mode != .singleUse {
-            saveChanges()
-        }
+
     }
 
     //MARK: - Database stuff

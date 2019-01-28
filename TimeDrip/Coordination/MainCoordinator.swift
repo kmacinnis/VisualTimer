@@ -22,33 +22,47 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 
-//    func buySubscription() {
-//        let vc = BuyViewController.instantiate()
-//        vc.coordinator = self
-//        navigationController.pushViewController(vc, animated: true)
-//    }
 
-    func pushSimpleTimer() {
+    func pushSimpleTimer(timer: SavedTimer) {
         let vc = SimpleTimerViewController.instantiate()
         //TODO: add setup
         vc.coordinator = self
+        vc.minutesSet = timer.minutesSet
+        vc.secondsSet = timer.secondsSet
+        vc.bucketFillColor = UIColor.init(hexString: timer.hexColor)?.cgColor ?? UIColor.gray.cgColor
+        vc.pausable = timer.pausable
+        vc.cancelable = timer.cancelable
+        vc.alertSound = timer.sound
+        vc.loopAudio = timer.loopAudio
+        vc.autoStart = timer.autoStart
+        vc.timerName = timer.name
         navigationController.pushViewController(vc, animated: true)
     }
 
     func pushSettings() {
-        let vc = SettingsViewController.instantiate()
+        let vc = EditTimerViewController.instantiate()
+        vc.mode = .prefs
         vc.coordinator = self
+        vc.title = "Settings"
         navigationController.pushViewController(vc, animated: true)
     }
 
     func pushEditTimer(timer: SavedTimer) {
         let vc = EditTimerViewController.instantiate()
         vc.coordinator = self
+        vc.mode = .edit
         vc.thisTimer = timer
+        vc.minutesSet = timer.minutesSet
+        vc.secondsSet = timer.secondsSet
+        vc.color = UIColor.init(hexString: timer.hexColor) ?? UIColor.gray
+        vc.origPausable = timer.pausable
+        vc.origAutoStart = timer.autoStart
+        vc.timeText = "\(timer.minutesSet) min"
+        vc.timerName = timer.name
         navigationController.pushViewController(vc, animated: true)
     }
 
-    func pushSavedTimers() {
+    func pushSavedTimerList() {
         let vc = SavedTimersTableViewController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
@@ -61,5 +75,12 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
 
+    func createSingleUseTimer() {
+        let vc = EditTimerViewController.instantiate()
+        vc.coordinator = self
+        vc.mode = .singleUse
+        vc.title = "Single Use Timer"
+        navigationController.pushViewController(vc, animated: true)
+    }
 
 }

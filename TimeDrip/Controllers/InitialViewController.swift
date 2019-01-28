@@ -30,7 +30,7 @@ class InitialViewController: UIViewController, Storyboarded {
     }
 
     @objc func toSavedTimerList(sender : UITapGestureRecognizer) {
-        coordinator?.pushSavedTimers()
+        coordinator?.pushSavedTimerList()
     }
 
     @objc func toPreferences(sender : UITapGestureRecognizer) {

@@ -16,6 +16,8 @@ import SwiftySound // for alert sound
 // * applicationWillEnterBackground/applicationWillEnterForeground
 //      - https://stackoverflow.com/a/46877212/731985
 // * BUG: Cancelling timer leaves graphic moving
+// * BUG: Getting out after finishing runs timer again
+
 
 
 
