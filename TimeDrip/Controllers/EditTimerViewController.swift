@@ -98,7 +98,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             performSegue(withIdentifier: "useNewTimer", sender: self)
         case .edit, .prefs:
             saveChanges()
-            self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
