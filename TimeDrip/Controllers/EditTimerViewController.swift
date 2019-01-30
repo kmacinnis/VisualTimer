@@ -13,9 +13,10 @@ import SwiftySound
 
 //TODO:
 // * change timePickerStyle by swiping picker left/right
-// * need to reload tableview after changes in color/sound/time
+// * need to reload tableview after changes in sound/time
 // * tapping outside an expanded selector (style/time/sound) should close it
 // * make work for .prefs mode
+// * BUG: Sounds don't show up in soundPicker anymore!!!
 
 
 enum PickerTag: Int {
@@ -58,6 +59,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var pausableSwitch: UISwitch?
     var cancelSwitch: UISwitch?
     var loopSwitch: UISwitch?
+    var colorSample: UIView?
     var soundLabel: UILabel?
     var soundPicker: UIPickerView?
     var timeLabel: UILabel?
@@ -144,6 +146,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             case .color:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ColorSampleTableViewCell
                 cell.sampleBlock.backgroundColor = color
+                colorSample = cell.sampleBlock
                 return cell
             case .timeSet:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! DetailCell
@@ -281,6 +284,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 self.color = color
                 RappleColorPicker.close()
                 self.hideAllPickerCells()
+                self.colorSample?.backgroundColor = color
             }
         case .timePicker, .soundPicker:
             print("Touched picker")
