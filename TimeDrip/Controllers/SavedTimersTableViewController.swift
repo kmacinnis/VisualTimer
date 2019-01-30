@@ -26,7 +26,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
     @objc func orderingModeOn() {
         tableView.isEditing = true
-        let doneBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(orderingModeOff))
+        let doneBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(orderingModeOff))
         navigationItem.setRightBarButtonItems([doneBarBtn], animated: true)
         tableView.reloadData()
     }
@@ -34,8 +34,8 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     @objc func orderingModeOff() {
         tableView.isEditing = false
 
-        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
-        let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
+        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
+        let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
 
         self.navigationItem.setRightBarButtonItems([addBarBtn, editBarBtn], animated: true)
         tableView.reloadData()
@@ -45,8 +45,8 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         super.viewDidLoad()
         tableView.register(UINib(nibName: "SavedTimerCell", bundle: nil), forCellReuseIdentifier: "savedTimerCell")
 
-        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
-        let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
+        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
+        let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
 //        let infoBarBtn = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(SavedTimersTableViewController.showInfo))
         self.navigationItem.rightBarButtonItems = [addBarBtn, editBarBtn]
     }
@@ -96,7 +96,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
             }
         }
 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
 

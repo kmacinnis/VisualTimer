@@ -218,7 +218,7 @@ class BucketSpace: UIView {
         basicAnimation.toValue = bucketFillPath(1.0).cgPath
         let duration = parentVC.minutes * 60 + parentVC.seconds
         basicAnimation.duration = CFTimeInterval(duration)
-        basicAnimation.fillMode = kCAFillModeForwards
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
         bucketFillLayer.add(basicAnimation, forKey: "drain")
     }

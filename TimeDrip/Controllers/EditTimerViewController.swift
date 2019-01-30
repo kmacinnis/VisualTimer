@@ -224,7 +224,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! TitleCell
                 nameField = cell.nameField
                 nameField?.text = timerName
-                nameField?.addTarget(self, action: #selector(nameChanged), for: UIControlEvents.allEditingEvents)
+                nameField?.addTarget(self, action: #selector(nameChanged), for: UIControl.Event.allEditingEvents)
                 if mode == .prefs || mode == .singleUse {
                     cell.isHidden = true
                 }
@@ -248,12 +248,12 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             return stylePickerHidden ? 0 : 80
         case .name:
             if mode == .add || mode == .edit {
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             } else {
                 return 0.0
             }
         default:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
 
