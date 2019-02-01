@@ -12,11 +12,10 @@ import RealmSwift
 import SwiftySound
 
 //TODO:
-// * change timePickerStyle by swiping picker left/right
-// * need to reload tableview after changes in sound/time
-// * tapping outside an expanded selector (style/time/sound) should close it
-// * make work for .prefs mode
-// * BUG: Sounds don't show up in soundPicker anymore!!!
+//TODO: * change timePickerStyle by swiping picker left/right
+//TODO: * tapping outside an expanded selector (style/time/sound) should close it
+//TODO: * dim background when picker is visible? Maybe?
+//TODO: * make work for .prefs mode
 
 
 enum PickerTag: Int {
@@ -52,6 +51,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var stylePickerHidden: Bool = true
     var timePickerHidden: Bool = true
     var soundPickerHidden: Bool = true
+    var allDimmedBut: Int?
     var timerStyle: TimerType = .simple
 
     var nameField: UITextField?
@@ -140,7 +140,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         return SettingsRow.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    fileprivate func getCorrectCell(_ indexPath: IndexPath, _ tableView: UITableView) -> UITableViewCell {
         if let setting = SettingsRow(rawValue: indexPath.row) {
             switch setting {
             case .color:
@@ -239,6 +239,20 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         }
     }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = getCorrectCell(indexPath, tableView)
+        if let nonDim = allDimmedBut {
+            if nonDim == indexPath.row {
+                cell.backgroundColor = UIColor.white
+            } else {
+                cell.backgroundColor = UIColor.flatNavyBlueDark
+                cell.alpha = 0.2
+            }
+
+        }
+        return cell
+    }
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         switch SettingsRow(rawValue: indexPath.row)! {
@@ -264,8 +278,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         case .timeSet:
             if timePickerHidden {
                 showPickerCell(timePicker!)
+                allDimmedBut = indexPath.row
+                tableView.reloadData()
             } else {
-                hidePickerCell(timePicker!)
+                hideAllPickerCells()
+
             }
         case .styleSet:
             if stylePickerHidden {
@@ -341,7 +358,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     fileprivate func numRowsInTimePickerForComponent(_ component: Int) -> Int {
         //TODO: * pull this into sep function.
-        //      * make this handle timePicker, soundPicker and stylePicker
+        //TODO: * make this handle timePicker, soundPicker and stylePicker
 
         switch timePickerStyle {
         case .hoursMinutes:
@@ -445,6 +462,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         switch timePickerStyle {
         case .minutesOnly:
             timeText = "\(row) min"
+            timeLabel?.text = timeText
             hoursSet = 0
             minutesSet = row
             secondsSet = 0
@@ -544,9 +562,14 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     func hideAllPickerCells() {
-        for picker in [soundPicker,].compactMap({ $0 }) {
+        for picker in [soundPicker,timePicker,stylePicker].compactMap({ $0 }) {
             hidePickerCell(picker)
         }
+        allDimmedBut = nil
+    }
+
+    func dimEverythingBut(cellNum: Int) {
+
     }
 
 
