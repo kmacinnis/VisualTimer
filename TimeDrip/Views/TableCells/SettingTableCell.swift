@@ -10,23 +10,21 @@ import UIKit
 
 
 
-protocol ListedElements {
-    var elements: [UIView] { get set }
-}
+class SettingTableCell: UITableViewCell {
+    let DIM_ALPHA = CGFloat(0.1)
+    let DIM_COLOR = UIColor.flatGray
 
-class SettingTableCell: UITableViewCell, ListedElements {
 
     var elements: [UIView] = []
     var expandsPicker: Bool = false
 
-
+    func dimElements(dim: Bool) {
+        backgroundColor = dim ? DIM_COLOR : UIColor.white
+        for element in elements {
+            element.alpha = dim ? DIM_ALPHA : CGFloat(1.0)
+        }
+    }
 
 
 }
 
-
-//extension UIView {
-//    var textColor: UIColor {
-//        return UIColor.black
-//    }
-//}

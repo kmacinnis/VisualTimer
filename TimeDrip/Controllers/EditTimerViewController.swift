@@ -33,8 +33,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     let defaults = UserDefaults.standard
-    let DIM_ALPHA = CGFloat(0.1)
-    let DIM_COLOR = UIColor.flatGray
 
     var mode: Mode = .add
     var timeText: String = "Tap to set"
@@ -247,15 +245,14 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         if let nonDim = allDimmedBut {
             if nonDim == indexPath.row {
                 // Current focused cell
-                dimElements(cell: cell, dim: false)
+                cell.dimElements(dim: false)
             } else {
                 // Dimmed cell
-                dimElements(cell: cell, dim: true)
+                cell.dimElements(dim: true)
             }
-
         } else {
             // Nothing is dimmed
-            dimElements(cell: cell, dim: false)
+            cell.dimElements(dim: false)
         }
         return cell
     }
