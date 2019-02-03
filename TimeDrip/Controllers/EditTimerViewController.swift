@@ -33,6 +33,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     let defaults = UserDefaults.standard
+    let DIM_ALPHA = CGFloat(0.1)
+    let DIM_COLOR = UIColor.flatGray
 
     var mode: Mode = .add
     var timeText: String = "Tap to set"
@@ -107,7 +109,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     @IBOutlet weak var useBtn: UIBarButtonItem!
 
-
+    @IBOutlet weak var bottomBar: UIToolbar!
+    
     // MARK: - View Stuff
 
     override func viewDidLoad() {
@@ -140,7 +143,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         return SettingsRow.count
     }
 
-    fileprivate func getCorrectCell(_ indexPath: IndexPath, _ tableView: UITableView) -> UITableViewCell {
+    fileprivate func getCorrectCell(_ indexPath: IndexPath, _ tableView: UITableView) -> SettingTableCell {
         if let setting = SettingsRow(rawValue: indexPath.row) {
             switch setting {
             case .color:
@@ -232,10 +235,10 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 }
                 return cell
             default:
-                return tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent(), for: indexPath)
+                return tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent(), for: indexPath) as! SettingTableCell
             }
         } else {
-            return tableView.dequeueReusableCell(withIdentifier: "errorCell")!
+            return tableView.dequeueReusableCell(withIdentifier: "errorCell")! as! SettingTableCell
         }
     }
 
@@ -243,12 +246,16 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         let cell = getCorrectCell(indexPath, tableView)
         if let nonDim = allDimmedBut {
             if nonDim == indexPath.row {
-                cell.backgroundColor = UIColor.white
+                // Current focused cell
+                dimElements(cell: cell, dim: false)
             } else {
-                cell.backgroundColor = UIColor.flatNavyBlueDark
-                cell.alpha = 0.2
+                // Dimmed cell
+                dimElements(cell: cell, dim: true)
             }
 
+        } else {
+            // Nothing is dimmed
+            dimElements(cell: cell, dim: false)
         }
         return cell
     }
@@ -282,7 +289,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 tableView.reloadData()
             } else {
                 hideAllPickerCells()
-
             }
         case .styleSet:
             if stylePickerHidden {
@@ -567,11 +573,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         }
         allDimmedBut = nil
     }
-
-    func dimEverythingBut(cellNum: Int) {
-
-    }
-
 
     //MARK: - Database stuff
 
