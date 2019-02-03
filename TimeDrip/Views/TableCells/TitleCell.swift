@@ -8,11 +8,17 @@
 
 import UIKit
 
-class TitleCell: UITableViewCell {
+class TitleCell: SettingTableCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var nameField: UITextField!
     
     @IBAction func nameFieldChanged(_ sender: Any) {
     }
-    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        elements = [nameLabel, nameField]
+    }
 }

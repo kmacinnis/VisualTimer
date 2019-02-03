@@ -103,6 +103,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="bottomBar" destination="S3t-2b-cqE" id="xUN-9z-fAF"/>
                         <outlet property="useBtn" destination="mXT-xD-KfN" id="IFF-yy-qKT"/>
                     </connections>
                 </tableViewController>

@@ -8,10 +8,14 @@
 
 import UIKit
 
-class DetailCell: UITableViewCell {
+class DetailCell: SettingTableCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var detail: UILabel!
-    
-    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        elements = [title, detail]
+        expandsPicker = true
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PickerCell: UITableViewCell {
+class PickerCell: SettingTableCell {
 
     @IBOutlet weak var picker: UIPickerView!
     
