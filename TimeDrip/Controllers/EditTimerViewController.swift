@@ -16,12 +16,15 @@ import SwiftySound
 //TODO: * tapping outside an expanded selector (style/time/sound) should close it
 //TODO: * dim background when picker is visible? Maybe?
 //TODO: * make work for .prefs mode
+//TODO: * BUG: Cancel button on bottom bar doesn't work
+//TODO: * MINOR BUG: Height of color row is off.
 
 
 enum PickerTag: Int {
     case stylePicker
     case timePicker
     case soundPicker
+    case none
 }
 
 class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, Storyboarded {
@@ -35,6 +38,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     let defaults = UserDefaults.standard
 
     var mode: Mode = .add
+    var expandedPicker : PickerTag = PickerTag.none
     var timeText: String = "Tap to set"
     var soundText: String = "Tap to set"
     var styleText: String = ""
@@ -48,9 +52,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var origPausable = false
     var origCancelable = true
     var origLoopSound = true
-    var stylePickerHidden: Bool = true
-    var timePickerHidden: Bool = true
-    var soundPickerHidden: Bool = true
     var allDimmedBut: Int?
     var timerStyle: TimerType = .simple
 
@@ -261,11 +262,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
         switch SettingsRow(rawValue: indexPath.row)! {
         case .timePicker:
-            return timePickerHidden ? 0 : 216
+            return (expandedPicker == .timePicker) ? 216 : 0
         case .soundPicker:
-            return soundPickerHidden ? 0 : 216
+            return (expandedPicker == .soundPicker) ? 216 : 0
         case .stylePicker:
-            return stylePickerHidden ? 0 : 80
+            return (expandedPicker == .stylePicker) ? 80 : 0
         case .name:
             if mode == .add || mode == .edit {
                 return UITableView.automaticDimension
@@ -280,24 +281,27 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch SettingsRow(rawValue: indexPath.row)! {
         case .timeSet:
-            if timePickerHidden {
+            if expandedPicker != .timePicker {
                 showPickerCell(timePicker!)
-                allDimmedBut = indexPath.row
-                tableView.reloadData()
+                allDimmedBut = indexPath.row + 1
             } else {
                 hideAllPickerCells()
             }
+            tableView.reloadData()
         case .styleSet:
-            if stylePickerHidden {
+            if expandedPicker != .stylePicker {
                 showPickerCell(stylePicker!)
+                allDimmedBut = indexPath.row + 1
             } else {
-                hidePickerCell(stylePicker!)
+                hideAllPickerCells()
             }
+            tableView.reloadData()
         case .soundSet:
-            if soundPickerHidden {
+            if expandedPicker != .soundPicker {
+                allDimmedBut = indexPath.row + 1
                 showPickerCell(soundPicker!)
             } else {
-                hidePickerCell(soundPicker!)
+                hideAllPickerCells()
             }
         case .color:
             RappleColorPicker.openColorPallet { (color, _) in
@@ -306,15 +310,18 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 self.hideAllPickerCells()
                 self.colorSample?.backgroundColor = color
             }
-        case .timePicker, .soundPicker:
-            print("Touched picker")
         default:
-            hideAllPickerCells()
+            ()
         }
-        tableView.beginUpdates()
-        tableView.endUpdates()
+//        tableView.beginUpdates()
+//        tableView.endUpdates()
+//        hideControls(allDimmedBut != nil)
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+
+
 
     //MARK: - Picker Management
 
@@ -402,6 +409,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             return Sounds.soundArray.count
         case .stylePicker:
             return TimerType.count
+        case .none:
+            return 0
         }
     }
 
@@ -458,6 +467,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             return TimerType.all[row]
         case .soundPicker:
             return Sounds.soundArray[row]["name"] ?? "???"
+        case .none:
+            return ""
         }
     }
 
@@ -491,6 +502,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         case .stylePicker:
             styleText = TimerType.all[row]
             timerStyle = TimerType(rawValue: row)!
+        case .none:
+            ()
         }
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -507,22 +520,24 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
         switch tag {
         case .soundPicker:
-            soundPickerHidden = false
+//            soundPickerHidden = false
             detailLabel = soundLabel
         case .timePicker:
-            timePickerHidden = false
+//            timePickerHidden = false
             detailLabel = timeLabel
         case .stylePicker:
-            stylePickerHidden = false
+//            stylePickerHidden = false
             detailLabel = styleLabel
+        case .none:
+            ()
         }
+        expandedPicker = tag
         tableView.beginUpdates()
         tableView.endUpdates()
         picker.isHidden = false
         picker.alpha = 1.0
         UIView.animate(withDuration: 0.5, animations: { () -> Void in
             picker.alpha = 1.0
-            picker.tintColor = UIColor.red
             detailLabel.textColor = UIColor.orange
         }, completion: {(finished) -> Void in
             picker.isHidden = false
@@ -540,16 +555,19 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
         switch tag {
         case .soundPicker:
-            soundPickerHidden = true
+//            soundPickerHidden = true
             detailLabel = soundLabel
             Sound.stopAll()
         case .timePicker:
-            timePickerHidden = true
+//            timePickerHidden = true
             detailLabel = timeLabel
         case .stylePicker:
-            stylePickerHidden = true
+//            stylePickerHidden = true
             detailLabel = styleLabel
+        case .none:
+            ()
         }
+        expandedPicker = PickerTag.none
         tableView.beginUpdates()
         tableView.endUpdates()
         picker.alpha = 1.0

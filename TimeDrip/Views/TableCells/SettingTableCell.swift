@@ -1,5 +1,5 @@
 //
-//  KMTableCell.swift
+//  SettingTableCell.swift
 //  TimeDrip
 //
 //  Created by Kate MacInnis on 2/2/19.
@@ -11,19 +11,31 @@ import UIKit
 
 
 class SettingTableCell: UITableViewCell {
-    let DIM_ALPHA = CGFloat(0.1)
-    let DIM_COLOR = UIColor.flatGray
+    let DIM_ALPHA = CGFloat(0.4)
+    let DIM_COLOR = UIColor.flatNavyBlue
+    let dimCover = UIView()
 
 
     var elements: [UIView] = []
     var expandsPicker: Bool = false
 
-    func dimElements(dim: Bool) {
-        backgroundColor = dim ? DIM_COLOR : UIColor.white
-        for element in elements {
-            element.alpha = dim ? DIM_ALPHA : CGFloat(1.0)
-        }
+    override func awakeFromNib() {
+        //TODO: Replace 44 with calculated cell height, to allow for adjustable text sizes.
+        dimCover.frame = CGRect(x: 0, y: 0, width: 0.1, height: 44)
+//        dimCover.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
+        dimCover.backgroundColor = DIM_COLOR
+        dimCover.alpha = DIM_ALPHA
+        self.addSubview(dimCover)
+        dimCover.isHidden = true
     }
+
+
+
+    func dimElements(dim: Bool) {
+        dimCover.isHidden = dim
+    }
+
+
 
 
 }
