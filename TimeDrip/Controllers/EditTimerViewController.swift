@@ -18,6 +18,8 @@ import SwiftySound
 //TODO: * make work for .prefs mode
 //TODO: * BUG: Cancel button on bottom bar doesn't work
 //TODO: * MINOR BUG: Height of color row is off.
+//TODO: * name field shouldn't show for single-use timer
+//TODO: * BUG: Timer doesn't work on single-use setting
 
 
 enum PickerTag: Int {
