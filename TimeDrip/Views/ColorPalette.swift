@@ -10,4 +10,4 @@ import UIKit
 import ChameleonFramework
 
 let Purple1: UIColor = UIColor(red: 102, green: 0, blue: 204, alpha: 1)
-
+let FOCUS_COLOR: UIColor = UIColor.orange

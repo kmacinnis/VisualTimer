@@ -18,7 +18,8 @@ import SwiftySound
 //TODO: * make work for .prefs mode
 //TODO: * BUG: Cancel button on bottom bar doesn't work
 //TODO: * MINOR BUG: Height of color row is off.
-//TODO: * name field shouldn't show for single-use timer
+//TODO: * MINOR BUG: Name row needs proper formatting
+//TODO: * name row shouldn't show for single-use timer
 //TODO: * BUG: Timer doesn't work on single-use setting
 
 
@@ -39,7 +40,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     let defaults = UserDefaults.standard
 
-    var mode: Mode = .add
+    var mode: Mode = .singleUse
     var expandedPicker : PickerTag = PickerTag.none
     var timeText: String = "Tap to set"
     var soundText: String = "Tap to set"
@@ -157,6 +158,9 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.title.text = "Time:"
                 cell.detail.text = timeText
                 timeLabel = cell.detail
+//                if expandedPicker == .timePicker {
+//                    cell.detail.textColor = FOCUS_COLOR
+//                }
                 return cell
             case .timePicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
@@ -174,6 +178,9 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.title.text = "Alert Sound:"
                 soundLabel = cell.detail
                 soundLabel?.text = soundText
+//                if expandedPicker == .soundPicker {
+//                    cell.detail.textColor = FOCUS_COLOR
+//                }
                 return cell
             case .soundPicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
@@ -196,6 +203,9 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.title.text = "Timer Style:"
                 cell.detail.text = styleText
                 styleLabel = cell.detail
+//                if expandedPicker == .stylePicker {
+//                    cell.detail.textColor = FOCUS_COLOR
+//                }
                 return cell
             case .stylePicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
@@ -313,7 +323,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 self.colorSample?.backgroundColor = color
             }
         default:
-            ()
+            hideAllPickerCells()
         }
 //        tableView.beginUpdates()
 //        tableView.endUpdates()
@@ -518,29 +528,14 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             print("Error! Picker has no tag specified!" )
             return
         }
-        var detailLabel: UILabel!
 
-        switch tag {
-        case .soundPicker:
-//            soundPickerHidden = false
-            detailLabel = soundLabel
-        case .timePicker:
-//            timePickerHidden = false
-            detailLabel = timeLabel
-        case .stylePicker:
-//            stylePickerHidden = false
-            detailLabel = styleLabel
-        case .none:
-            ()
-        }
         expandedPicker = tag
         tableView.beginUpdates()
         tableView.endUpdates()
         picker.isHidden = false
         picker.alpha = 1.0
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 1.0, animations: { () -> Void in
             picker.alpha = 1.0
-            detailLabel.textColor = UIColor.orange
         }, completion: {(finished) -> Void in
             picker.isHidden = false
 
@@ -553,29 +548,16 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             print("Error! Picker has no tag specified!" )
             return
         }
-        var detailLabel: UILabel!
 
-        switch tag {
-        case .soundPicker:
-//            soundPickerHidden = true
-            detailLabel = soundLabel
+        if tag == .soundPicker {
             Sound.stopAll()
-        case .timePicker:
-//            timePickerHidden = true
-            detailLabel = timeLabel
-        case .stylePicker:
-//            stylePickerHidden = true
-            detailLabel = styleLabel
-        case .none:
-            ()
         }
         expandedPicker = PickerTag.none
         tableView.beginUpdates()
         tableView.endUpdates()
         picker.alpha = 1.0
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 1.0, animations: { () -> Void in
             picker.alpha = 0.0
-            detailLabel.textColor = UIColor.darkText
         }, completion: {(finished) -> Void in
             picker.isHidden = true
 
