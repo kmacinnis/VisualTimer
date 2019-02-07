@@ -7,6 +7,8 @@
 
 import Foundation
 
+let disabledRows: [SettingsRow] = [.styleSet, .name]
+
 enum SettingsRow: Int {
     case name
     case styleSet
@@ -90,6 +92,14 @@ enum SettingsRow: Int {
 
     func order() -> Int {
         return self.rawValue
+    }
+
+    func disabled() -> Bool {
+        return disabledRows.contains(self)
+    }
+
+    func enabled() -> Bool {
+        return !(disabledRows.contains(self))
     }
 
     func hasDefault() -> Bool {

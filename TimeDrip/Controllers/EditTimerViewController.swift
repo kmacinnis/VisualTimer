@@ -18,7 +18,6 @@ import SwiftySound
 //TODO: * make work for .prefs mode
 //TODO: * BUG: Cancel button on bottom bar doesn't work
 //TODO: * MINOR BUG: Height of color row is off.
-//TODO: * MINOR BUG: Name row needs proper formatting
 //TODO: * name row shouldn't show for single-use timer
 //TODO: * BUG: Timer doesn't work on single-use setting
 
@@ -123,6 +122,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "detailCell")
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "titleCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
+        tableView.register(UINib(nibName: "DisabledCell", bundle: nil), forCellReuseIdentifier: "disabledCell")
 
         useBtn.isEnabled = (minutesSet > 0)
         if mode == .edit {
@@ -147,6 +147,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     fileprivate func getCorrectCell(_ indexPath: IndexPath, _ tableView: UITableView) -> SettingTableCell {
         if let setting = SettingsRow(rawValue: indexPath.row) {
+
             switch setting {
             case .color:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ColorSampleTableViewCell
@@ -158,9 +159,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.title.text = "Time:"
                 cell.detail.text = timeText
                 timeLabel = cell.detail
-//                if expandedPicker == .timePicker {
-//                    cell.detail.textColor = FOCUS_COLOR
-//                }
                 return cell
             case .timePicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
@@ -178,9 +176,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.title.text = "Alert Sound:"
                 soundLabel = cell.detail
                 soundLabel?.text = soundText
-//                if expandedPicker == .soundPicker {
-//                    cell.detail.textColor = FOCUS_COLOR
-//                }
                 return cell
             case .soundPicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
@@ -203,9 +198,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.title.text = "Timer Style:"
                 cell.detail.text = styleText
                 styleLabel = cell.detail
-//                if expandedPicker == .stylePicker {
-//                    cell.detail.textColor = FOCUS_COLOR
-//                }
                 return cell
             case .stylePicker:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! PickerCell
@@ -254,39 +246,53 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let setting = SettingsRow(rawValue: indexPath.row) {
+
+            if setting.disabled() {
+                print(setting)
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell") {
+                    return cell
+                }
+            }
+        }
         let cell = getCorrectCell(indexPath, tableView)
         if let nonDim = allDimmedBut {
             if nonDim == indexPath.row {
                 // Current focused cell
-                cell.dimElements(dim: false)
+                cell.dim(false)
             } else {
                 // Dimmed cell
-                cell.dimElements(dim: true)
+                cell.dim(true)
             }
         } else {
             // Nothing is dimmed
-            cell.dimElements(dim: false)
+            cell.dim(false)
         }
         return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        switch SettingsRow(rawValue: indexPath.row)! {
+        let setting = SettingsRow(rawValue: indexPath.row)!
+        if setting.disabled() {
+            return 0
+        }
+        switch setting {
         case .timePicker:
             return (expandedPicker == .timePicker) ? 216 : 0
         case .soundPicker:
             return (expandedPicker == .soundPicker) ? 216 : 0
         case .stylePicker:
             return (expandedPicker == .stylePicker) ? 80 : 0
-        case .name:
-            if mode == .add || mode == .edit {
-                return UITableView.automaticDimension
-            } else {
-                return 0.0
-            }
+//        case .name:
+//            if mode == .add || mode == .edit {
+//                return UITableView.automaticDimension
+//            } else {
+//                return 0.0
+//            }
         default:
-            return UITableView.automaticDimension
+//            return UITableView.automaticDimension
+            return 44
         }
     }
 
