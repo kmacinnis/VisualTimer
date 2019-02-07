@@ -13,9 +13,7 @@ import SwiftySound
 
 //TODO:
 //TODO: * change timePickerStyle by swiping picker left/right
-//TODO: * tapping outside an expanded selector (style/time/sound) should close it
 //TODO: * make work for .prefs mode
-//TODO: * BUG: Cancel button on bottom bar doesn't work
 
 
 enum PickerTag: Int {
@@ -90,8 +88,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
-        print("Cancel Button Pressed")
-        self.dismiss(animated: true, completion: nil)
+        Sound.stopAll()
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
