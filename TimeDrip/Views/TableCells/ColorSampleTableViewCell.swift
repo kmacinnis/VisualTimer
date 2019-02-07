@@ -14,9 +14,6 @@ class ColorSampleTableViewCell: SettingTableCell {
     
     @IBOutlet weak var sampleBlock: UIView!
 
-    func elementsx() -> [UIView] {
-        return [colorLabel, sampleBlock]
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

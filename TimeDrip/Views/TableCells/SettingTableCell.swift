@@ -19,20 +19,22 @@ class SettingTableCell: UITableViewCell {
     var elements: [UIView] = []
     var expandsPicker: Bool = false
 
-    override func awakeFromNib() {
-        //TODO: Replace 44 with calculated cell height, to allow for adjustable text sizes.
-        dimCover.frame = CGRect(x: 0, y: 0, width: 0.1, height: 44)
-//        dimCover.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
-        dimCover.backgroundColor = DIM_COLOR
-        dimCover.alpha = DIM_ALPHA
-        self.addSubview(dimCover)
-        dimCover.isHidden = true
-    }
+//    override func awakeFromNib() {
+//        //TODO: Replace 44 with calculated cell height, to allow for adjustable text sizes.
+//        dimCover.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
+////        dimCover.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
+//        dimCover.backgroundColor = DIM_COLOR
+////        dimCover.alpha = DIM_ALPHA
+//        self.addSubview(dimCover)
+//        dimCover.layer.zPosition = 10
+//        dimCover.isUserInteractionEnabled = true
+//        dimCover.isHidden = true
+//    }
 
 
 
-    func dimElements(dim: Bool) {
-        dimCover.isHidden = dim
+    func dim(_ state: Bool) {
+        dimCover.isHidden = !state
     }
 
 
