@@ -16,7 +16,6 @@ import SwiftySound
 //TODO: * tapping outside an expanded selector (style/time/sound) should close it
 //TODO: * make work for .prefs mode
 //TODO: * BUG: Cancel button on bottom bar doesn't work
-//TODO: * Stop sound on press usebtn
 
 
 enum PickerTag: Int {
@@ -96,6 +95,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     @IBAction func useBtnPressed(_ sender: UIBarButtonItem) {
+        Sound.stopAll()
         switch mode {
         case .add:
             saveChanges()
