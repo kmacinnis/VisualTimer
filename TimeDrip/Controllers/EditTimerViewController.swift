@@ -14,12 +14,9 @@ import SwiftySound
 //TODO:
 //TODO: * change timePickerStyle by swiping picker left/right
 //TODO: * tapping outside an expanded selector (style/time/sound) should close it
-//TODO: * dim background when picker is visible? Maybe?
 //TODO: * make work for .prefs mode
 //TODO: * BUG: Cancel button on bottom bar doesn't work
-//TODO: * MINOR BUG: Height of color row is off.
-//TODO: * name row shouldn't show for single-use timer
-//TODO: * BUG: Timer doesn't work on single-use setting
+//TODO: * Stop sound on press usebtn
 
 
 enum PickerTag: Int {
@@ -29,15 +26,13 @@ enum PickerTag: Int {
     case none
 }
 
+enum Mode {
+    case add, edit, singleUse, prefs
+}
+
 class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, Storyboarded {
 
     weak var coordinator: MainCoordinator?
-
-    enum Mode {
-        case add, edit, singleUse, prefs
-    }
-
-    let defaults = UserDefaults.standard
 
     var mode: Mode = .singleUse
     var expandedPicker : PickerTag = PickerTag.none
@@ -74,6 +69,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     let realm = try! Realm()
 
+
+    @IBOutlet weak var useBtn: UIBarButtonItem!
+
+    @IBOutlet weak var bottomBar: UIToolbar!
+
     @objc func nameChanged() {
         timerName = (nameField?.text) ?? ""
         switch mode {
@@ -99,19 +99,20 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         switch mode {
         case .add:
             saveChanges()
-            coordinator?.pushSimpleTimer(timer: thisTimer!)
+            let timer = unsavedTimerFromSettings()
+            coordinator?.pushSimpleTimer(timer: timer)
         case .singleUse:
-            coordinator?.pushSimpleTimer(timer: thisTimer!)
-        case .edit, .prefs:
+            let timer = unsavedTimerFromSettings()
+            coordinator?.pushSimpleTimer(timer: timer)
+        case .edit:
             saveChanges()
+            self.navigationController?.popViewController(animated: true)
+        case .prefs:
+            savePrefs()
             self.navigationController?.popViewController(animated: true)
         }
     }
 
-    @IBOutlet weak var useBtn: UIBarButtonItem!
-
-    @IBOutlet weak var bottomBar: UIToolbar!
-    
     // MARK: - View Stuff
 
     override func viewDidLoad() {
@@ -125,9 +126,17 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         tableView.register(UINib(nibName: "DisabledCell", bundle: nil), forCellReuseIdentifier: "disabledCell")
 
         useBtn.isEnabled = (minutesSet > 0)
-        if mode == .edit {
+
+        switch mode {
+        case .edit:
             useBtn.title = "Save Changes"
+        case .singleUse:
+            useBtn.title = "Go"
+        default:
+            ()
         }
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -248,12 +257,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let setting = SettingsRow(rawValue: indexPath.row) {
 
-            if setting.disabled() {
-                print(setting)
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell") {
-                    return cell
-                }
+            if setting.disabled(mode: mode)  {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell")
+                return cell!
             }
+
         }
         let cell = getCorrectCell(indexPath, tableView)
         if let nonDim = allDimmedBut {
@@ -274,7 +282,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         let setting = SettingsRow(rawValue: indexPath.row)!
-        if setting.disabled() {
+        if setting.disabled(mode: mode) {
             return 0
         }
         switch setting {
@@ -284,12 +292,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             return (expandedPicker == .soundPicker) ? 216 : 0
         case .stylePicker:
             return (expandedPicker == .stylePicker) ? 80 : 0
-//        case .name:
-//            if mode == .add || mode == .edit {
-//                return UITableView.automaticDimension
-//            } else {
-//                return 0.0
-//            }
         default:
 //            return UITableView.automaticDimension
             return 44
@@ -582,16 +584,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     //MARK: - Database stuff
 
     func saveChanges() {
-        if mode == .prefs {
-            defaults.set(pausableSwitch?.isOn ?? false, forKey: "pausable")
-            defaults.set(autoStartSwitch?.isOn ?? false, forKey: "autoStart")
-            defaults.set(cancelSwitch?.isOn ?? true, forKey: "cancelable")
-            defaults.set(color.hexValue(), forKey: "color")
-            defaults.set(timerStyle.rawValue, forKey: "style")
-            defaults.set(soundText, forKey: "alertSound")
-            defaults.set(loopSwitch?.isOn ?? true, forKey: "loopAudio")
-            return
-        }
         if mode == .add {
             thisTimer = SavedTimer()
             do {
@@ -626,6 +618,36 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
 
+    //MARK: User Preferences
+
+    func savePrefs() {
+        let defaults = UserDefaults.standard
+
+        defaults.set(pausableSwitch?.isOn ?? false, forKey: "pausable")
+        defaults.set(autoStartSwitch?.isOn ?? false, forKey: "autoStart")
+        defaults.set(cancelSwitch?.isOn ?? true, forKey: "cancelable")
+        defaults.set(color.hexValue(), forKey: "color")
+        defaults.set(timerStyle.rawValue, forKey: "style")
+        defaults.set(soundText, forKey: "alertSound")
+        defaults.set(loopSwitch?.isOn ?? true, forKey: "loopAudio")
+    }
+
+
+    //MARK: Timer Class
+
+    func unsavedTimerFromSettings() -> UnsavedTimer {
+        let timer = UnsavedTimer()
+        timer.minutesSet = minutesSet
+        timer.secondsSet = secondsSet
+        timer.hoursSet = hoursSet
+        timer.color = color.cgColor
+        timer.autoStart = autoStartSwitch?.isOn ?? false
+        timer.pausable = pausableSwitch?.isOn ?? false
+        timer.loopAudio = loopSwitch?.isOn ?? false
+        timer.cancelable = cancelSwitch?.isOn ?? false
+        timer.sound = soundText
+        return timer
+    }
 
     
 

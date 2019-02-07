@@ -23,20 +23,39 @@ class MainCoordinator: Coordinator {
     }
 
 
-    func pushSimpleTimer(timer: SavedTimer) {
+//    func pushSimpleTimer(timer: SavedTimer) {
+//        let vc = SimpleTimerViewController.instantiate()
+//        //TODO: add setup
+//        vc.coordinator = self
+//        vc.minutesSet = timer.minutesSet
+//        vc.secondsSet = timer.secondsSet
+//        vc.bucketFillColor = UIColor.init(hexString: timer.hexColor)?.cgColor ?? UIColor.gray.cgColor
+//        vc.pausable = timer.pausable
+//        vc.cancelable = timer.cancelable
+//        vc.alertSound = timer.sound
+//        vc.loopAudio = timer.loopAudio
+//        vc.autoStart = timer.autoStart
+//        vc.timerName = timer.name
+//        navigationController.pushViewController(vc, animated: true)
+//    }
+
+    func pushSimpleTimer(timer: UnsavedTimer) {
         let vc = SimpleTimerViewController.instantiate()
-        //TODO: add setup
+        print("PushSimpleTimer, Unsaved Timer")
+
         vc.coordinator = self
         vc.minutesSet = timer.minutesSet
         vc.secondsSet = timer.secondsSet
-        vc.bucketFillColor = UIColor.init(hexString: timer.hexColor)?.cgColor ?? UIColor.gray.cgColor
+        vc.bucketFillColor = timer.color
         vc.pausable = timer.pausable
         vc.cancelable = timer.cancelable
         vc.alertSound = timer.sound
         vc.loopAudio = timer.loopAudio
         vc.autoStart = timer.autoStart
-        vc.timerName = timer.name
+        vc.timerName = "Timer"
+
         navigationController.pushViewController(vc, animated: true)
+
     }
 
     func pushSettings() {

@@ -7,7 +7,9 @@
 
 import Foundation
 
-let disabledRows: [SettingsRow] = [.styleSet, .name]
+let disabledAlways: [SettingsRow] = [.styleSet]
+let disabledInPrefsMode: [SettingsRow] = [.name]
+let disabledInSingleUseMode: [SettingsRow] = [.name]
 
 enum SettingsRow: Int {
     case name
@@ -95,11 +97,28 @@ enum SettingsRow: Int {
     }
 
     func disabled() -> Bool {
-        return disabledRows.contains(self)
+        return disabledAlways.contains(self)
+    }
+
+    func disabled(mode: Mode) -> Bool {
+        var disabledInMode: [SettingsRow] = []
+        switch mode {
+        case .singleUse:
+            disabledInMode = disabledInSingleUseMode
+        case .prefs:
+            disabledInMode = disabledInPrefsMode
+        default:
+            ()
+        }
+        return disabledAlways.contains(self) || disabledInMode.contains(self)
     }
 
     func enabled() -> Bool {
-        return !(disabledRows.contains(self))
+        return !(disabledAlways.contains(self))
+    }
+
+    func enabled(mode: Mode) -> Bool {
+        return !disabled(mode: mode)
     }
 
     func hasDefault() -> Bool {

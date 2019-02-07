@@ -25,7 +25,7 @@ class InitialViewController: UIViewController, Storyboarded {
     @IBOutlet weak var prefText: UITextView!
     
     @objc func toSingleUseTimer(sender : UITapGestureRecognizer) {
-        coordinator?.pushEditTimer(timer: SavedTimer())
+        coordinator?.createSingleUseTimer()
     }
 
     @objc func toSavedTimerList(sender : UITapGestureRecognizer) {

@@ -105,7 +105,8 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let timer = timers?[indexPath.row] {
+        if let savedTimer = timers?[indexPath.row] {
+            let timer = convertTimer(savedTimer: savedTimer)
             coordinator?.pushSimpleTimer(timer: timer)
         }
 
