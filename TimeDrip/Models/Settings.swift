@@ -8,7 +8,7 @@
 import Foundation
 
 let disabledAlways: [SettingsRow] = [.styleSet]
-let disabledInPrefsMode: [SettingsRow] = [.name]
+let disabledInPrefsMode: [SettingsRow] = [.name, .timeSet]
 let disabledInSingleUseMode: [SettingsRow] = [.name]
 
 enum SettingsRow: Int {

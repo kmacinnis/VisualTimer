@@ -37,7 +37,6 @@ class InitialViewController: UIViewController, Storyboarded {
     }
 
     func firstLaunch() -> Bool{
-        return false
         if let _ = defaults.string(forKey: "hasLaunchedBefore"){
             print("App has launched before")
             return true

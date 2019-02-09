@@ -10,6 +10,8 @@ import Foundation
 
 class Sounds {
     static let soundArray = [
+        ["name":"Silence", "file":"silence"],
+        ["name":"", "file":"blank"],
         ["name":"Alert Sound: Buzzer", "file":"alertsound-buzzer"],
         ["name":"Alert Sound: Horn", "file":"alertsound-horn"],
         ["name":"Alert Sound: Invasion", "file":"alertsound-invasion"],

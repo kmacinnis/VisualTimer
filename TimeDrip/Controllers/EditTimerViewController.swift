@@ -14,6 +14,7 @@ import SwiftySound
 //TODO:
 //TODO: * change timePickerStyle by swiping picker left/right
 //TODO: * make work for .prefs mode
+//TODO: * either remove dimming code, or make it work without clunky allDimmedBut
 
 
 enum PickerTag: Int {
@@ -35,6 +36,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var expandedPicker : PickerTag = PickerTag.none
     var timeText: String = "Tap to set"
     var soundText: String = "Tap to set"
+    var soundFile: String = ""
     var styleText: String = ""
     var timerName: String = ""
     var color: UIColor = UIColor.blue
@@ -106,7 +108,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             saveChanges()
             self.navigationController?.popViewController(animated: true)
         case .prefs:
-            savePrefs()
+            saveDefaults()
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -123,15 +125,21 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
         tableView.register(UINib(nibName: "DisabledCell", bundle: nil), forCellReuseIdentifier: "disabledCell")
 
-        useBtn.isEnabled = (minutesSet > 0)
 
         switch mode {
         case .edit:
             useBtn.title = "Save Changes"
         case .singleUse:
+            retrieveDefaults()
+            useBtn.isEnabled = (minutesSet > 0)
             useBtn.title = "Go"
-        default:
-            ()
+        case .prefs:
+            retrieveDefaults()
+            useBtn.title = "Save Defaults"
+            useBtn.isEnabled = true
+        case .add:
+            retrieveDefaults()
+            useBtn.isEnabled = (minutesSet > 0)
         }
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
@@ -618,19 +626,31 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     //MARK: User Preferences
 
-    func savePrefs() {
-        let defaults = UserDefaults.standard
+    let defaults = UserDefaults.standard
 
-        defaults.set(pausableSwitch?.isOn ?? false, forKey: "pausable")
-        defaults.set(autoStartSwitch?.isOn ?? false, forKey: "autoStart")
-        defaults.set(cancelSwitch?.isOn ?? true, forKey: "cancelable")
-        defaults.set(color.hexValue(), forKey: "color")
-        defaults.set(timerStyle.rawValue, forKey: "style")
-        defaults.set(soundText, forKey: "alertSound")
-        defaults.set(loopSwitch?.isOn ?? true, forKey: "loopAudio")
+    func retrieveDefaults() {
+        print(defaults.dictionaryRepresentation().keys)
+        pausableSwitch?.isOn = defaults.bool(forKey: "pausable")
+        autoStartSwitch?.isOn = defaults.bool(forKey: "autoStart")
+        cancelSwitch?.isOn = defaults.bool(forKey: "cancelable")
+        let hexcolor = defaults.string(forKey: "color")
+        color = UIColor.init(hexString: hexcolor ?? "") ?? UIColor.gray
+        loopSwitch?.isOn = defaults.bool(forKey: "loopAudio")
+        soundFile = defaults.string(forKey: "soundText") ?? ""
+        timerStyle = TimerType(rawValue: defaults.integer(forKey: "style")) ?? .simple
     }
 
+    func saveDefaults() {
+        defaults.set(pausableSwitch?.isOn, forKey: "pausable")
+        defaults.set(autoStartSwitch?.isOn, forKey: "autoStart")
+        defaults.set(cancelSwitch?.isOn, forKey: "cancelable")
+        defaults.set(color.hexValue(), forKey: "color")
+        defaults.set(timerStyle.rawValue, forKey: "style")
+        defaults.set(soundFile, forKey: "alertSound")
+        defaults.set(loopSwitch?.isOn, forKey: "loopAudio")
+    }
 
+    
     //MARK: Timer Class
 
     func unsavedTimerFromSettings() -> UnsavedTimer {

@@ -45,6 +45,7 @@
 		44CED5132053B71A002079F5 /* SavedTimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CED5112053B71A002079F5 /* SavedTimerCell.xib */; };
 		44D4B75D220B603200F9D965 /* DisabledCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B75B220B603200F9D965 /* DisabledCell.swift */; };
 		44D4B75E220B603200F9D965 /* DisabledCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B75C220B603200F9D965 /* DisabledCell.xib */; };
+		44D4B760220E9BE400F9D965 /* StandardUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B75F220E9BE400F9D965 /* StandardUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		44CED5112053B71A002079F5 /* SavedTimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedTimerCell.xib; sourceTree = "<group>"; };
 		44D4B75B220B603200F9D965 /* DisabledCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledCell.swift; sourceTree = "<group>"; };
 		44D4B75C220B603200F9D965 /* DisabledCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisabledCell.xib; sourceTree = "<group>"; };
+		44D4B75F220E9BE400F9D965 /* StandardUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardUserDefaults.swift; sourceTree = "<group>"; };
 		797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeDrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */,
 				4450C31E204B802900A784A7 /* Settings.swift */,
 				4448127C20BB0D15004D97F5 /* Sounds.swift */,
+				44D4B75F220E9BE400F9D965 /* StandardUserDefaults.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,9 +207,9 @@
 				44A65589204CE3250088FE49 /* PickerCell.xib */,
 				44A655912051BC280088FE49 /* DetailCell.swift */,
 				44A655922051BC280088FE49 /* DetailCell.xib */,
-				44A655992051C5FD0088FE49 /* TitleCell.swift */,
 				44D4B75B220B603200F9D965 /* DisabledCell.swift */,
 				44D4B75C220B603200F9D965 /* DisabledCell.xib */,
+				44A655992051C5FD0088FE49 /* TitleCell.swift */,
 				44A6559A2051C5FD0088FE49 /* TitleCell.xib */,
 				44CED50C20533C13002079F5 /* ToggleCell.swift */,
 				44CED50D20533C13002079F5 /* ToggleCell.xib */,
@@ -377,6 +380,7 @@
 				44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */,
 				44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */,
 				4450C31F204B802900A784A7 /* Settings.swift in Sources */,
+				44D4B760220E9BE400F9D965 /* StandardUserDefaults.swift in Sources */,
 				44A6558A204CE3250088FE49 /* PickerCell.swift in Sources */,
 				4448127D20BB0D15004D97F5 /* Sounds.swift in Sources */,
 				44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */,

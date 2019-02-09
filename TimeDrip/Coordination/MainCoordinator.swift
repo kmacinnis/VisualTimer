@@ -43,10 +43,17 @@ class MainCoordinator: Coordinator {
     }
 
     func pushSettings() {
-        let vc = EditTimerViewController.instantiate()
-        vc.mode = .prefs
+        let vc = SettingsViewController.instantiate()
         vc.coordinator = self
         vc.title = "Settings"
+        navigationController.pushViewController(vc, animated: true)
+    }
+
+    func pushDefaultSettings() {
+        let vc = EditTimerViewController.instantiate()
+        vc.coordinator = self
+        vc.mode = .prefs
+        vc.title = "Default Settings"
         navigationController.pushViewController(vc, animated: true)
     }
 
