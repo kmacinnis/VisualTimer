@@ -71,32 +71,32 @@ class InitialViewController: UIViewController, Storyboarded {
         let tapSettings = UITapGestureRecognizer(target: self, action: #selector(self.toPreferences(sender:)))
         self.preferenceView.addGestureRecognizer(tapSettings)
 
-        if firstLaunch() {
-            defaults.set(false, forKey: "pausable")
-            defaults.set(true, forKey: "autoStart")
-            defaults.set(true, forKey: "cancelable")
-            defaults.set("#C390D4", forKey: "color")
-            defaults.set("simple", forKey: "style")
-
-            let timerOne = SavedTimer()
-            let realm = try! Realm()
-            do {
-                try realm.write {
-                    timerOne.name = "Simple Timer Example"
-                    timerOne.hoursSet = 0
-                    timerOne.minutesSet = 5
-                    timerOne.secondsSet = 0
-                    timerOne.timerType = .simple
-                    timerOne.autoStart = true
-                    timerOne.pausable = false
-                    timerOne.hexColor = "#FF8F17"
-
-                }
-            } catch {
-                print("Error writing to database: \(error)")
-            }
-
-        }
+//        if firstLaunch() {
+//            defaults.set(false, forKey: "pausable")
+//            defaults.set(true, forKey: "autoStart")
+//            defaults.set(true, forKey: "cancelable")
+//            defaults.set("#C390D4", forKey: "color")
+//            defaults.set("simple", forKey: "style")
+//
+//            let timerOne = SavedTimer()
+//            let realm = try! Realm()
+//            do {
+//                try realm.write {
+//                    timerOne.name = "Simple Timer Example"
+//                    timerOne.hoursSet = 0
+//                    timerOne.minutesSet = 5
+//                    timerOne.secondsSet = 0
+//                    timerOne.timerType = .simple
+//                    timerOne.autoStart = true
+//                    timerOne.pausable = false
+//                    timerOne.hexColor = "#FF8F17"
+//
+//                }
+//            } catch {
+//                print("Error writing to database: \(error)")
+//            }
+//
+//        }
 
     }
 

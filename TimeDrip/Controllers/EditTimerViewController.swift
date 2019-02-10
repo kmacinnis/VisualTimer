@@ -157,11 +157,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SettingsRow.count
+        return TimerSettingsRow.count
     }
 
     fileprivate func getCorrectCell(_ indexPath: IndexPath, _ tableView: UITableView) -> SettingTableCell {
-        if let setting = SettingsRow(rawValue: indexPath.row) {
+        if let setting = TimerSettingsRow(rawValue: indexPath.row) {
 
             switch setting {
             case .color:
@@ -261,7 +261,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let setting = SettingsRow(rawValue: indexPath.row) {
+        if let setting = TimerSettingsRow(rawValue: indexPath.row) {
 
             if setting.disabled(mode: mode)  {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell")
@@ -287,7 +287,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        let setting = SettingsRow(rawValue: indexPath.row)!
+        let setting = TimerSettingsRow(rawValue: indexPath.row)!
         if setting.disabled(mode: mode) {
             return 0
         }
@@ -305,7 +305,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch SettingsRow(rawValue: indexPath.row)! {
+        switch TimerSettingsRow(rawValue: indexPath.row)! {
         case .timeSet:
             if expandedPicker != .timePicker {
                 showPickerCell(timePicker!)
@@ -630,24 +630,29 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     func retrieveDefaults() {
         print(defaults.dictionaryRepresentation().keys)
-        pausableSwitch?.isOn = defaults.bool(forKey: "pausable")
-        autoStartSwitch?.isOn = defaults.bool(forKey: "autoStart")
-        cancelSwitch?.isOn = defaults.bool(forKey: "cancelable")
-        let hexcolor = defaults.string(forKey: "color")
-        color = UIColor.init(hexString: hexcolor ?? "") ?? UIColor.gray
-        loopSwitch?.isOn = defaults.bool(forKey: "loopAudio")
-        soundFile = defaults.string(forKey: "soundText") ?? ""
-        timerStyle = TimerType(rawValue: defaults.integer(forKey: "style")) ?? .simple
+        origPausable = defaults.bool(forKey: AppDefaults.TimerDefaults.pausable)
+        origAutoStart = defaults.bool(forKey: AppDefaults.TimerDefaults.autoStart)
+        origCancelable = defaults.bool(forKey: AppDefaults.TimerDefaults.cancelable)
+        let hexcolor = defaults.string(forKey: AppDefaults.TimerDefaults.colorHex)
+        color = UIColor.init(hexString: hexcolor ?? "#C390D4") ?? UIColor.gray
+        origLoopSound = defaults.bool(forKey: "loopAudio")
+
+        //TODO: Handle sound and style
+        //TODO: Use AppDefaults instead of strings
     }
 
     func saveDefaults() {
-        defaults.set(pausableSwitch?.isOn, forKey: "pausable")
-        defaults.set(autoStartSwitch?.isOn, forKey: "autoStart")
-        defaults.set(cancelSwitch?.isOn, forKey: "cancelable")
-        defaults.set(color.hexValue(), forKey: "color")
-        defaults.set(timerStyle.rawValue, forKey: "style")
-        defaults.set(soundFile, forKey: "alertSound")
-        defaults.set(loopSwitch?.isOn, forKey: "loopAudio")
+
+        defaults.set(pausableSwitch?.isOn, forKey: AppDefaults.TimerDefaults.pausable)
+        defaults.set(autoStartSwitch?.isOn, forKey: AppDefaults.TimerDefaults.autoStart)
+        defaults.set(cancelSwitch?.isOn, forKey: AppDefaults.TimerDefaults.cancelable)
+        defaults.set(loopSwitch?.isOn, forKey: AppDefaults.TimerDefaults.loopAudio)
+        defaults.set(color.hexValue(), forKey: AppDefaults.TimerDefaults.colorHex)
+        defaults.set(soundFile, forKey: AppDefaults.TimerDefaults.alertSound)
+
+        //        defaults.set(timerStyle.rawValue, forKey: "style")
+        //TODO: Handle sound and style
+
     }
 
     

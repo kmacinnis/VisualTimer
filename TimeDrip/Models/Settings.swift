@@ -7,11 +7,11 @@
 
 import Foundation
 
-let disabledAlways: [SettingsRow] = [.styleSet]
-let disabledInPrefsMode: [SettingsRow] = [.name, .timeSet]
-let disabledInSingleUseMode: [SettingsRow] = [.name]
+let disabledAlways: [TimerSettingsRow] = [.styleSet]
+let disabledInPrefsMode: [TimerSettingsRow] = [.name, .timeSet]
+let disabledInSingleUseMode: [TimerSettingsRow] = [.name]
 
-enum SettingsRow: Int {
+enum TimerSettingsRow: Int {
     case name
     case styleSet
     case stylePicker
@@ -48,8 +48,6 @@ enum SettingsRow: Int {
             return "toggleCell"
         case .color:
             return "colorCell"
-//        case .shaded:
-//            return "saveNoticeCell"
         case .pausable:
             return "toggleCell"
         case .cancelable:
@@ -81,8 +79,6 @@ enum SettingsRow: Int {
             return "ToggleCell"
         case .color:
             return "ColorSampleTableViewCell"
-//        case .shaded:
-//            return "saveNoticeCell"
         case .pausable:
             return "ToggleCell"
         case .cancelable:
@@ -101,7 +97,7 @@ enum SettingsRow: Int {
     }
 
     func disabled(mode: Mode) -> Bool {
-        var disabledInMode: [SettingsRow] = []
+        var disabledInMode: [TimerSettingsRow] = []
         switch mode {
         case .singleUse:
             disabledInMode = disabledInSingleUseMode
@@ -130,18 +126,18 @@ enum SettingsRow: Int {
         }
     }
 
-    static func all() -> [SettingsRow] {
-        var settingsArray : [SettingsRow] = []
-        for i in 0...SettingsRow.count-1 {
-            settingsArray.append(SettingsRow(rawValue: i)!)
+    static func all() -> [TimerSettingsRow] {
+        var settingsArray : [TimerSettingsRow] = []
+        for i in 0...TimerSettingsRow.count-1 {
+            settingsArray.append(TimerSettingsRow(rawValue: i)!)
         }
         return settingsArray
     }
 
-    static func defaultPrefs() -> [SettingsRow] {
-        var settingsArray : [SettingsRow] = []
-        for i in 0...SettingsRow.count-1 {
-            let settingRow = SettingsRow(rawValue: i)!
+    static func defaultPrefs() -> [TimerSettingsRow] {
+        var settingsArray : [TimerSettingsRow] = []
+        for i in 0...TimerSettingsRow.count-1 {
+            let settingRow = TimerSettingsRow(rawValue: i)!
             if settingRow.hasDefault() {
                 settingsArray.append(settingRow)
             }
@@ -158,4 +154,145 @@ enum SettingsRow: Int {
         }
     }
 
+    private func debugRemindMeToUpdateCount() {
+        /**
+         This function should never be run.
+         The whole point of it is to exist to throw a flag
+         when the cases of the enum are changed.
+         Do not update the switch statement in this function
+         until after the count is updated.
+         */
+
+
+        var x = 0 // Just sticking this here to number lines with.
+        switch self {
+        case .timeSet:
+            x = 1
+        case .timePicker:
+            x = 2
+        case .soundSet:
+            x = 3
+        case .soundPicker:
+            x = 4
+        case .styleSet:
+            x = 5
+        case .stylePicker:
+            x = 6
+        case .name:
+            x = 7
+        case .autoStart:
+            x = 8
+        case .color:
+            x = 9
+        case .pausable:
+            x = 10
+        case .cancelable:
+            x = 11
+        case .loopAudio:
+            x = 12
+        case .overflow:
+            x = 13 // overflow is here for debug crash-proofing
+                   // Set count to one less than overflow value
+        }
+        print(x) // No reason to do this. Just wanted to.
+        }
+}
+
+let disabledAppLevelSettings: [AppSettingsRow] = []
+
+enum AppSettingsRow: Int {
+    case name
+    case styleSet
+    case stylePicker
+    case timeSet
+    case timePicker
+    case autoStart
+    case pausable
+    case cancelable
+    case color
+    case soundSet
+    case soundPicker
+    case loopAudio
+    case overflow
+
+    static let count = 12
+
+    func reuseIdent () -> String {
+        switch self {
+        case .timeSet:
+            return "detailCell"
+        case .timePicker:
+            return "pickerCell"
+        case .soundSet:
+            return "detailCell"
+        case .soundPicker:
+            return "pickerCell"
+        case .styleSet:
+            return "detailCell"
+        case .stylePicker:
+            return "pickerCell"
+        case .name:
+            return "titleCell"
+        case .autoStart:
+            return "toggleCell"
+        case .color:
+            return "colorCell"
+        case .pausable:
+            return "toggleCell"
+        case .cancelable:
+            return "toggleCell"
+        case .loopAudio:
+            return "toggleCell"
+        default:
+            return "errorCell"
+        }
+    }
+
+    func nibName () -> String {
+        switch self {
+        case default:
+            return ""
+        }
+    }
+
+    func order() -> Int {
+        return self.rawValue
+    }
+
+    func disabled() -> Bool {
+        return disabledAppLevelSettings.contains(self)
+    }
+
+
+    func enabled() -> Bool {
+        return !(disabledAppLevelSettings.contains(self))
+    }
+
+    static func all() -> [AppSettingsRow] {
+        var settingsArray : [AppSettingsRow] = []
+        for i in 0...AppSettingsRow.count-1 {
+            settingsArray.append(AppSettingsRow(rawValue: i)!)
+        }
+        return settingsArray
+    }
+
+    private func debugRemindMeToUpdateCount() {
+        /**
+         This function should never be run.
+         The whole point of it is to exist to throw a flag
+         when the cases of the enum are changed.
+         Do not update the switch statement in this function
+         until after the count is updated.
+         */
+
+
+        var x = 0 // Just sticking this here to number lines with.
+        switch self {
+
+        case .overflow:
+            x = 13 // overflow is here for debug crash-proofing
+            // Set count to one less than overflow value
+        }
+        print(x) // No reason to do this. Just wanted to.
+    }
 }
