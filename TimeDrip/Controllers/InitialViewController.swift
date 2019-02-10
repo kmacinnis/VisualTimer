@@ -9,6 +9,10 @@
 import UIKit
 import RealmSwift
 
+//TODO: * Rewrite firstLaunch stuff
+
+
+
 class InitialViewController: UIViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?

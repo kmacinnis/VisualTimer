@@ -8,93 +8,128 @@
 
 import UIKit
 
-//TODO: Make this actually work
+//TODO: * Figure out and add log messages
+//TODO: * Add modals describing settings on tap
+//TODO: * Make view credits work
+        //TODO: - Add credits
+        // Gear by Reed Enger from the Noun Project
+        // Sources for sounds are listed in sounds/details
+//TODO: * Confirm on reset to defaults
+
+
 class SettingsViewController: UITableViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?
 
-    let appLevelSettings = "App-Level"
-    let defaultSettings = "Defaults"
-    let credits = "Credits"
-    var sectionList: [String] {
-        return [appLevelSettings, defaultSettings, credits]
-    }
+    var darkSwitch: UISwitch?
+    var startSwitch: UISwitch?
+    var origStartValue = true
+    var origDarkValue = true
 
-    let appLevelSettingsList = ["Show start screen", "Dark background for light colors"]
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        origDarkValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.darkForLightColors)
+        origStartValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.useStartScreen)
+
         tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "detailCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
         tableView.register(UINib(nibName: "DisabledCell", bundle: nil), forCellReuseIdentifier: "disabledCell")
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
-
     }
 
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionList.count
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch sectionList[section] {
-        case appLevelSettings:
-            return appLevelSettingsList.count
-        case defaultSettings:
-            return 1
-        case credits:
-            return 1
-        default:
-            return 0
-        }
+        return AppSettingsRow.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let setting = AppSettingsRow(rawValue: indexPath.row) {
+            switch setting {
+            case .useStartScreen:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
+                cell.toggleLabel.text = "Show start screen"
+                startSwitch = cell.toggleSwitch
+                startSwitch?.isOn = origStartValue
+                startSwitch?.addTarget(self, action: #selector(startSwitchChanged), for: UIControl.Event.allTouchEvents)
 
-        switch sectionList[indexPath.section] {
-        case appLevelSettings:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell", for: indexPath) as! ToggleCell
-            cell.toggleLabel.text = appLevelSettingsList[indexPath.row]
-            return cell
-        case defaultSettings:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
-            cell.title.text = "Set timer defaults"
-            cell.detail.text = ">"
-            return cell
-        case credits:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
-            cell.title.text = "View acknowledgements"
-            cell.detail.text = ">"
-            return cell
-        default:
+                return cell
+            case .darkForLightColors:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
+                cell.toggleLabel.text = "Dark background for light colors"
+                darkSwitch = cell.toggleSwitch
+                cell.toggleSwitch.isOn = origDarkValue
+                darkSwitch?.addTarget(self, action: #selector(darkSwitchChanged), for: UIControl.Event.allTouchEvents)
+
+                return cell
+            case .setTimerDefaults:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
+                cell.title.text = "Set timer defaults"
+                cell.detail.text = ">"
+                return cell
+            case .viewCredits:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
+                cell.title.text = "View acknowledgements"
+                cell.detail.text = ">"
+                return cell
+            case .resetAllSettings:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
+                cell.title.text = "Reset to default settings"
+                cell.detail.text = " "
+                return cell
+            case .overflow:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell", for: indexPath) as! DisabledCell
+                //TODO: log some kind of warning here
+                return cell
+
+            } // end switch
+        } else { // if setting is nil
             let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell", for: indexPath) as! DisabledCell
+            //TODO: log some kind of warning here
             return cell
         }
-
     }
-
-
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch sectionList[indexPath.section] {
-        case appLevelSettings:
+        let setting = AppSettingsRow(rawValue: indexPath.row)!
+        switch setting {
+        case .useStartScreen:
             ()
-        //TODO: add description modal when row is tapped? Maybe?
-        case defaultSettings:
+        case .darkForLightColors:
+            ()
+        case .setTimerDefaults:
             coordinator?.pushDefaultSettings()
-        case credits:
+        case .viewCredits:
             ()
-        default:
+        case .resetAllSettings:
+            let def = Defaults()
+            def.clearAppDefaults()
+            def.clearTimerDefaults()
+            tableView.reloadData()
+        case .overflow:
             ()
+            //TODO: Log warning here
         }
     }
 
+    //MARK:- Switch handling
 
-    //TODO: - Add credits
-    // Gear by Reed Enger from the Noun Project
-    // Sources for sounds are listed in sounds/details
+    @objc func darkSwitchChanged() {
+        UserDefaults.standard.set(darkSwitch?.isOn, forKey: Defaults.AppDefaults.darkForLightColors)
+    }
+    @objc func startSwitchChanged() {
+        UserDefaults.standard.set(startSwitch?.isOn, forKey: Defaults.AppDefaults.useStartScreen)
+    }
+
+
 }

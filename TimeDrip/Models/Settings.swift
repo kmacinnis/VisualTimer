@@ -201,48 +201,28 @@ enum TimerSettingsRow: Int {
 let disabledAppLevelSettings: [AppSettingsRow] = []
 
 enum AppSettingsRow: Int {
-    case name
-    case styleSet
-    case stylePicker
-    case timeSet
-    case timePicker
-    case autoStart
-    case pausable
-    case cancelable
-    case color
-    case soundSet
-    case soundPicker
-    case loopAudio
+    case useStartScreen
+    case darkForLightColors
+    case setTimerDefaults
+    case viewCredits
+    case resetAllSettings
     case overflow
 
-    static let count = 12
+
+    static let count = 5
 
     func reuseIdent () -> String {
         switch self {
-        case .timeSet:
+        case .useStartScreen:
+            return "toggleCell"
+        case .darkForLightColors:
+            return "toggleCell"
+        case .setTimerDefaults:
             return "detailCell"
-        case .timePicker:
-            return "pickerCell"
-        case .soundSet:
+        case .viewCredits:
             return "detailCell"
-        case .soundPicker:
-            return "pickerCell"
-        case .styleSet:
+        case .resetAllSettings:
             return "detailCell"
-        case .stylePicker:
-            return "pickerCell"
-        case .name:
-            return "titleCell"
-        case .autoStart:
-            return "toggleCell"
-        case .color:
-            return "colorCell"
-        case .pausable:
-            return "toggleCell"
-        case .cancelable:
-            return "toggleCell"
-        case .loopAudio:
-            return "toggleCell"
         default:
             return "errorCell"
         }
@@ -250,7 +230,7 @@ enum AppSettingsRow: Int {
 
     func nibName () -> String {
         switch self {
-        case default:
+        default:
             return ""
         }
     }
@@ -288,11 +268,85 @@ enum AppSettingsRow: Int {
 
         var x = 0 // Just sticking this here to number lines with.
         switch self {
-
+        case .useStartScreen:
+            x = 1
+        case .darkForLightColors:
+            x = 2
+        case .viewCredits:
+            x = 3
+        case .setTimerDefaults:
+            x = 4
+        case .resetAllSettings:
+            x = 5
         case .overflow:
-            x = 13 // overflow is here for debug crash-proofing
-            // Set count to one less than overflow value
+            x = 0 // overflow is here for debug crash-proofing
+                  // Set count to value before overflow value
         }
         print(x) // No reason to do this. Just wanted to.
+    }
+}
+
+class Defaults {
+    // The purpose of this is to minimize typos (or accidentally having soundName vs soundFile vs alertSound)
+    // This is not its final form
+    // reference for ideas: https://medium.com/swift-programming/swift-userdefaults-protocol-4cae08abbf92
+
+    struct TimerDefaults {
+        // Strings
+        static let colorHex = "colorHex"
+        static let alertSound = "alertSound"
+
+        // Bools
+        static let pausable = "pausable"
+        static let cancelable = "cancelable"
+        static let autoStart = "autoStart"
+        static let loopAudio = "loopAudio"
+
+        static let allDefaults : [String] = [colorHex, alertSound, pausable, cancelable, autoStart, loopAudio]
+    }
+
+    struct AppDefaults {
+        static let hasLaunchedBefore = "hasLaunchedBefore"
+        static let useStartScreen = "useStartScreen"
+        static let darkForLightColors = "darkForLightColors"
+
+        static let allDefaults : [String] = [hasLaunchedBefore, useStartScreen, darkForLightColors]
+        static let allClearable : [String] = [useStartScreen, darkForLightColors]
+    }
+
+    func register() {
+        let defaults: [String : Any] = [
+            TimerDefaults.colorHex : "",
+            TimerDefaults.alertSound : "blank",
+            TimerDefaults.pausable : false,
+            TimerDefaults.cancelable : true,
+            TimerDefaults.autoStart : true,
+            TimerDefaults.loopAudio : false,
+            AppDefaults.useStartScreen : true,
+            AppDefaults.darkForLightColors : true,
+            ]
+        UserDefaults.standard.register(defaults: defaults)
+    }
+
+    func clearAll() {
+        // For debugging purposes only. Probably.
+        var keys = [ "pausable", "cancelable", "autoStart", "loopAudio","color", "hexcolor",                     "style","alertSound","soundName","soundFile",]
+        keys.append(contentsOf: TimerDefaults.allDefaults)
+        keys.append(contentsOf: AppDefaults.allDefaults)
+        for key in keys {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+    }
+
+    func clearTimerDefaults() {
+        for key in TimerDefaults.allDefaults {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+    }
+
+    func clearAppDefaults() {
+        for key in AppDefaults.allClearable {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
     }
 }

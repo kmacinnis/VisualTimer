@@ -13,8 +13,8 @@ import SwiftySound
 
 //TODO:
 //TODO: * change timePickerStyle by swiping picker left/right
-//TODO: * make work for .prefs mode
 //TODO: * either remove dimming code, or make it work without clunky allDimmedBut
+//TODO: * Add modals describing settings on tap
 
 
 enum PickerTag: Int {
@@ -47,7 +47,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var origAutoStart = true
     var origPausable = false
     var origCancelable = true
-    var origLoopSound = true
+    var origLoopAudio = true
     var allDimmedBut: Int?
     var timerStyle: TimerType = .simple
 
@@ -206,7 +206,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
                 cell.toggleLabel.text = "Loop Alert Sound"
                 loopSwitch = cell.toggleSwitch
-                loopSwitch?.isOn = origLoopSound
+                loopSwitch?.isOn = origLoopAudio
                 return cell
             case .styleSet:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! DetailCell
@@ -630,12 +630,12 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     func retrieveDefaults() {
         print(defaults.dictionaryRepresentation().keys)
-        origPausable = defaults.bool(forKey: AppDefaults.TimerDefaults.pausable)
-        origAutoStart = defaults.bool(forKey: AppDefaults.TimerDefaults.autoStart)
-        origCancelable = defaults.bool(forKey: AppDefaults.TimerDefaults.cancelable)
-        let hexcolor = defaults.string(forKey: AppDefaults.TimerDefaults.colorHex)
-        color = UIColor.init(hexString: hexcolor ?? "#C390D4") ?? UIColor.gray
-        origLoopSound = defaults.bool(forKey: "loopAudio")
+        origPausable = defaults.bool(forKey: Defaults.TimerDefaults.pausable)
+        origAutoStart = defaults.bool(forKey: Defaults.TimerDefaults.autoStart)
+        origCancelable = defaults.bool(forKey: Defaults.TimerDefaults.cancelable)
+        let hexcolor = defaults.string(forKey: Defaults.TimerDefaults.colorHex)
+        origLoopAudio = defaults.bool(forKey: Defaults.TimerDefaults.loopAudio)
+        color = UIColor.init(hexString: hexcolor ?? "#C390D4")!
 
         //TODO: Handle sound and style
         //TODO: Use AppDefaults instead of strings
@@ -643,12 +643,12 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
 
     func saveDefaults() {
 
-        defaults.set(pausableSwitch?.isOn, forKey: AppDefaults.TimerDefaults.pausable)
-        defaults.set(autoStartSwitch?.isOn, forKey: AppDefaults.TimerDefaults.autoStart)
-        defaults.set(cancelSwitch?.isOn, forKey: AppDefaults.TimerDefaults.cancelable)
-        defaults.set(loopSwitch?.isOn, forKey: AppDefaults.TimerDefaults.loopAudio)
-        defaults.set(color.hexValue(), forKey: AppDefaults.TimerDefaults.colorHex)
-        defaults.set(soundFile, forKey: AppDefaults.TimerDefaults.alertSound)
+        defaults.set(pausableSwitch?.isOn, forKey: Defaults.TimerDefaults.pausable)
+        defaults.set(autoStartSwitch?.isOn, forKey: Defaults.TimerDefaults.autoStart)
+        defaults.set(cancelSwitch?.isOn, forKey: Defaults.TimerDefaults.cancelable)
+        defaults.set(loopSwitch?.isOn, forKey: Defaults.TimerDefaults.loopAudio)
+        defaults.set(color.hexValue(), forKey: Defaults.TimerDefaults.colorHex)
+        defaults.set(soundFile, forKey: Defaults.TimerDefaults.alertSound)
 
         //        defaults.set(timerStyle.rawValue, forKey: "style")
         //TODO: Handle sound and style

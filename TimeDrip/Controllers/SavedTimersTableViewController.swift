@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
-
+//TODO: * In edit mode, put menu button in usual back button place.
 
 class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate, Storyboarded {
 
