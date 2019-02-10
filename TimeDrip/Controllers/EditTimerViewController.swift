@@ -15,6 +15,7 @@ import SwiftySound
 //TODO: * change timePickerStyle by swiping picker left/right
 //TODO: * either remove dimming code, or make it work without clunky allDimmedBut
 //TODO: * Add modals describing settings on tap
+//TODO: * useBtn never active in prefs mode
 
 
 enum PickerTag: Int {
@@ -107,7 +108,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     func updateSoundText() {
         // alertSound is what is kept updated, so we need to update the display name to reflect that
         if let i = Sounds.getIndex(filename: alertSound) {
-            soundText = Sounds.soundArray[i]["name"] ?? "**no display name given**" 
+            soundText = Sounds.soundArray[i]["name"] ?? "**no display name given**"
         } else {
             soundText = "Tap to Set"
         }
@@ -664,9 +665,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         origLoopAudio = defaults.bool(forKey: Defaults.TimerDefaults.loopAudio)
         color = UIColor.init(hexString: hexcolor ?? "#C390D4")!
         alertSound = defaults.string(forKey: Defaults.TimerDefaults.alertSound) ?? ""
-
-        //TODO: Handle sound and style
-        //TODO: Use AppDefaults instead of strings
+//        timerStyle = TimerType(rawValue: defaults.integer(forKey: Defaults.TimerDefaults.timerStyle) ) ?? .simple
     }
 
     func saveDefaults() {
@@ -677,10 +676,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         defaults.set(loopSwitch?.isOn, forKey: Defaults.TimerDefaults.loopAudio)
         defaults.set(color.hexValue(), forKey: Defaults.TimerDefaults.colorHex)
         defaults.set(alertSound, forKey: Defaults.TimerDefaults.alertSound)
-
-        //        defaults.set(timerStyle.rawValue, forKey: "style")
-        //TODO: Handle sound and style
-
+//        defaults.set(timerStyle.rawValue, forKey: Defaults.TimerDefaults.timerStyle)
     }
 
     

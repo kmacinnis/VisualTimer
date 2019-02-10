@@ -302,6 +302,9 @@ class Defaults {
         static let autoStart = "autoStart"
         static let loopAudio = "loopAudio"
 
+        // Ints
+        static let timerStyle = "timerStyle"
+
         static let allDefaults : [String] = [colorHex, alertSound, pausable, cancelable, autoStart, loopAudio]
     }
 
