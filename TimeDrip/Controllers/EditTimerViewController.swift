@@ -35,8 +35,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     var mode: Mode = .singleUse
     var expandedPicker : PickerTag = PickerTag.none
     var timeText: String = "Tap to set"
-    var soundText: String = "Tap to set"
-    var soundFile: String = ""
+    var soundText: String = "Tap to set"   // This will be the *Display Name* of the sound
+    var alertSound: String = ""            // This will be the *File Name* of the sound
     var styleText: String = ""
     var timerName: String = ""
     var color: UIColor = UIColor.blue
@@ -89,6 +89,33 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         }
     }
 
+    @objc func updateTimeText() {
+        useBtn.isEnabled = (minutesSet > 0)
+        switch timePickerStyle {
+        case .minutesOnly:
+            if minutesSet > 0 {
+                timeText = "\(minutesSet) min"
+            } else {
+                timeText = "Tap to Set"
+            }
+        default:
+            timeText = "Not Implemented Yet"
+        }
+        timeLabel?.text = timeText
+    }
+
+    func updateSoundText() {
+        // alertSound is what is kept updated, so we need to update the display name to reflect that
+        if let i = Sounds.getIndex(filename: alertSound) {
+            soundText = Sounds.soundArray[i]["name"] ?? "**no display name given**" 
+        } else {
+            soundText = "Tap to Set"
+        }
+
+    }
+
+    // MARK: -
+
     @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
         Sound.stopAll()
         self.navigationController?.popViewController(animated: true)
@@ -126,6 +153,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         tableView.register(UINib(nibName: "DisabledCell", bundle: nil), forCellReuseIdentifier: "disabledCell")
 
 
+
         switch mode {
         case .edit:
             useBtn.title = "Save Changes"
@@ -141,6 +169,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             retrieveDefaults()
             useBtn.isEnabled = (minutesSet > 0)
         }
+        updateTimeText()
+
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
     }
@@ -181,9 +211,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.picker.delegate = self
                 cell.picker.tag = PickerTag.timePicker.rawValue
                 timePicker = cell.picker
-                if mode == .edit {
-                    cell.picker.selectRow(minutesSet, inComponent: 0, animated: false)
-                }
+                cell.picker.selectRow(minutesSet, inComponent: 0, animated: false)
                 //TODO: Attach swipe recognizer to change pickerStyle
                 return cell
             case .soundSet:
@@ -198,8 +226,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
                 cell.picker.delegate = self
                 cell.picker.tag = PickerTag.soundPicker.rawValue
                 soundPicker = cell.picker
-                if mode == .edit {
-                    cell.picker.selectRow(Sounds.getIndex(filename: soundText) ?? 0, inComponent: 0, animated: false)
+                if alertSound != "" {
+                    cell.picker.selectRow(Sounds.getIndex(filename: alertSound) ?? 1, inComponent: 0, animated: false)
                 }
                 return cell
             case .loopAudio:
@@ -501,14 +529,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     fileprivate func didSelectRowInTimePicker(_ row: Int) {
         switch timePickerStyle {
         case .minutesOnly:
-            timeText = "\(row) min"
-            timeLabel?.text = timeText
             hoursSet = 0
             minutesSet = row
             secondsSet = 0
-            useBtn.isEnabled = (minutesSet > 0)
         default:
-            timeText = "TBA"
+            minutesSet = 9001
             // Probably going to need refactoring to deal with multiple components
         }
     }
@@ -519,10 +544,12 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         switch tag {
         case .timePicker:
             didSelectRowInTimePicker(row)
+            updateTimeText()
         case .soundPicker:
-            soundText = Sounds.soundArray[row]["file"] ?? ""
-            soundLabel?.text = Sounds.soundArray[row]["name"] ?? "???"
-            let soundFile = "sounds/\(soundText)"
+            soundText = Sounds.soundArray[row]["name"] ?? "???"
+            soundLabel?.text = soundText
+            alertSound = Sounds.soundArray[row]["file"] ?? ""
+            let soundFile = "sounds/\(alertSound)"
             Sound.stopAll()
             Sound.play(file: soundFile, fileExtension: "wav")
         case .stylePicker:
@@ -636,6 +663,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         let hexcolor = defaults.string(forKey: Defaults.TimerDefaults.colorHex)
         origLoopAudio = defaults.bool(forKey: Defaults.TimerDefaults.loopAudio)
         color = UIColor.init(hexString: hexcolor ?? "#C390D4")!
+        alertSound = defaults.string(forKey: Defaults.TimerDefaults.alertSound) ?? ""
 
         //TODO: Handle sound and style
         //TODO: Use AppDefaults instead of strings
@@ -648,7 +676,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         defaults.set(cancelSwitch?.isOn, forKey: Defaults.TimerDefaults.cancelable)
         defaults.set(loopSwitch?.isOn, forKey: Defaults.TimerDefaults.loopAudio)
         defaults.set(color.hexValue(), forKey: Defaults.TimerDefaults.colorHex)
-        defaults.set(soundFile, forKey: Defaults.TimerDefaults.alertSound)
+        defaults.set(alertSound, forKey: Defaults.TimerDefaults.alertSound)
 
         //        defaults.set(timerStyle.rawValue, forKey: "style")
         //TODO: Handle sound and style
