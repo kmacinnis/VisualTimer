@@ -49,6 +49,13 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
 
+    func pushCredits() {
+        let vc = CreditsTableViewController.instantiate()
+        vc.coordinator = self
+        vc.title = "Credits"
+        navigationController.pushViewController(vc, animated: true)
+    }
+
     func pushDefaultSettings() {
         let vc = EditTimerViewController.instantiate()
         vc.coordinator = self
