@@ -26,7 +26,7 @@ class CreditsListViewController: UIViewController {
 
 }
 
-extension CreditsListViewController: UITableViewDataSource {
+extension CreditsListViewController: UITableViewDataSource, Storyboarded {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sounds.count
     }
