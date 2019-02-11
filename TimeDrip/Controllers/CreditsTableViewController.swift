@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreditsTableViewController: UIViewController, Storyboarded {
+class CreditsListViewController: UIViewController {
 
     weak var coordinator: MainCoordinator?
 
@@ -26,7 +26,7 @@ class CreditsTableViewController: UIViewController, Storyboarded {
 
 }
 
-extension CreditsTableViewController: UITableViewDataSource {
+extension CreditsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sounds.count
     }

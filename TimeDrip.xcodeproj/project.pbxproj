@@ -46,7 +46,7 @@
 		44D4B75D220B603200F9D965 /* DisabledCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B75B220B603200F9D965 /* DisabledCell.swift */; };
 		44D4B75E220B603200F9D965 /* DisabledCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B75C220B603200F9D965 /* DisabledCell.xib */; };
 		44D4B76222112CA900F9D965 /* CreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */; };
-		44D4B76422112FDD00F9D965 /* CreditsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B76322112FDD00F9D965 /* CreditsTableViewController.swift */; };
+		44D4B76422112FDD00F9D965 /* CreditsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B76322112FDD00F9D965 /* CreditsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,7 +90,7 @@
 		44D4B75B220B603200F9D965 /* DisabledCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledCell.swift; sourceTree = "<group>"; };
 		44D4B75C220B603200F9D965 /* DisabledCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisabledCell.xib; sourceTree = "<group>"; };
 		44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewCell.swift; sourceTree = "<group>"; };
-		44D4B76322112FDD00F9D965 /* CreditsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsTableViewController.swift; sourceTree = "<group>"; };
+		44D4B76322112FDD00F9D965 /* CreditsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsListViewController.swift; sourceTree = "<group>"; };
 		797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeDrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 				44877F8820893C5E00A0AE15 /* InitialViewController.swift */,
 				440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */,
 				4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */,
-				44D4B76322112FDD00F9D965 /* CreditsTableViewController.swift */,
+				44D4B76322112FDD00F9D965 /* CreditsListViewController.swift */,
 				445F848220AB6D5F004E1E3A /* SettingsViewController.swift */,
 				44A6559D2051D0720088FE49 /* EditTimerViewController.swift */,
 			);
@@ -382,7 +382,7 @@
 				44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */,
 				445F847F20A91E8D004E1E3A /* ColorPalette.swift in Sources */,
 				44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */,
-				44D4B76422112FDD00F9D965 /* CreditsTableViewController.swift in Sources */,
+				44D4B76422112FDD00F9D965 /* CreditsListViewController.swift in Sources */,
 				44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */,
 				4450C31F204B802900A784A7 /* Settings.swift in Sources */,
 				44A6558A204CE3250088FE49 /* PickerCell.swift in Sources */,
