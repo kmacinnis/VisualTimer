@@ -8,10 +8,14 @@
 
 import UIKit
 
-class ToggleCell: UITableViewCell {
+class ToggleCell: SettingTableCell {
 
     @IBOutlet weak var toggleLabel: UILabel!
 
     @IBOutlet weak var toggleSwitch: UISwitch!
-    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        elements = [toggleLabel, toggleSwitch]
+    }
 }

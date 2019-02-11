@@ -49,10 +49,40 @@ class SavedTimer: Object {
 
     override static func primaryKey() -> String? {
         return "id"
+
     }
 }
 
-//class SimpleTimer: Object {
-//    @objc dynamic var savedTimer: SavedTimer?
-//}
+class UnsavedTimer: Object {
+    var name: String = ""
+    var hoursSet: Int = 0
+    var minutesSet: Int = 0
+    var secondsSet: Int = 0
+    var timerType: TimerType = .simple
+    var autoStart: Bool = false
+    var pausable: Bool = false
+    var color: CGColor = UIColor.blue.cgColor
+    var cancelable: Bool = true
+    var sound: String = "alertsound-buzzer"
+    var loopAudio: Bool = true
 
+
+}
+
+
+
+func convertTimer(savedTimer: SavedTimer) -> UnsavedTimer {
+    let unsaved = UnsavedTimer()
+    unsaved.name = savedTimer.name
+    unsaved.hoursSet = savedTimer.hoursSet
+    unsaved.minutesSet = savedTimer.minutesSet
+    unsaved.secondsSet = savedTimer.secondsSet
+    unsaved.timerType = savedTimer.timerType
+    unsaved.autoStart = savedTimer.autoStart
+    unsaved.pausable = savedTimer.pausable
+    unsaved.color = UIColor.init(hexString: savedTimer.hexColor)?.cgColor ?? UIColor.gray.cgColor
+    unsaved.cancelable = savedTimer.cancelable
+    unsaved.sound = savedTimer.sound
+    unsaved.loopAudio = savedTimer.loopAudio
+    return unsaved
+}

@@ -9,8 +9,13 @@
 import UIKit
 import RealmSwift
 
-class InitialViewController: UIViewController {
+//TODO: * Rewrite firstLaunch stuff
 
+
+
+class InitialViewController: UIViewController, Storyboarded {
+
+    weak var coordinator: MainCoordinator?
     let defaults = UserDefaults.standard
 
     @IBOutlet weak var oneTimeView: RoundedView!
@@ -24,19 +29,18 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var prefText: UITextView!
     
     @objc func toSingleUseTimer(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toSingleUseTimer", sender: self)
+        coordinator?.createSingleUseTimer()
     }
 
     @objc func toSavedTimerList(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toSavedTimerList", sender: self)
+        coordinator?.pushSavedTimerList()
     }
 
     @objc func toPreferences(sender : UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toSettingsScreen", sender: self)
+        coordinator?.pushSettings()
     }
 
     func firstLaunch() -> Bool{
-        return false
         if let _ = defaults.string(forKey: "hasLaunchedBefore"){
             print("App has launched before")
             return true
@@ -71,49 +75,35 @@ class InitialViewController: UIViewController {
         let tapSettings = UITapGestureRecognizer(target: self, action: #selector(self.toPreferences(sender:)))
         self.preferenceView.addGestureRecognizer(tapSettings)
 
-        if firstLaunch() {
-            defaults.set(false, forKey: "pausable")
-            defaults.set(true, forKey: "autoStart")
-            defaults.set(true, forKey: "cancelable")
-            defaults.set("#C390D4", forKey: "color")
-            defaults.set("simple", forKey: "style")
-
-            let timerOne = SavedTimer()
-            let realm = try! Realm()
-            do {
-                try realm.write {
-                    timerOne.name = "Simple Timer Example"
-                    timerOne.hoursSet = 0
-                    timerOne.minutesSet = 5
-                    timerOne.secondsSet = 0
-                    timerOne.timerType = .simple
-                    timerOne.autoStart = true
-                    timerOne.pausable = false
-                    timerOne.hexColor = "#FF8F17"
-
-                }
-            } catch {
-                print("Error writing to database: \(error)")
-            }
-
-        }
+//        if firstLaunch() {
+//            defaults.set(false, forKey: "pausable")
+//            defaults.set(true, forKey: "autoStart")
+//            defaults.set(true, forKey: "cancelable")
+//            defaults.set("#C390D4", forKey: "color")
+//            defaults.set("simple", forKey: "style")
+//
+//            let timerOne = SavedTimer()
+//            let realm = try! Realm()
+//            do {
+//                try realm.write {
+//                    timerOne.name = "Simple Timer Example"
+//                    timerOne.hoursSet = 0
+//                    timerOne.minutesSet = 5
+//                    timerOne.secondsSet = 0
+//                    timerOne.timerType = .simple
+//                    timerOne.autoStart = true
+//                    timerOne.pausable = false
+//                    timerOne.hexColor = "#FF8F17"
+//
+//                }
+//            } catch {
+//                print("Error writing to database: \(error)")
+//            }
+//
+//        }
 
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "toSingleUseTimer":
-            let destinationVC = segue.destination as! EditTimerViewController
-            destinationVC.mode = .singleUse
-            destinationVC.title = "Single Use Timer"
-        case "toSettingsScreen":
-            let destinationVC = segue.destination as! EditTimerViewController
-            destinationVC.mode = .prefs
-            destinationVC.title = "Settings"
-        default:
-            ()
-        }
-    }
 
 
 }

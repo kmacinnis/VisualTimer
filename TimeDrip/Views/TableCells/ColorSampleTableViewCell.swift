@@ -8,8 +8,16 @@
 
 import UIKit
 
-class ColorSampleTableViewCell: UITableViewCell {
+class ColorSampleTableViewCell: SettingTableCell {
 
+    @IBOutlet weak var colorLabel: UILabel!
+    
     @IBOutlet weak var sampleBlock: UIView!
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        elements =  [colorLabel, sampleBlock]
+    }
 
 }

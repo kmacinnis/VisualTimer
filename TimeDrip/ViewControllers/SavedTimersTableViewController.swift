@@ -10,16 +10,18 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
+//TODO: * In edit mode, put menu button in usual back button place.
 
+class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate, Storyboarded {
 
-class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate {
+    weak var coordinator: MainCoordinator?
 
     var timers: Results<SavedTimer>?
     let realm = try! Realm()
     var timerForEditing: SavedTimer?
 
     @objc func addTimer() {
-        performSegue(withIdentifier: "newTimer", sender: self)
+        coordinator?.createNewTimer()
     }
 
     @objc func orderingModeOn() {
@@ -51,37 +53,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
     override func viewWillAppear(_ animated: Bool) {
         loadSavedTimers()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "startTimer" {
-            let destinationVC = segue.destination as! SimpleTimerViewController
-            if let indexPath = tableView.indexPathForSelectedRow {
-                if let timer = timers?[indexPath.row] {
-                    destinationVC.minutesSet = timer.minutesSet
-                    destinationVC.secondsSet = timer.secondsSet
-                    destinationVC.bucketFillColor = UIColor.init(hexString: timer.hexColor)?.cgColor ?? UIColor.gray.cgColor
-                    destinationVC.pausable = timer.pausable
-                    destinationVC.autoStart = timer.autoStart
-                    destinationVC.timerName = timer.name
-                }
-            }
-        } else if segue.identifier == "editTimer" {
-            let destinationVC = segue.destination as! EditTimerViewController
-            if let timer = timerForEditing {
-                destinationVC.mode = .edit
-                destinationVC.thisTimer = timer
-                destinationVC.minutesSet = timer.minutesSet
-                destinationVC.secondsSet = timer.secondsSet
-                destinationVC.color = UIColor.init(hexString: timer.hexColor) ?? UIColor.gray
-                destinationVC.origPausable = timer.pausable
-                destinationVC.origAutoStart = timer.autoStart
-                destinationVC.timeText = "\(timer.minutesSet) min"
-                destinationVC.timerName = timer.name
-            }
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
     }
 
 
@@ -134,7 +105,11 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "startTimer", sender: self)
+        if let savedTimer = timers?[indexPath.row] {
+            let timer = convertTimer(savedTimer: savedTimer)
+            coordinator?.pushSimpleTimer(timer: timer)
+        }
+
     }
 
 
@@ -182,7 +157,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
         let editAction = SwipeAction(style: .default, title: "Edit") { (action, indexPath) in
             self.timerForEditing = self.timers?[indexPath.row]
-            self.performSegue(withIdentifier: "editTimer", sender: self)
+            self.coordinator?.pushEditTimer(timer:self.timerForEditing!)
         }
         editAction.backgroundColor = UIColor.init(hexString: "#FFAE00")
 

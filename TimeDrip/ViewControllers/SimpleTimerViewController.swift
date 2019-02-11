@@ -16,13 +16,16 @@ import SwiftySound // for alert sound
 // * applicationWillEnterBackground/applicationWillEnterForeground
 //      - https://stackoverflow.com/a/46877212/731985
 // * BUG: Cancelling timer leaves graphic moving
+// * BUG: Getting out after finishing runs timer again
 
 
 
-class SimpleTimerViewController: UIViewController {
+
+class SimpleTimerViewController: UIViewController, Storyboarded {
 
     //MARK: - Initialize stuff
-
+    weak var coordinator: MainCoordinator?
+    
     var bucketLineColor: UIColor = UIColor.black
     var bucketFillColor: CGColor = UIColor.gray.cgColor
 

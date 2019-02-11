@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l9N-xJ-TtB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,13 +13,13 @@
         <!--Edit Timer-->
         <scene sceneID="QDi-pl-qEe">
             <objects>
-                <tableViewController autoresizesArchivedViewToFullSize="NO" title="Edit Timer" automaticallyAdjustsScrollViewInsets="NO" id="po4-An-G2K" customClass="EditTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditTimerViewController" autoresizesArchivedViewToFullSize="NO" title="Edit Timer" automaticallyAdjustsScrollViewInsets="NO" id="po4-An-G2K" customClass="EditTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vY6-jm-ZeV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" id="S3t-2b-cqE">
-                            <rect key="frame" x="0.0" y="96" width="414" height="44"/>
+                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="S3t-2b-cqE">
+                            <rect key="frame" x="0.0" y="160" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
                                 <barButtonItem title="Cancel" id="VWh-FN-dTU">
@@ -103,18 +103,18 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="bottomBar" destination="S3t-2b-cqE" id="xUN-9z-fAF"/>
                         <outlet property="useBtn" destination="mXT-xD-KfN" id="IFF-yy-qKT"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="useNewTimer" id="kU5-oQ-8Uk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kA4-Eq-eT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1101" y="-488"/>
+            <point key="canvasLocation" x="-3461" y="-960"/>
         </scene>
         <!--Saved Timers-->
         <scene sceneID="rxu-4b-vRA">
             <objects>
-                <tableViewController id="hlf-VI-8fP" customClass="SavedTimersTableViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SavedTimersTableViewController" id="hlf-VI-8fP" customClass="SavedTimersTableViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YKt-K3-gi9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,32 +144,83 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Saved Timers" id="oim-0T-CgQ"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="startTimer" id="zxQ-wO-ous"/>
-                        <segue destination="po4-An-G2K" kind="show" identifier="editTimer" id="UFt-e5-oWQ"/>
-                        <segue destination="po4-An-G2K" kind="show" identifier="newTimer" id="Xb3-8O-YCV"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoP-Mc-8oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1058" y="-1654"/>
+            <point key="canvasLocation" x="-2767" y="-960"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="mby-mi-qIa">
+            <objects>
+                <tableViewController storyboardIdentifier="CreditsTableViewController" id="fkw-US-XUU" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="r0V-jt-Yox">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2dQ-ox-WHI">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2dQ-ox-WHI" id="kNt-Df-nA7">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fkw-US-XUU" id="x3X-gg-rae"/>
+                            <outlet property="delegate" destination="fkw-US-XUU" id="TcK-4I-7PW"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ger-uz-ygY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2058" y="-960"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="QVS-Fp-kIo">
+            <objects>
+                <tableViewController storyboardIdentifier="SettingsViewController" id="pwf-0E-5qq" customClass="SettingsViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p1A-X2-uue">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vtM-61-Zmq">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vtM-61-Zmq" id="RSH-EC-AZF">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pwf-0E-5qq" id="snT-dO-jVa"/>
+                            <outlet property="delegate" destination="pwf-0E-5qq" id="JhT-6f-wYR"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4mw-Ni-6P3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2057" y="-1643"/>
         </scene>
         <!--Simple Timer View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SimpleTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SimpleTimerViewController" id="BYZ-38-t0r" customClass="SimpleTimerViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDo-Lk-XhM" userLabel="bucketSide" customClass="BucketSpace" customModule="TimeDrip" customModuleProvider="target">
-                                <rect key="frame" x="-8" y="64" width="207" height="680"/>
+                                <rect key="frame" x="-8" y="20" width="207" height="724"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yr0-TO-zbe" userLabel="buttonSpace">
-                                <rect key="frame" x="199" y="600" width="215" height="136"/>
+                                <rect key="frame" x="199" y="591.33333333333337" width="215" height="144.66666666666663"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CSM-pT-eRe">
-                                        <rect key="frame" x="47.666666666666657" y="31.666666666666629" width="120" height="73"/>
+                                        <rect key="frame" x="47.666666666666657" y="35.666666666666629" width="120" height="73"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeP-AU-NeJ" userLabel="timerButton" customClass="RoundedButton" customModule="TimeDrip" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="33"/>
@@ -238,10 +289,10 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-wy-mcY" userLabel="timeDisplaySpace">
-                                <rect key="frame" x="199" y="64" width="215" height="536"/>
+                                <rect key="frame" x="199" y="20" width="215" height="571.33333333333337"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="o1P-f0-08Z">
-                                        <rect key="frame" x="42.666666666666657" y="18" width="130" height="500"/>
+                                        <rect key="frame" x="42.666666666666657" y="35.666666666666686" width="130" height="500.00000000000006"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qX-3d-0x3" userLabel="fillerA">
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="37"/>
@@ -259,7 +310,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWT-xP-MET" userLabel="hourUnitLabel">
-                                                                <rect key="frame" x="0.0" y="99.333333333333343" width="130" height="28.666666666666657"/>
+                                                                <rect key="frame" x="0.0" y="99.333333333333329" width="130" height="28.666666666666671"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -287,7 +338,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nz7-AP-eHu" userLabel="minuteUnitLabel">
-                                                                <rect key="frame" x="0.0" y="99.333333333333314" width="130" height="28.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="99.333333333333343" width="130" height="28.666666666666657"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -315,7 +366,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" text="Seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKU-VP-oZj" userLabel="secondUnitLabel">
-                                                                <rect key="frame" x="0.0" y="99.666666666666686" width="130" height="30.333333333333343"/>
+                                                                <rect key="frame" x="0.0" y="99.666666666666629" width="130" height="30.333333333333343"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -333,7 +384,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsm-5x-eO8" userLabel="fillerB">
-                                                <rect key="frame" x="0.0" y="463" width="130" height="37"/>
+                                                <rect key="frame" x="0.0" y="462.99999999999994" width="130" height="37"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -384,12 +435,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2873.913043478261" y="-1224.4565217391305"/>
+            <point key="canvasLocation" x="-2768" y="-1643"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="qby-i5-6qX">
             <objects>
-                <viewController id="sIQ-wy-9wg" customClass="InitialViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" id="sIQ-wy-9wg" customClass="InitialViewController" customModule="TimeDrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ho3-S7-Qtv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -407,19 +458,19 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8vd-oa-ywa">
-                                <rect key="frame" x="30" y="69" width="354" height="637"/>
+                                <rect key="frame" x="30" y="25" width="354" height="681"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-YY-5bs" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="192.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="207"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Create a timer for one-time use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-n5-omN">
-                                                <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
+                                                <rect key="frame" x="30" y="30" width="294" height="147"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-hourglass" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-w3-7zj" userLabel="single-hourglass">
-                                                <rect key="frame" x="60" y="-3.6666666666666714" width="234" height="200"/>
+                                                <rect key="frame" x="60" y="3.6666666666666714" width="234" height="200"/>
                                                 <color key="tintColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="N46-Sf-q9l"/>
@@ -458,10 +509,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gG-bI-vcK" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="222.33333333333331" width="354" height="192.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="237" width="354" height="207"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Go to list of saved timers for repeat use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-9v-rhP">
-                                                <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
+                                                <rect key="frame" x="30" y="30" width="294" height="147"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
@@ -502,10 +553,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2r-75-LuV" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="444.66666666666657" width="354" height="192.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="474" width="354" height="207"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Settings" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
-                                                <rect key="frame" x="30" y="30" width="294" height="132.33333333333334"/>
+                                                <rect key="frame" x="30" y="30" width="294" height="147"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -575,32 +626,11 @@
                         <outlet property="savedTimersText" destination="Esg-9v-rhP" id="B0k-DU-s1c"/>
                         <outlet property="singleHourglass" destination="0MX-w3-7zj" id="Jez-PF-E7v"/>
                         <outlet property="singleTimerText" destination="bzC-n5-omN" id="e9I-Vj-Bio"/>
-                        <segue destination="po4-An-G2K" kind="show" identifier="toSingleUseTimer" id="YDd-W5-U9e"/>
-                        <segue destination="po4-An-G2K" kind="show" identifier="toSettingsScreen" id="LLh-3B-Btu"/>
-                        <segue destination="hlf-VI-8fP" kind="show" identifier="toSavedTimerList" id="p7P-3I-kK9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgq-Ve-uMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2286.9565217391305" y="-1644.2934782608697"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pBa-x7-35U">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l9N-xJ-TtB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9CM-s4-NVB">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="sIQ-wy-9wg" kind="relationship" relationship="rootViewController" id="WJw-b4-VCj"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ls8-vx-vL0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3194.202898550725" y="-1644.2934782608697"/>
+            <point key="canvasLocation" x="-3462" y="-1643"/>
         </scene>
     </scenes>
     <resources>
@@ -608,8 +638,4 @@
         <image name="List Icon" width="206" height="294"/>
         <image name="white-hourglass" width="234" height="331"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="zxQ-wO-ous"/>
-        <segue reference="LLh-3B-Btu"/>
-    </inferredMetricsTieBreakers>
 </document>

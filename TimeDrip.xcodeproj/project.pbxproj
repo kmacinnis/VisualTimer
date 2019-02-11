@@ -9,44 +9,49 @@
 /* Begin PBXBuildFile section */
 		060E56225D8F44696315A74C /* Pods_TimeDrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */; };
 		440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA0292033B4F300D2FBD8 /* AppDelegate.swift */; };
-		440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */; };
 		440EA02F2033B4F300D2FBD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA02D2033B4F300D2FBD8 /* Main.storyboard */; };
 		440EA0312033B4F300D2FBD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0302033B4F300D2FBD8 /* Assets.xcassets */; };
 		440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */; };
 		4448127D20BB0D15004D97F5 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4448127C20BB0D15004D97F5 /* Sounds.swift */; };
 		4448127F20BB0FF6004D97F5 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 4448127E20BB0FF6004D97F5 /* sounds */; };
 		4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */; };
-		4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */; };
 		4450C31F204B802900A784A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450C31E204B802900A784A7 /* Settings.swift */; };
+		445329A021FE75DC00E03F86 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453299F21FE75DC00E03F86 /* Coordinator.swift */; };
 		445F847D20A8CA90004E1E3A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F847C20A8CA90004E1E3A /* GradientView.swift */; };
 		445F847F20A91E8D004E1E3A /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F847E20A91E8D004E1E3A /* ColorPalette.swift */; };
 		445F848120A925F6004E1E3A /* RoundedGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F848020A925F6004E1E3A /* RoundedGradientView.swift */; };
-		445F848320AB6D5F004E1E3A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F848220AB6D5F004E1E3A /* SettingsViewController.swift */; };
 		4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462D8892066C2E00070D1C6 /* RoundedButton.swift */; };
+		446D13652212186D0068EEED /* CreditsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D135F2212186D0068EEED /* CreditsListViewController.swift */; };
+		446D13662212186D0068EEED /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13602212186D0068EEED /* InitialViewController.swift */; };
+		446D13672212186D0068EEED /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13612212186D0068EEED /* SavedTimersTableViewController.swift */; };
+		446D13682212186D0068EEED /* EditTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13622212186D0068EEED /* EditTimerViewController.swift */; };
+		446D13692212186D0068EEED /* SimpleTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13632212186D0068EEED /* SimpleTimerViewController.swift */; };
+		446D136A2212186D0068EEED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13642212186D0068EEED /* SettingsViewController.swift */; };
 		44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8620891A0200A0AE15 /* RoundedView.swift */; };
-		44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8820893C5E00A0AE15 /* InitialViewController.swift */; };
 		44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */; };
 		44A65587204CAA730088FE49 /* ColorSampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */; };
 		44A6558A204CE3250088FE49 /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65588204CE3250088FE49 /* PickerCell.swift */; };
 		44A6558B204CE3250088FE49 /* PickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65589204CE3250088FE49 /* PickerCell.xib */; };
 		44A655932051BC280088FE49 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655912051BC280088FE49 /* DetailCell.swift */; };
 		44A655942051BC280088FE49 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A655922051BC280088FE49 /* DetailCell.xib */; };
-		44A655972051BFAF0088FE49 /* AutoStartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655952051BFAF0088FE49 /* AutoStartCell.swift */; };
-		44A655982051BFAF0088FE49 /* AutoStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A655962051BFAF0088FE49 /* AutoStartCell.xib */; };
 		44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A655992051C5FD0088FE49 /* TitleCell.swift */; };
 		44A6559C2051C5FD0088FE49 /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A6559A2051C5FD0088FE49 /* TitleCell.xib */; };
-		44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6559D2051D0720088FE49 /* EditTimerViewController.swift */; };
 		44B6758020C246BF00F71B9F /* BucketSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B6757F20C246BF00F71B9F /* BucketSpace.swift */; };
+		44C8DC7F21FE5EAB009179B3 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8DC7E21FE5EAB009179B3 /* Storyboarded.swift */; };
+		44C8DC8121FE6658009179B3 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8DC8021FE6658009179B3 /* MainCoordinator.swift */; };
+		44CC996122060CD10066D113 /* SettingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CC996022060CD10066D113 /* SettingTableCell.swift */; };
 		44CED50E20533C13002079F5 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CED50C20533C13002079F5 /* ToggleCell.swift */; };
 		44CED50F20533C13002079F5 /* ToggleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CED50D20533C13002079F5 /* ToggleCell.xib */; };
 		44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CED5102053B71A002079F5 /* SavedTimerCell.swift */; };
 		44CED5132053B71A002079F5 /* SavedTimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CED5112053B71A002079F5 /* SavedTimerCell.xib */; };
+		44D4B75D220B603200F9D965 /* DisabledCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B75B220B603200F9D965 /* DisabledCell.swift */; };
+		44D4B75E220B603200F9D965 /* DisabledCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B75C220B603200F9D965 /* DisabledCell.xib */; };
+		44D4B76222112CA900F9D965 /* CreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		440EA0262033B4F300D2FBD8 /* TimeDrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeDrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		440EA0292033B4F300D2FBD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimerViewController.swift; sourceTree = "<group>"; };
 		440EA02E2033B4F300D2FBD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		440EA0302033B4F300D2FBD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		440EA0332033B4F300D2FBD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,31 +59,38 @@
 		4448127C20BB0D15004D97F5 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		4448127E20BB0FF6004D97F5 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		4450C2AE2040B7EC00A784A7 /* SavedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimer.swift; sourceTree = "<group>"; };
-		4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
 		4450C31E204B802900A784A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		4453299F21FE75DC00E03F86 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		445F847C20A8CA90004E1E3A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		445F847E20A91E8D004E1E3A /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		445F848020A925F6004E1E3A /* RoundedGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGradientView.swift; sourceTree = "<group>"; };
-		445F848220AB6D5F004E1E3A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4462D8892066C2E00070D1C6 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		446D135F2212186D0068EEED /* CreditsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsListViewController.swift; sourceTree = "<group>"; };
+		446D13602212186D0068EEED /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		446D13612212186D0068EEED /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
+		446D13622212186D0068EEED /* EditTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTimerViewController.swift; sourceTree = "<group>"; };
+		446D13632212186D0068EEED /* SimpleTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTimerViewController.swift; sourceTree = "<group>"; };
+		446D13642212186D0068EEED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		44877F8620891A0200A0AE15 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
-		44877F8820893C5E00A0AE15 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSampleTableViewCell.swift; sourceTree = "<group>"; };
 		44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSampleTableViewCell.xib; sourceTree = "<group>"; };
 		44A65588204CE3250088FE49 /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
 		44A65589204CE3250088FE49 /* PickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerCell.xib; sourceTree = "<group>"; };
 		44A655912051BC280088FE49 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		44A655922051BC280088FE49 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
-		44A655952051BFAF0088FE49 /* AutoStartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoStartCell.swift; sourceTree = "<group>"; };
-		44A655962051BFAF0088FE49 /* AutoStartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoStartCell.xib; sourceTree = "<group>"; };
 		44A655992051C5FD0088FE49 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		44A6559A2051C5FD0088FE49 /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
-		44A6559D2051D0720088FE49 /* EditTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerViewController.swift; sourceTree = "<group>"; };
 		44B6757F20C246BF00F71B9F /* BucketSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketSpace.swift; sourceTree = "<group>"; };
+		44C8DC7E21FE5EAB009179B3 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		44C8DC8021FE6658009179B3 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		44CC996022060CD10066D113 /* SettingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableCell.swift; path = TimeDrip/Views/TableCells/SettingTableCell.swift; sourceTree = SOURCE_ROOT; };
 		44CED50C20533C13002079F5 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
 		44CED50D20533C13002079F5 /* ToggleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCell.xib; sourceTree = "<group>"; };
 		44CED5102053B71A002079F5 /* SavedTimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimerCell.swift; sourceTree = "<group>"; };
 		44CED5112053B71A002079F5 /* SavedTimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedTimerCell.xib; sourceTree = "<group>"; };
+		44D4B75B220B603200F9D965 /* DisabledCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledCell.swift; sourceTree = "<group>"; };
+		44D4B75C220B603200F9D965 /* DisabledCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisabledCell.xib; sourceTree = "<group>"; };
+		44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewCell.swift; sourceTree = "<group>"; };
 		797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeDrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,25 +141,14 @@
 				440EA0292033B4F300D2FBD8 /* AppDelegate.swift */,
 				4450C2AD2040B7A900A784A7 /* Models */,
 				4470E619203B4E0C0061C75B /* Views */,
-				4450C2AC2040B78F00A784A7 /* Controllers */,
+				446D135E2212186D0068EEED /* ViewControllers */,
+				448F467E21FE70C500D819EA /* Coordination */,
 				440EA0302033B4F300D2FBD8 /* Assets.xcassets */,
 				4448127E20BB0FF6004D97F5 /* sounds */,
 				440EA0322033B4F300D2FBD8 /* LaunchScreen.storyboard */,
 				440EA0352033B4F300D2FBD8 /* Info.plist */,
 			);
 			path = TimeDrip;
-			sourceTree = "<group>";
-		};
-		4450C2AC2040B78F00A784A7 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				440EA02B2033B4F300D2FBD8 /* SimpleTimerViewController.swift */,
-				44877F8820893C5E00A0AE15 /* InitialViewController.swift */,
-				4450C2B22040DBEC00A784A7 /* SavedTimersTableViewController.swift */,
-				445F848220AB6D5F004E1E3A /* SettingsViewController.swift */,
-				44A6559D2051D0720088FE49 /* EditTimerViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4450C2AD2040B7A900A784A7 /* Models */ = {
@@ -158,6 +159,19 @@
 				4448127C20BB0D15004D97F5 /* Sounds.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		446D135E2212186D0068EEED /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				446D135F2212186D0068EEED /* CreditsListViewController.swift */,
+				446D13602212186D0068EEED /* InitialViewController.swift */,
+				446D13612212186D0068EEED /* SavedTimersTableViewController.swift */,
+				446D13622212186D0068EEED /* EditTimerViewController.swift */,
+				446D13632212186D0068EEED /* SimpleTimerViewController.swift */,
+				446D13642212186D0068EEED /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		4470E619203B4E0C0061C75B /* Views */ = {
@@ -175,17 +189,29 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		448F467E21FE70C500D819EA /* Coordination */ = {
+			isa = PBXGroup;
+			children = (
+				4453299F21FE75DC00E03F86 /* Coordinator.swift */,
+				44C8DC7E21FE5EAB009179B3 /* Storyboarded.swift */,
+				44C8DC8021FE6658009179B3 /* MainCoordinator.swift */,
+			);
+			path = Coordination;
+			sourceTree = "<group>";
+		};
 		44A6558C205086E50088FE49 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				44CC996022060CD10066D113 /* SettingTableCell.swift */,
 				44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */,
 				44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */,
 				44A65588204CE3250088FE49 /* PickerCell.swift */,
 				44A65589204CE3250088FE49 /* PickerCell.xib */,
+				44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */,
 				44A655912051BC280088FE49 /* DetailCell.swift */,
 				44A655922051BC280088FE49 /* DetailCell.xib */,
-				44A655952051BFAF0088FE49 /* AutoStartCell.swift */,
-				44A655962051BFAF0088FE49 /* AutoStartCell.xib */,
+				44D4B75B220B603200F9D965 /* DisabledCell.swift */,
+				44D4B75C220B603200F9D965 /* DisabledCell.xib */,
 				44A655992051C5FD0088FE49 /* TitleCell.swift */,
 				44A6559A2051C5FD0088FE49 /* TitleCell.xib */,
 				44CED50C20533C13002079F5 /* ToggleCell.swift */,
@@ -267,9 +293,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A6559C2051C5FD0088FE49 /* TitleCell.xib in Resources */,
+				44D4B75E220B603200F9D965 /* DisabledCell.xib in Resources */,
 				44A655942051BC280088FE49 /* DetailCell.xib in Resources */,
 				440EA0342033B4F300D2FBD8 /* LaunchScreen.storyboard in Resources */,
-				44A655982051BFAF0088FE49 /* AutoStartCell.xib in Resources */,
 				44A65587204CAA730088FE49 /* ColorSampleTableViewCell.xib in Resources */,
 				4448127F20BB0FF6004D97F5 /* sounds in Resources */,
 				44CED5132053B71A002079F5 /* SavedTimerCell.xib in Resources */,
@@ -337,27 +363,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				445F848120A925F6004E1E3A /* RoundedGradientView.swift in Sources */,
-				440EA02C2033B4F300D2FBD8 /* SimpleTimerViewController.swift in Sources */,
+				445329A021FE75DC00E03F86 /* Coordinator.swift in Sources */,
+				446D13682212186D0068EEED /* EditTimerViewController.swift in Sources */,
 				44B6758020C246BF00F71B9F /* BucketSpace.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
-				445F848320AB6D5F004E1E3A /* SettingsViewController.swift in Sources */,
+				446D13672212186D0068EEED /* SavedTimersTableViewController.swift in Sources */,
 				4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */,
-				4450C2B32040DBEC00A784A7 /* SavedTimersTableViewController.swift in Sources */,
+				44D4B76222112CA900F9D965 /* CreditTableViewCell.swift in Sources */,
+				446D13652212186D0068EEED /* CreditsListViewController.swift in Sources */,
 				44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */,
+				446D13692212186D0068EEED /* SimpleTimerViewController.swift in Sources */,
 				445F847D20A8CA90004E1E3A /* GradientView.swift in Sources */,
 				44CED50E20533C13002079F5 /* ToggleCell.swift in Sources */,
 				4450C2AF2040B7EC00A784A7 /* SavedTimer.swift in Sources */,
 				44A655932051BC280088FE49 /* DetailCell.swift in Sources */,
 				44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */,
+				44CC996122060CD10066D113 /* SettingTableCell.swift in Sources */,
+				44C8DC8121FE6658009179B3 /* MainCoordinator.swift in Sources */,
+				446D13662212186D0068EEED /* InitialViewController.swift in Sources */,
 				44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */,
 				445F847F20A91E8D004E1E3A /* ColorPalette.swift in Sources */,
-				44A6559E2051D0720088FE49 /* EditTimerViewController.swift in Sources */,
 				44A6559B2051C5FD0088FE49 /* TitleCell.swift in Sources */,
 				4450C31F204B802900A784A7 /* Settings.swift in Sources */,
+				446D136A2212186D0068EEED /* SettingsViewController.swift in Sources */,
 				44A6558A204CE3250088FE49 /* PickerCell.swift in Sources */,
 				4448127D20BB0D15004D97F5 /* Sounds.swift in Sources */,
-				44A655972051BFAF0088FE49 /* AutoStartCell.swift in Sources */,
-				44877F8920893C5E00A0AE15 /* InitialViewController.swift in Sources */,
+				44C8DC7F21FE5EAB009179B3 /* Storyboarded.swift in Sources */,
+				44D4B75D220B603200F9D965 /* DisabledCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
