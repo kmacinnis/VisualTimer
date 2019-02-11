@@ -91,7 +91,6 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     @objc func updateTimeText() {
-        useBtn.isEnabled = (minutesSet > 0)
         switch timePickerStyle {
         case .minutesOnly:
             if minutesSet > 0 {
@@ -106,7 +105,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     func updateSoundText() {
-        // alertSound is what is kept updated, so we need to update the display name to reflect that
+        // soundText is the display name
         if let i = Sounds.getIndex(filename: alertSound) {
             soundText = Sounds.soundArray[i]["name"] ?? "**no display name given**"
         } else {
@@ -170,7 +169,8 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             retrieveDefaults()
             useBtn.isEnabled = (minutesSet > 0)
         }
-        updateTimeText()
+//        updateTimeText()
+        updateSoundText()
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
@@ -367,6 +367,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             }
         default:
             hideAllPickerCells()
+            print(alertSound)
         }
 //        tableView.beginUpdates()
 //        tableView.endUpdates()
@@ -652,12 +653,11 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
 
-    //MARK: User Preferences
+    //MARK:- User Preferences
 
     let defaults = UserDefaults.standard
 
     func retrieveDefaults() {
-        print(defaults.dictionaryRepresentation().keys)
         origPausable = defaults.bool(forKey: Defaults.TimerDefaults.pausable)
         origAutoStart = defaults.bool(forKey: Defaults.TimerDefaults.autoStart)
         origCancelable = defaults.bool(forKey: Defaults.TimerDefaults.cancelable)
