@@ -76,12 +76,6 @@ class InitialViewController: UIViewController, Storyboarded {
         self.preferenceView.addGestureRecognizer(tapSettings)
 
 //        if firstLaunch() {
-//            defaults.set(false, forKey: "pausable")
-//            defaults.set(true, forKey: "autoStart")
-//            defaults.set(true, forKey: "cancelable")
-//            defaults.set("#C390D4", forKey: "color")
-//            defaults.set("simple", forKey: "style")
-//
 //            let timerOne = SavedTimer()
 //            let realm = try! Realm()
 //            do {

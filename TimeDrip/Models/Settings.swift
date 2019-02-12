@@ -203,19 +203,22 @@ let disabledAppLevelSettings: [AppSettingsRow] = []
 enum AppSettingsRow: Int {
     case useStartScreen
     case darkForLightColors
+    case swipeLeftForEdit
     case setTimerDefaults
     case viewCredits
     case resetAllSettings
     case overflow
 
 
-    static let count = 5
+    static let count = 6
 
     func reuseIdent () -> String {
         switch self {
         case .useStartScreen:
             return "toggleCell"
         case .darkForLightColors:
+            return "toggleCell"
+        case .swipeLeftForEdit:
             return "toggleCell"
         case .setTimerDefaults:
             return "detailCell"
@@ -278,11 +281,13 @@ enum AppSettingsRow: Int {
             x = 4
         case .resetAllSettings:
             x = 5
+        case .swipeLeftForEdit:
+            x = 6
         case .overflow:
-            x = 0 // overflow is here for debug crash-proofing
-                  // Set count to value before overflow value
+            x = 0 //
+                  // Set count to value before overflow
         }
-        print(x) // No reason to do this. Just wanted to.
+        print(x)
     }
 }
 
@@ -312,9 +317,10 @@ class Defaults {
         static let hasLaunchedBefore = "hasLaunchedBefore"
         static let useStartScreen = "useStartScreen"
         static let darkForLightColors = "darkForLightColors"
+        static let swipeLeftForEdit = "swipeLeftForEdit"
 
-        static let allDefaults : [String] = [hasLaunchedBefore, useStartScreen, darkForLightColors]
-        static let allClearable : [String] = [useStartScreen, darkForLightColors]
+        static let allDefaults : [String] = [hasLaunchedBefore, useStartScreen, darkForLightColors, swipeLeftForEdit]
+        static let allClearable : [String] = [useStartScreen, darkForLightColors, swipeLeftForEdit]
     }
 
     func register() {
@@ -327,6 +333,7 @@ class Defaults {
             TimerDefaults.loopAudio : false,
             AppDefaults.useStartScreen : true,
             AppDefaults.darkForLightColors : true,
+            AppDefaults.swipeLeftForEdit : true,
             ]
         UserDefaults.standard.register(defaults: defaults)
     }

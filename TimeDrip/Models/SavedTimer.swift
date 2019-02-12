@@ -44,7 +44,7 @@ class SavedTimer: Object {
     @objc dynamic var pausable: Bool = false
     @objc dynamic var hexColor: String = ""
     @objc dynamic var cancelable: Bool = true
-    @objc dynamic var sound: String = "alertsound-buzzer"
+    @objc dynamic var sound: String = ""
     @objc dynamic var loopAudio: Bool = true
 
     override static func primaryKey() -> String? {

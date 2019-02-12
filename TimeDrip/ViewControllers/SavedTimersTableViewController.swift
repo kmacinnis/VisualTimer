@@ -157,6 +157,11 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
 
+        let disabled = !UserDefaults.standard.bool(forKey: Defaults.AppDefaults.swipeLeftForEdit)
+        if disabled {
+            return []
+        }
+
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.deleteTimer(at: indexPath)
         }
@@ -171,6 +176,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
 
         }
         dragAction.backgroundColor = UIColor.flatSkyBlue
+
         switch orientation {
         case .right:
             return [deleteAction, editAction]

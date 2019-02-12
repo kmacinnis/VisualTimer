@@ -19,16 +19,17 @@ class SettingsViewController: UITableViewController, Storyboarded {
 
     var darkSwitch: UISwitch?
     var startSwitch: UISwitch?
+    var swipeSwitch: UISwitch?
     var origStartValue = true
     var origDarkValue = true
-
-
+    var origSwipeValue = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         origDarkValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.darkForLightColors)
         origStartValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.useStartScreen)
+        origSwipeValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.swipeLeftForEdit)
 
         tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "detailCell")
         tableView.register(UINib(nibName: "ToggleCell", bundle: nil), forCellReuseIdentifier: "toggleCell")
@@ -87,6 +88,15 @@ class SettingsViewController: UITableViewController, Storyboarded {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "disabledCell", for: indexPath) as! DisabledCell
                 //TODO: log some kind of warning here
                 return cell
+            case .swipeLeftForEdit:
+                let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
+                cell.toggleLabel.text = "Swipe left on saved timer list to edit or delete"
+                swipeSwitch = cell.toggleSwitch
+                swipeSwitch?.isOn = origStartValue
+                swipeSwitch?.addTarget(self, action: #selector(swipeSwitchChanged), for: UIControl.Event.allTouchEvents)
+
+                return cell
+
 
             } // end switch
         } else { // if setting is nil
@@ -99,10 +109,6 @@ class SettingsViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = AppSettingsRow(rawValue: indexPath.row)!
         switch setting {
-        case .useStartScreen:
-            ()
-        case .darkForLightColors:
-            ()
         case .setTimerDefaults:
             coordinator?.pushDefaultSettings()
         case .viewCredits:
@@ -112,9 +118,8 @@ class SettingsViewController: UITableViewController, Storyboarded {
             def.clearAppDefaults()
             def.clearTimerDefaults()
             tableView.reloadData()
-        case .overflow:
+        default:
             ()
-            //TODO: Log warning here
         }
     }
 
@@ -127,5 +132,8 @@ class SettingsViewController: UITableViewController, Storyboarded {
         UserDefaults.standard.set(startSwitch?.isOn, forKey: Defaults.AppDefaults.useStartScreen)
     }
 
+    @objc func swipeSwitchChanged() {
+        UserDefaults.standard.set(swipeSwitch?.isOn, forKey: Defaults.AppDefaults.swipeLeftForEdit)
+    }
 
 }
