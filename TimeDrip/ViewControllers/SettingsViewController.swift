@@ -111,7 +111,7 @@ class SettingsViewController: UITableViewController, Storyboarded {
         case .setTimerDefaults:
             coordinator?.pushDefaultSettings()
         case .viewCredits:
-            ()
+            coordinator?.pushCredits()
         case .resetAllSettings:
             let def = Defaults()
             def.clearAppDefaults()

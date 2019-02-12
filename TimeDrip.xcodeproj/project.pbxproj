@@ -21,12 +21,13 @@
 		445F847F20A91E8D004E1E3A /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F847E20A91E8D004E1E3A /* ColorPalette.swift */; };
 		445F848120A925F6004E1E3A /* RoundedGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F848020A925F6004E1E3A /* RoundedGradientView.swift */; };
 		4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462D8892066C2E00070D1C6 /* RoundedButton.swift */; };
-		446D13652212186D0068EEED /* CreditsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D135F2212186D0068EEED /* CreditsListViewController.swift */; };
 		446D13662212186D0068EEED /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13602212186D0068EEED /* InitialViewController.swift */; };
 		446D13672212186D0068EEED /* SavedTimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13612212186D0068EEED /* SavedTimersTableViewController.swift */; };
 		446D13682212186D0068EEED /* EditTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13622212186D0068EEED /* EditTimerViewController.swift */; };
 		446D13692212186D0068EEED /* SimpleTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13632212186D0068EEED /* SimpleTimerViewController.swift */; };
 		446D136A2212186D0068EEED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D13642212186D0068EEED /* SettingsViewController.swift */; };
+		446D136C2212427F0068EEED /* CreditsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D136B2212427F0068EEED /* CreditsTableViewController.swift */; };
+		446D136E22124E6F0068EEED /* CreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D136D22124E6F0068EEED /* CreditCell.swift */; };
 		44877F8720891A0200A0AE15 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44877F8620891A0200A0AE15 /* RoundedView.swift */; };
 		44A65586204CAA730088FE49 /* ColorSampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */; };
 		44A65587204CAA730088FE49 /* ColorSampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */; };
@@ -46,7 +47,6 @@
 		44CED5132053B71A002079F5 /* SavedTimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CED5112053B71A002079F5 /* SavedTimerCell.xib */; };
 		44D4B75D220B603200F9D965 /* DisabledCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B75B220B603200F9D965 /* DisabledCell.swift */; };
 		44D4B75E220B603200F9D965 /* DisabledCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B75C220B603200F9D965 /* DisabledCell.xib */; };
-		44D4B76222112CA900F9D965 /* CreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,12 +65,13 @@
 		445F847E20A91E8D004E1E3A /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		445F848020A925F6004E1E3A /* RoundedGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGradientView.swift; sourceTree = "<group>"; };
 		4462D8892066C2E00070D1C6 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		446D135F2212186D0068EEED /* CreditsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsListViewController.swift; sourceTree = "<group>"; };
 		446D13602212186D0068EEED /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		446D13612212186D0068EEED /* SavedTimersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTimersTableViewController.swift; sourceTree = "<group>"; };
 		446D13622212186D0068EEED /* EditTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTimerViewController.swift; sourceTree = "<group>"; };
 		446D13632212186D0068EEED /* SimpleTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTimerViewController.swift; sourceTree = "<group>"; };
 		446D13642212186D0068EEED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		446D136B2212427F0068EEED /* CreditsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsTableViewController.swift; sourceTree = "<group>"; };
+		446D136D22124E6F0068EEED /* CreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreditCell.swift; path = TimeDrip/Views/TableCells/CreditCell.swift; sourceTree = SOURCE_ROOT; };
 		44877F8620891A0200A0AE15 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		44A65584204CAA730088FE49 /* ColorSampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSampleTableViewCell.swift; sourceTree = "<group>"; };
 		44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSampleTableViewCell.xib; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		44CED5112053B71A002079F5 /* SavedTimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedTimerCell.xib; sourceTree = "<group>"; };
 		44D4B75B220B603200F9D965 /* DisabledCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledCell.swift; sourceTree = "<group>"; };
 		44D4B75C220B603200F9D965 /* DisabledCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisabledCell.xib; sourceTree = "<group>"; };
-		44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewCell.swift; sourceTree = "<group>"; };
 		797849907096ADE14A72EB35 /* Pods_TimeDrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeDrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D93A06A6400438465299FE /* Pods-TimeDrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEFD9D06AA6DB32A7FDA1F7 /* Pods-TimeDrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeDrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeDrip/Pods-TimeDrip.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		446D135E2212186D0068EEED /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				446D135F2212186D0068EEED /* CreditsListViewController.swift */,
+				446D136B2212427F0068EEED /* CreditsTableViewController.swift */,
 				446D13602212186D0068EEED /* InitialViewController.swift */,
 				446D13612212186D0068EEED /* SavedTimersTableViewController.swift */,
 				446D13622212186D0068EEED /* EditTimerViewController.swift */,
@@ -207,7 +207,7 @@
 				44A65585204CAA730088FE49 /* ColorSampleTableViewCell.xib */,
 				44A65588204CE3250088FE49 /* PickerCell.swift */,
 				44A65589204CE3250088FE49 /* PickerCell.xib */,
-				44D4B76122112CA900F9D965 /* CreditTableViewCell.swift */,
+				446D136D22124E6F0068EEED /* CreditCell.swift */,
 				44A655912051BC280088FE49 /* DetailCell.swift */,
 				44A655922051BC280088FE49 /* DetailCell.xib */,
 				44D4B75B220B603200F9D965 /* DisabledCell.swift */,
@@ -366,11 +366,11 @@
 				445329A021FE75DC00E03F86 /* Coordinator.swift in Sources */,
 				446D13682212186D0068EEED /* EditTimerViewController.swift in Sources */,
 				44B6758020C246BF00F71B9F /* BucketSpace.swift in Sources */,
+				446D136C2212427F0068EEED /* CreditsTableViewController.swift in Sources */,
 				440EA02A2033B4F300D2FBD8 /* AppDelegate.swift in Sources */,
 				446D13672212186D0068EEED /* SavedTimersTableViewController.swift in Sources */,
 				4462D88A2066C2E00070D1C6 /* RoundedButton.swift in Sources */,
-				44D4B76222112CA900F9D965 /* CreditTableViewCell.swift in Sources */,
-				446D13652212186D0068EEED /* CreditsListViewController.swift in Sources */,
+				446D136E22124E6F0068EEED /* CreditCell.swift in Sources */,
 				44CED5122053B71A002079F5 /* SavedTimerCell.swift in Sources */,
 				446D13692212186D0068EEED /* SimpleTimerViewController.swift in Sources */,
 				445F847D20A8CA90004E1E3A /* GradientView.swift in Sources */,

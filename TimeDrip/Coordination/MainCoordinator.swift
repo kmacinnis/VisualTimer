@@ -50,7 +50,7 @@ class MainCoordinator: Coordinator {
     }
 
     func pushCredits() {
-        let vc = CreditsListViewController.instantiate()
+        let vc = CreditsTableViewController.instantiate()
         vc.coordinator = self
         vc.title = "Credits"
         navigationController.pushViewController(vc, animated: true)
