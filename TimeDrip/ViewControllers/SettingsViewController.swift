@@ -10,12 +10,7 @@ import UIKit
 
 //TODO: * Figure out and add log messages
 //TODO: * Add modals describing settings on tap
-//TODO: * Make view credits work
-        //TODO: - Add credits
-        // Gear by Reed Enger from the Noun Project
-        // Sources for sounds are listed in sounds/details
 //TODO: * Confirm on reset to defaults
-//TODO: * Make App-Level preferences actually do something.
 
 
 class SettingsViewController: UITableViewController, Storyboarded {

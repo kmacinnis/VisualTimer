@@ -17,11 +17,22 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = InitialViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
+        if UserDefaults.standard.bool(forKey: Defaults.AppDefaults.useStartScreen) {
+            let vc = InitialViewController.instantiate()
+            vc.coordinator = self
+            navigationController.pushViewController(vc, animated: false)
+        } else {
+            let vc = SavedTimersTableViewController.instantiate()
+            vc.coordinator = self
+            navigationController.pushViewController(vc, animated: false)
+        }
     }
 
+    func pushInitial() {
+        let vc = InitialViewController.instantiate()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
 
     func pushSimpleTimer(timer: UnsavedTimer) {
         let vc = SimpleTimerViewController.instantiate()

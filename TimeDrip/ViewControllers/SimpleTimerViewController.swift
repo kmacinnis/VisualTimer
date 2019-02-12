@@ -17,6 +17,7 @@ import SwiftySound // for alert sound
 //      - https://stackoverflow.com/a/46877212/731985
 // * BUG: Cancelling timer leaves graphic moving
 // * BUG: Getting out after finishing runs timer again
+// * check preference Dark background for light colors
 
 
 

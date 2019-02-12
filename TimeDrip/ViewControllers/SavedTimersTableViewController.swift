@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
-//TODO: * In edit mode, put menu button in usual back button place.
 
 class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate, Storyboarded {
 
@@ -24,6 +23,10 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         coordinator?.createNewTimer()
     }
 
+    @objc func goHome() {
+        coordinator?.pushInitial()
+    }
+
     @objc func orderingModeOn() {
         tableView.isEditing = true
         let doneBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(orderingModeOff))
@@ -34,10 +37,10 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
     @objc func orderingModeOff() {
         tableView.isEditing = false
 
-        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
+        let reorderBarBtn = UIBarButtonItem(title: "Reorder", style: .plain, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
         let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
 
-        self.navigationItem.setRightBarButtonItems([addBarBtn, editBarBtn], animated: true)
+        self.navigationItem.setRightBarButtonItems([addBarBtn, reorderBarBtn], animated: true)
         tableView.reloadData()
     }
 
@@ -45,10 +48,13 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         super.viewDidLoad()
         tableView.register(UINib(nibName: "SavedTimerCell", bundle: nil), forCellReuseIdentifier: "savedTimerCell")
 
-        let editBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
+        let reorderBarBtn = UIBarButtonItem(title: "Reorder", style: .plain, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
         let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
-//        let infoBarBtn = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(SavedTimersTableViewController.showInfo))
-        self.navigationItem.rightBarButtonItems = [addBarBtn, editBarBtn]
+        self.navigationItem.rightBarButtonItems = [addBarBtn, reorderBarBtn]
+        if !UserDefaults.standard.bool(forKey: Defaults.AppDefaults.useStartScreen) {
+            let homeBarBtn = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(SavedTimersTableViewController.goHome))
+            self.navigationItem.leftBarButtonItem = homeBarBtn
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -39,7 +39,6 @@ class CreditsTableViewController: UITableViewController, Storyboarded {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("credits.count: \(credits.count)")
         return credits.count
     }
 
