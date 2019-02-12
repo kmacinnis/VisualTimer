@@ -26,10 +26,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         coordinator?.createNewTimer()
     }
 
-    @objc func goHome() {
-        coordinator?.pushInitial()
-    }
-
     @objc func orderingModeOn() {
         tableView.isEditing = true
         let doneBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(orderingModeOff))

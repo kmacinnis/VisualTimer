@@ -92,7 +92,7 @@ class SettingsViewController: UITableViewController, Storyboarded {
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
                 cell.toggleLabel.text = "Swipe left on saved timer list to edit or delete"
                 swipeSwitch = cell.toggleSwitch
-                swipeSwitch?.isOn = origStartValue
+                swipeSwitch?.isOn = origSwipeValue
                 swipeSwitch?.addTarget(self, action: #selector(swipeSwitchChanged), for: UIControl.Event.allTouchEvents)
 
                 return cell

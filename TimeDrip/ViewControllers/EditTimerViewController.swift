@@ -15,7 +15,6 @@ import SwiftySound
 //TODO: * change timePickerStyle by swiping picker left/right
 //TODO: * either remove dimming code, or make it work without clunky allDimmedBut
 //TODO: * Add modals describing settings on tap
-//TODO: * useBtn never active in prefs mode
 
 
 enum PickerTag: Int {

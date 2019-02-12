@@ -31,12 +31,6 @@ class MainCoordinator: Coordinator {
         }
     }
 
-    func pushInitial() {
-        let vc = InitialViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
-
     func pushSimpleTimer(timer: UnsavedTimer) {
         let vc = SimpleTimerViewController.instantiate()
         print("PushSimpleTimer, Unsaved Timer")
