@@ -201,7 +201,7 @@ enum TimerSettingsRow: Int {
 let disabledAppLevelSettings: [AppSettingsRow] = []
 
 enum AppSettingsRow: Int {
-    case useStartScreen
+    case startOnSavedList
     case darkForLightColors
     case swipeLeftForEdit
     case setTimerDefaults
@@ -214,7 +214,7 @@ enum AppSettingsRow: Int {
 
     func reuseIdent () -> String {
         switch self {
-        case .useStartScreen:
+        case .startOnSavedList:
             return "toggleCell"
         case .darkForLightColors:
             return "toggleCell"
@@ -271,7 +271,7 @@ enum AppSettingsRow: Int {
 
         var x = 0 // Just sticking this here to number lines with.
         switch self {
-        case .useStartScreen:
+        case .startOnSavedList:
             x = 1
         case .darkForLightColors:
             x = 2
@@ -315,12 +315,12 @@ class Defaults {
 
     struct AppDefaults {
         static let hasLaunchedBefore = "hasLaunchedBefore"
-        static let useStartScreen = "useStartScreen"
+        static let startOnSavedList = "startOnSavedList"
         static let darkForLightColors = "darkForLightColors"
         static let swipeLeftForEdit = "swipeLeftForEdit"
 
-        static let allDefaults : [String] = [hasLaunchedBefore, useStartScreen, darkForLightColors, swipeLeftForEdit]
-        static let allClearable : [String] = [useStartScreen, darkForLightColors, swipeLeftForEdit]
+        static let allDefaults : [String] = [hasLaunchedBefore, startOnSavedList, darkForLightColors, swipeLeftForEdit]
+        static let allClearable : [String] = [startOnSavedList, darkForLightColors, swipeLeftForEdit]
     }
 
     func register() {
@@ -331,7 +331,7 @@ class Defaults {
             TimerDefaults.cancelable : true,
             TimerDefaults.autoStart : true,
             TimerDefaults.loopAudio : false,
-            AppDefaults.useStartScreen : true,
+            AppDefaults.startOnSavedList : false,
             AppDefaults.darkForLightColors : true,
             AppDefaults.swipeLeftForEdit : true,
             ]
@@ -340,7 +340,7 @@ class Defaults {
 
     func clearAll() {
         // For debugging purposes only. Probably.
-        var keys = [ "pausable", "cancelable", "autoStart", "loopAudio","color", "hexcolor",                     "style","alertSound","soundName","soundFile",]
+        var keys = [ "pausable", "cancelable", "autoStart", "loopAudio","color", "hexcolor",                     "style","alertSound","soundName","soundFile","useStartScreen"]
         keys.append(contentsOf: TimerDefaults.allDefaults)
         keys.append(contentsOf: AppDefaults.allDefaults)
         for key in keys {

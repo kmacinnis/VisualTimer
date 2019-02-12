@@ -9,5 +9,7 @@
 import UIKit
 import ChameleonFramework
 
-let Purple1: UIColor = UIColor(red: 102, green: 0, blue: 204, alpha: 1)
-let FOCUS_COLOR: UIColor = UIColor.orange
+struct ColorPalette {
+    static let deleteColor: UIColor = UIColor.init(hexString: "#D44333")!
+    static let editColor: UIColor = UIColor.flatSkyBlue
+}

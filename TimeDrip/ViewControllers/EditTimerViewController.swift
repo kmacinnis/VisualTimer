@@ -538,6 +538,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
             minutesSet = 9001
             // Probably going to need refactoring to deal with multiple components
         }
+        useBtn.isEnabled = (minutesSet > 0)
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -680,7 +681,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
     }
 
     
-    //MARK: Timer Class
+    //MARK:- Timer Class
 
     func unsavedTimerFromSettings() -> UnsavedTimer {
         let timer = UnsavedTimer()

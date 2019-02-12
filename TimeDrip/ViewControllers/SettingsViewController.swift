@@ -28,7 +28,7 @@ class SettingsViewController: UITableViewController, Storyboarded {
         super.viewDidLoad()
 
         origDarkValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.darkForLightColors)
-        origStartValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.useStartScreen)
+        origStartValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.startOnSavedList)
         origSwipeValue = UserDefaults.standard.bool(forKey: Defaults.AppDefaults.swipeLeftForEdit)
 
         tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "detailCell")
@@ -53,9 +53,9 @@ class SettingsViewController: UITableViewController, Storyboarded {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let setting = AppSettingsRow(rawValue: indexPath.row) {
             switch setting {
-            case .useStartScreen:
+            case .startOnSavedList:
                 let cell = tableView.dequeueReusableCell(withIdentifier: setting.reuseIdent()) as! ToggleCell
-                cell.toggleLabel.text = "Show start screen"
+                cell.toggleLabel.text = "Go to saved timer list on open"
                 startSwitch = cell.toggleSwitch
                 startSwitch?.isOn = origStartValue
                 startSwitch?.addTarget(self, action: #selector(startSwitchChanged), for: UIControl.Event.allTouchEvents)
@@ -129,7 +129,7 @@ class SettingsViewController: UITableViewController, Storyboarded {
         UserDefaults.standard.set(darkSwitch?.isOn, forKey: Defaults.AppDefaults.darkForLightColors)
     }
     @objc func startSwitchChanged() {
-        UserDefaults.standard.set(startSwitch?.isOn, forKey: Defaults.AppDefaults.useStartScreen)
+        UserDefaults.standard.set(startSwitch?.isOn, forKey: Defaults.AppDefaults.startOnSavedList)
     }
 
     @objc func swipeSwitchChanged() {

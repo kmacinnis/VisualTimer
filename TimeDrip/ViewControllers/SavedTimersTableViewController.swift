@@ -11,6 +11,9 @@ import RealmSwift
 import SwipeCellKit
 
 
+//TODO:
+//TODO: * Change reorder trigger to be a swipe-right button?
+
 class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellDelegate, Storyboarded {
 
     weak var coordinator: MainCoordinator?
@@ -51,10 +54,6 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         let reorderBarBtn = UIBarButtonItem(title: "Reorder", style: .plain, target: self, action: #selector(SavedTimersTableViewController.orderingModeOn))
         let addBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(SavedTimersTableViewController.addTimer))
         self.navigationItem.rightBarButtonItems = [addBarBtn, reorderBarBtn]
-        if !UserDefaults.standard.bool(forKey: Defaults.AppDefaults.useStartScreen) {
-            let homeBarBtn = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(SavedTimersTableViewController.goHome))
-            self.navigationItem.leftBarButtonItem = homeBarBtn
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -165,12 +164,13 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.deleteTimer(at: indexPath)
         }
+        deleteAction.backgroundColor = ColorPalette.deleteColor
 
         let editAction = SwipeAction(style: .default, title: "Edit") { (action, indexPath) in
             self.timerForEditing = self.timers?[indexPath.row]
             self.coordinator?.pushEditTimer(timer:self.timerForEditing!)
         }
-        editAction.backgroundColor = UIColor.init(hexString: "#FFAE00")
+        editAction.backgroundColor = UIColor.flatSkyBlue
 
         let dragAction = SwipeAction(style: .default, title: "Drag") { (action, indexPath) in
 
@@ -181,7 +181,7 @@ class SavedTimersTableViewController: UITableViewController, SwipeTableViewCellD
         case .right:
             return [deleteAction, editAction]
         case .left:
-            return [dragAction]
+            return []
         }
     }
 

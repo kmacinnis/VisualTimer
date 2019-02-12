@@ -179,10 +179,10 @@
 			children = (
 				440EA02D2033B4F300D2FBD8 /* Main.storyboard */,
 				44A6558C205086E50088FE49 /* TableCells */,
+				445F847E20A91E8D004E1E3A /* ColorPalette.swift */,
 				4462D8892066C2E00070D1C6 /* RoundedButton.swift */,
 				445F847C20A8CA90004E1E3A /* GradientView.swift */,
 				445F848020A925F6004E1E3A /* RoundedGradientView.swift */,
-				445F847E20A91E8D004E1E3A /* ColorPalette.swift */,
 				44877F8620891A0200A0AE15 /* RoundedView.swift */,
 				44B6757F20C246BF00F71B9F /* BucketSpace.swift */,
 			);
