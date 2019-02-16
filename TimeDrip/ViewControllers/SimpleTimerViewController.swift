@@ -16,6 +16,7 @@ import SwiftySound // for alert sound
 // * applicationWillEnterBackground/applicationWillEnterForeground
 //      - https://stackoverflow.com/a/46877212/731985
 // * BUG: Cancelling timer leaves graphic moving
+// * BUG: Timer re-runs after stopping sometimes?
 // * BUG: Getting out after finishing runs timer again
 // * check preference Dark background for light colors
 
@@ -23,6 +24,13 @@ import SwiftySound // for alert sound
 
 
 class SimpleTimerViewController: UIViewController, Storyboarded {
+
+    enum TimerState {
+        case running
+        case paused
+        case finished
+        case void
+    }
 
     //MARK: - Initialize stuff
     weak var coordinator: MainCoordinator?
@@ -41,9 +49,8 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
 
     
     var timer = Timer()
-    var timerInUse: Bool = false
-    var timerPaused: Bool = false
-    var shouldDisplaySeconds: Bool = false
+    var timerState: TimerState = .void
+    var shouldDisplaySeconds: Bool = true
     var shouldDisplayHours: Bool = false
 
     var alertSound: String = ""
@@ -74,36 +81,45 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
 
     func runTimer() {
         print("run timer")
-        if !timerInUse {
+        if timerState == .void {
             minutes = minutesSet
             minutesCeil = minutesSet
             seconds = 0
             updateTimeDisplay()
         }
-        timerInUse = true
-        timerPaused = false
+        timerState = .running
+        updateButtons()
+        print("Create timer object")
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(SimpleTimerViewController.updateTimer)), userInfo: nil, repeats: true)
         bucketSpace.drainBucket()
-        if pausable {
-            timerButton.setTitle("Pause", for: .normal)
-        } else {
-            timerButton.isHidden = true
-        }
-        cancelButton.isHidden = !cancelable
     }
 
     func pauseTimer() {
         timer.invalidate()
         bucketSpace.bucketFillLayer.removeAnimation(forKey: "drain")
         bucketSpace.bucketFillLayer.path = bucketSpace.bucketFillPath().cgPath
-        timerButton.setTitle("Resume", for: .normal)
-        timerPaused = true
+        timerState = .paused
+        updateButtons()
     }
 
-    func refreshTimer() {
 
+    /// This is used to set the timer to void, and clear everything for a restart
+    func voidTimer() {
+        timer.invalidate()
+        hours = 0
+        minutes = 0
+        seconds = 0
+        bucketSpace.bucketFillLayer.removeAnimation(forKey: "drain")
+        bucketSpace.bucketFillLayer.path = bucketSpace.bucketFillPath(1.0).cgPath
+        Sound.stopAll()
+        timer.invalidate()
+
+        timerState = .void
+        updateButtons()
+        updateTimeDisplay()
     }
 
+    /// Performs the work to keep the screen reflecting the timer
     @objc func updateTimer() {
 
         if minutes + seconds == 0 {
@@ -114,6 +130,7 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
             Sound.play(file: "sounds/\(alertSound)", fileExtension: "wav", numberOfLoops: numLoops)
             updateTimeDisplay()
             navigationItem.hidesBackButton = false
+            timerState = .finished
             return
         }
         if seconds == 0 {
@@ -159,38 +176,58 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
                 minuteUnitLabel.text = "Minutes"
             }
         }
-
-
-
     }
-    
+
+    func updateButtons() {
+        switch timerState {
+        case .running:
+            // timerButton.isHidden = !pausable
+            timerButton.alpha = pausable ? 1.0 : 0.3
+            timerButton.setTitle("Pause", for: .normal)
+            // cancelButton.isHidden = !cancelable
+            cancelButton.alpha = cancelable ? 1.0 : 0.3
+        case .paused:
+            timerButton.isHidden = false  // must show timer button to be able to resume
+            timerButton.alpha = 1.0
+            timerButton.setTitle("Resume", for: .normal)
+            // cancelButton.isHidden = !cancelable
+            cancelButton.alpha = cancelable ? 1.0 : 0.3
+        case .void:
+            timerButton.isHidden = false
+            timerButton.alpha = 1.0
+            timerButton.setTitle("Start", for: .normal)
+            // cancelButton.isHidden = true
+            cancelButton.alpha = 0.3
+        case .finished:
+            //TODO: possibly this should depend on whether the sound repeats??
+            timerButton.isHidden = false
+            timerButton.alpha = 1.0
+            timerButton.setTitle("Done", for: .normal)
+            // cancelButton.isHidden = true
+            cancelButton.alpha = 0.3
+        }
+    }
+
     @IBAction func timerButtonPressed(_ sender: Any) {
         print("Timer button pressed")
-        // timerPaused or not timerInUse
-        if timerPaused || !timerInUse {
-            runTimer()
-        } else {
+        switch timerState {
+        case .running:
             pauseTimer()
+        case .paused, .void:
+            runTimer()
+        case .finished:
+            voidTimer()
         }
+
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         print("Cancel button pressed")
-        self.navigationController?.isNavigationBarHidden = false
+//        self.navigationController?.isNavigationBarHidden = false
         navigationItem.hidesBackButton = false
-        bucketSpace.setNeedsLayout()
-        bucketSpace.layoutIfNeeded()
-        bucketSpace.adjustBucketInsides()
-        Sound.stopAll()
-        timer.invalidate()
 
-        bucketSpace.stopAnimations()
-        bucketSpace.updateFillPath()
-        timerInUse = false
-        timerPaused = false
-        timerButton.isHidden = false
-        timerButton.setTitle("Restart", for: .normal)
-        cancelButton.isHidden = true
+        voidTimer()
+        autoStart = false
 
     }
 
@@ -211,26 +248,11 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
 
     //MARK: - ViewController methods
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-        runTimerWhenReady = autoStart
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = false
-        Sound.stopAll()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         bucketSpace.parentVC = self
         navigationItem.title = timerName
 
-        if !pausable && autoStart {
-            timerButton.isHidden = true
-        }
-        cancelButton.isHidden = !cancelable
         hourValueLabel.text = "\(hoursSet)"
         minuteValueLabel.text = "\(minutesSet)"
         secondValueLabel.text = "\(secondsSet)"
@@ -249,22 +271,42 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
             runTimer()
             runTimerWhenReady = false
         }
-        if timerInUse && !timerPaused {
+        if timerState == .running {
             bucketSpace.drainBucket()
         }
 
     }
 
-    override func viewDidLayoutSubviews() {
-        // Handles rotation
-        super.viewDidLayoutSubviews()
-        bucketSpace.setNeedsLayout()
-        bucketSpace.layoutIfNeeded()
-        bucketSpace.adjustBucketInsides()
-        pauseTimer()
-        runTimer()
-        //TODO: what's up with pause/run above? was that a clunky way to force update the bucket?
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
+        UIApplication.shared.isIdleTimerDisabled = true
+        runTimerWhenReady = autoStart
     }
+
+//    override func viewDidLayoutSubviews() {
+//        // Handles rotation
+//        super.viewDidLayoutSubviews()
+//        bucketSpace.setNeedsLayout()
+//        bucketSpace.layoutIfNeeded()
+//        bucketSpace.adjustBucketInsides()
+//        //        pauseTimer()
+//        //        runTimer()
+//        //TODO: what's up with pause/run above? was that a clunky way to force update the bucket?
+//    }
+
+//    viewDidLayoutSubviews()
+
+//    viewDidAppear(_ animated: Bool)
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        UIApplication.shared.isIdleTimerDisabled = false
+        Sound.stopAll()
+    }
+
 
 
 }

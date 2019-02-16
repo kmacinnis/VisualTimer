@@ -87,10 +87,10 @@ class BucketSpace: UIView {
         bucketView.layer.addSublayer(bucketFillLayer)
         bucketFillLayer.fillColor = fillColor
         bucketFillLayer.frame = bucketView.bounds
-        if parentVC.timerInUse {
-            bucketFillLayer.path = bucketFillPath().cgPath
-        } else {
+        if parentVC.timerState == .void {
             bucketFillLayer.path = bucketFillPath(0.0).cgPath
+        } else {
+            bucketFillLayer.path = bucketFillPath().cgPath
         }
     }
 
@@ -192,8 +192,6 @@ class BucketSpace: UIView {
     }
 
     func adjustBucketInsides() {
-        print("Setting up insides")
-        print(bucketView.frame.size)
         setUpReplicatorLayer(size: bucketView.frame.size)
         bucketView.layer.addSublayer(replicatorLayer)
         setUpMeasureMarks()

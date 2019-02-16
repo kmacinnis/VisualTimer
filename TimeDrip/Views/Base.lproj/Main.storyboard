@@ -174,7 +174,7 @@
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Sound Name from link." textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wcK-He-4E6">
                                             <rect key="frame" x="28" y="11" width="358" height="153"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         </textView>
@@ -223,14 +223,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2L2-pA-krm">
-                                            <rect key="frame" x="167" y="12" width="81" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2L2-pA-krm">
+                                            <rect key="frame" x="28" y="11" width="358" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="2L2-pA-krm" firstAttribute="leading" secondItem="RSH-EC-AZF" secondAttribute="leadingMargin" constant="8" id="NpP-L6-kgN"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="2L2-pA-krm" secondAttribute="trailing" constant="8" id="ipU-dw-psg"/>
+                                        <constraint firstItem="2L2-pA-krm" firstAttribute="top" secondItem="RSH-EC-AZF" secondAttribute="topMargin" id="laB-2g-lEe"/>
+                                        <constraint firstItem="2L2-pA-krm" firstAttribute="bottom" secondItem="RSH-EC-AZF" secondAttribute="bottomMargin" id="zRj-tv-BNa"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -502,7 +507,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-YY-5bs" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="207"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Create a timer for one-time use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-n5-omN">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Create a timer for one-time use" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-n5-omN">
                                                 <rect key="frame" x="30" y="30" width="294" height="147"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
@@ -550,11 +555,11 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gG-bI-vcK" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="237" width="354" height="207"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Go to list of saved timers for repeat use" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-9v-rhP">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Go to list of saved timers for repeat use" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-9v-rhP">
                                                 <rect key="frame" x="30" y="30" width="294" height="147"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="List Icon" translatesAutoresizingMaskIntoConstraints="NO" id="10K-Si-4pJ">
@@ -594,10 +599,14 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2r-75-LuV" customClass="RoundedGradientView" customModule="TimeDrip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="474" width="354" height="207"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Settings" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
-                                                <rect key="frame" x="30" y="30" width="294" height="147"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Settings" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-4l-A3x">
+                                                <rect key="frame" x="30" y="75" width="294" height="57"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="294" id="Vqr-th-cvt"/>
+                                                    <constraint firstAttribute="height" constant="57" id="ohi-Ga-fkC"/>
+                                                </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Gears" translatesAutoresizingMaskIntoConstraints="NO" id="Rg1-zV-wwg">
@@ -607,10 +616,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="top" secondItem="S2r-75-LuV" secondAttribute="top" constant="30" id="KEs-Wk-cTQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="5bT-4l-A3x" secondAttribute="trailing" constant="30" id="Mht-Ve-vwe"/>
-                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="leading" secondItem="S2r-75-LuV" secondAttribute="leading" constant="30" id="NTt-KL-HB0"/>
-                                            <constraint firstAttribute="bottom" secondItem="5bT-4l-A3x" secondAttribute="bottom" constant="30" id="zpy-Hx-ZE8"/>
+                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="centerY" secondItem="S2r-75-LuV" secondAttribute="centerY" id="11V-Y2-SxD"/>
+                                            <constraint firstItem="5bT-4l-A3x" firstAttribute="centerX" secondItem="S2r-75-LuV" secondAttribute="centerX" id="lV1-hY-ToO"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -669,7 +676,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgq-Ve-uMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3462" y="-1643"/>
+            <point key="canvasLocation" x="-3462.3188405797105" y="-1643.4782608695652"/>
         </scene>
     </scenes>
     <resources>
