@@ -77,13 +77,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         timerName = (nameField?.text) ?? ""
         switch mode {
         case .edit:
-            useBtn.isEnabled = (timerName != "")
-        case .add:
-            if timerName == "" {
-                useBtn.title = "Use Timer"
-            } else {
-                useBtn.title = "Save & Use Timer"
-            }
+            useBtn.isEnabled = (timerName != "") && (hoursSet + minutesSet + secondsSet != 0)
         default: // name field doesn't show for single-use or preferences mode
             ()
         }
@@ -125,8 +119,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         switch mode {
         case .add:
             saveChanges()
-            let timer = unsavedTimerFromSettings()
-            coordinator?.pushSimpleTimer(timer: timer)
+            self.navigationController?.popViewController(animated: true)
         case .singleUse:
             let timer = unsavedTimerFromSettings()
             coordinator?.pushSimpleTimer(timer: timer)
@@ -663,7 +656,7 @@ class EditTimerViewController: UITableViewController, UIPickerViewDataSource, UI
         origCancelable = defaults.bool(forKey: Defaults.TimerDefaults.cancelable)
         let hexcolor = defaults.string(forKey: Defaults.TimerDefaults.colorHex)
         origLoopAudio = defaults.bool(forKey: Defaults.TimerDefaults.loopAudio)
-        color = UIColor.init(hexString: hexcolor ?? "#C390D4")!
+        color = UIColor.init(hexString: hexcolor ?? "#C390D4") ?? UIColor.flatSandDark
         alertSound = defaults.string(forKey: Defaults.TimerDefaults.alertSound) ?? ""
 //        timerStyle = TimerType(rawValue: defaults.integer(forKey: Defaults.TimerDefaults.timerStyle) ) ?? .simple
     }

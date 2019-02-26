@@ -127,6 +127,7 @@ class SimpleTimerViewController: UIViewController, Storyboarded {
             timer.invalidate()
             let numLoops = loopAudio ? -1 : 0
             print("sounds/\(alertSound)")
+            Sound.category = .soloAmbient
             Sound.play(file: "sounds/\(alertSound)", fileExtension: "wav", numberOfLoops: numLoops)
             updateTimeDisplay()
             navigationItem.hidesBackButton = false

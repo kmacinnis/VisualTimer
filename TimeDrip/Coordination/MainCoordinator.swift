@@ -44,7 +44,7 @@ class MainCoordinator: Coordinator {
         vc.alertSound = timer.sound
         vc.loopAudio = timer.loopAudio
         vc.autoStart = timer.autoStart
-        vc.timerName = "Timer"
+        vc.timerName = timer.name
 
         navigationController.pushViewController(vc, animated: true)
 

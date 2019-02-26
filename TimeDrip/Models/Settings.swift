@@ -323,7 +323,7 @@ class Defaults {
         static let allClearable : [String] = [startOnSavedList, darkForLightColors, swipeLeftForEdit]
     }
 
-    func register() {
+    class func register() {
         let defaults: [String : Any] = [
             TimerDefaults.colorHex : "",
             TimerDefaults.alertSound : "blank",
